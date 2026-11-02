@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+
+# Secrets and local configuration
+.env
+.env.*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Raw CASE-001 public dataset files
+cases/CASE-001-linux-ssh/evidence/ssh_honeypot_dataset.csv
+cases/CASE-001-linux-ssh/evidence/ssh_honeypot_dataset.csv.v2.tar.gz
+
+# Generated analysis output
+cases/*/analysis/output/
