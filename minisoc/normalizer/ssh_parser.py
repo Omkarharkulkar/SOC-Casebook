@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Parse Ubuntu OpenSSH authentication log entries."""
+"""Parse common Ubuntu OpenSSH authentication log entries."""
 
 import re
 import sys
@@ -9,9 +9,9 @@ from pathlib import Path
 
 
 HEADER_PATTERN = re.compile(
-    r"^(?P<timestamp>\S+)\s+"
+    r"^(?P<timestamp>\S+|[A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+"
     r"(?P<hostname>\S+)\s+"
-    r"sshd\[(?P<pid>\d+)\]:\s+"
+    r"sshd(?:-session)?\[(?P<pid>\d+)\]:\s+"
     r"(?P<message>.*)$"
 )
 
@@ -22,6 +22,13 @@ EVENT_PATTERNS = [
         "failed_password",
         re.compile(
             rf"Failed password for (?:invalid user )?"
+            rf"(?P<username>\S+) from {IP_PORT}"
+        ),
+    ),
+    (
+        "failed_publickey",
+        re.compile(
+            rf"Failed publickey for (?:invalid user )?"
             rf"(?P<username>\S+) from {IP_PORT}"
         ),
     ),
@@ -52,7 +59,33 @@ EVENT_PATTERNS = [
             rf"{IP_PORT}"
         ),
     ),
+    (
+        "disconnected",
+        re.compile(
+            rf"Disconnected from "
+            rf"(?:authenticating user (?P<auth_user>\S+)\s+)?"
+            rf"(?:invalid user (?P<invalid_user>\S+)\s+)?"
+            rf"{IP_PORT}"
+        ),
+    ),
 ]
+
+
+def get_utc_timestamp(timestamp):
+    """Convert timezone-aware ISO timestamps to UTC.
+
+    Return None when the timestamp has no timezone or is not ISO format.
+    """
+
+    try:
+        parsed = datetime.fromisoformat(timestamp)
+    except ValueError:
+        return None
+
+    if parsed.utcoffset() is None:
+        return None
+
+    return parsed.astimezone(timezone.utc).isoformat()
 
 
 def parse_line(line):
@@ -80,14 +113,10 @@ def parse_line(line):
             or details.get("invalid_user")
         )
 
-        timestamp = datetime.fromisoformat(data["timestamp"])
-
         event = {
             "event_type": event_type,
             "timestamp": data["timestamp"],
-            "timestamp_utc": timestamp.astimezone(
-                timezone.utc
-            ).isoformat(),
+            "timestamp_utc": get_utc_timestamp(data["timestamp"]),
             "hostname": data["hostname"],
             "process_id": int(data["pid"]),
             "username": username,
@@ -105,20 +134,32 @@ def parse_line(line):
     return None
 
 
-def parse_file(file_path):
-    """Parse a file and return recognized SSH events."""
+def parse_file_with_stats(file_path):
+    """Parse a log file and return events and basic parsing statistics."""
 
     events = []
+    total_lines = 0
+    unrecognized_lines = 0
 
     with Path(file_path).open(
         "r", encoding="utf-8", errors="replace"
     ) as log_file:
         for line in log_file:
+            total_lines += 1
             event = parse_line(line)
 
             if event is not None:
                 events.append(event)
+            else:
+                unrecognized_lines += 1
 
+    return events, total_lines, unrecognized_lines
+
+
+def parse_file(file_path):
+    """Parse a file and return recognized SSH events."""
+
+    events, _, _ = parse_file_with_stats(file_path)
     return events
 
 
@@ -130,11 +171,13 @@ def main():
         )
         return 1
 
-    events = parse_file(sys.argv[1])
+    events, total_lines, unrecognized = parse_file_with_stats(sys.argv[1])
     counts = Counter(event["event_type"] for event in events)
 
     print("===== SSH LOG PARSER SUMMARY =====")
+    print(f"Total input lines: {total_lines}")
     print(f"Recognized events: {len(events)}")
+    print(f"Unrecognized lines: {unrecognized}")
 
     for event_type, count in sorted(counts.items()):
         print(f"{event_type}: {count}")

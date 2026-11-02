@@ -77,7 +77,11 @@ Each case will clearly identify its data provenance. No real organizational or p
 
 ## Project Status
 
-Currently in the foundation stage. Repository structure and investigation documentation are being established.
+The repository foundation and CASE-001 investigation are complete.
+
+CASE-001 includes Ubuntu SSH authentication evidence, a public SSH honeypot dataset analysis, an incident report, and a lightweight Python SSH log parser with unit tests.
+
+The remaining investigation cases and supporting MiniSOC components are planned for development.
 
 ## Disclaimer
 

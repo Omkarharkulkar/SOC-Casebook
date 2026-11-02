@@ -9,7 +9,7 @@ SSH authentication activity investigation using two separate evidence sources:
 
 ## Host Information — Lab Evidence
 
-- Hostname: omkarvm
+- Hostname: lab-ubuntu-01
 - Operating system: Ubuntu 24.04.5 LTS
 - Log timezone: UTC+05:30
 
@@ -21,6 +21,10 @@ SSH authentication activity investigation using two separate evidence sources:
 | ssh-journal.txt | systemd journal, SSH service | Supporting SSH service activity |
 | ssh_honeypot_dataset.csv | Public Zenodo SSH honeypot dataset | External SSH connection, login, and command activity |
 | ssh_honeypot_dataset.csv.v2.tar.gz | Original downloaded Zenodo archive | Preserved copy of the downloaded dataset |
+
+### Evidence Redaction
+
+The public evidence files use sanitized identifiers. The original VM hostname and Linux username were replaced with `lab-ubuntu-01` and `labuser` respectively before publication. Event timestamps, source addresses, destination addresses, process IDs, and authentication outcomes were retained.
 
 ## Evidence 1: Ubuntu SSH Authentication Events
 
@@ -110,18 +114,28 @@ They read the dataset without executing recorded commands.
 
 ## Analysis Performed
 
-The Python SSH parser at `minisoc/normalizer/ssh_parser.py` was used to identify Ubuntu SSH events:
+The Python SSH parser at `minisoc/normalizer/ssh_parser.py` was used to identify SSH authentication events in the Ubuntu evidence.
+
+The parser currently recognizes:
 
 - Failed password authentication
+- Failed public-key authentication
 - Successful password authentication
 - Successful public-key authentication
 - Invalid username attempts
 - SSH connection closures
+- SSH disconnection events
 
-Parser results:
+It supports ISO-format timestamps with timezone information and classic syslog timestamps. Timezone-aware timestamps are also converted to UTC. Classic syslog timestamps are preserved without assigning an assumed year or timezone.
 
+Parser results for `ssh-auth-events.txt`:
+
+- Total input lines: 21
 - Recognized events: 21
-- Unit tests: 6 passed
+- Unrecognized lines: 0
+- Unit tests: 12 passed
+
+The zero unrecognized count applies only to this filtered evidence file. It does not mean that every possible OpenSSH log format is supported.
 
 The public honeypot CSV was analysed separately using read-only Python scripts.
 

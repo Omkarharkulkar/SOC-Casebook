@@ -1,21 +1,21 @@
-2026-10-27T16:25:46.617092+05:30 omkarvm sshd[5985]: Connection closed by 192.168.50.10 port 40206
-2026-10-27T16:26:11.220035+05:30 omkarvm sshd[5990]: Connection closed by 192.168.50.10 port 55170
-2026-10-27T16:28:38.825142+05:30 omkarvm sshd[6012]: Connection closed by 192.168.50.10 port 35268
-2026-10-27T16:31:38.103549+05:30 omkarvm sshd[6042]: Connection closed by 192.168.50.10 port 42928
-2026-10-27T16:32:06.272209+05:30 omkarvm sshd[6046]: Connection closed by 192.168.50.10 port 47160
-2026-10-27T16:40:22.619503+05:30 omkarvm sshd[6090]: Invalid user invaliduser from 192.168.50.10 port 33230
-2026-10-27T16:40:22.643073+05:30 omkarvm sshd[6090]: Connection closed by invalid user invaliduser 192.168.50.10 port 33230 [preauth]
-2026-10-28T16:34:17.105280+05:30 omkarvm sshd[4468]: Failed password for omkarubuntu from 192.168.50.10 port 54830 ssh2
-2026-10-28T16:34:26.465008+05:30 omkarvm sshd[4468]: Accepted password for omkarubuntu from 192.168.50.10 port 54830 ssh2
-2026-10-29T16:12:07.475396+05:30 omkarvm sshd[4775]: Connection closed by authenticating user omkarubuntu 192.168.50.10 port 52468 [preauth]
-2026-10-29T16:12:07.715129+05:30 omkarvm sshd[4777]: Connection closed by authenticating user omkarubuntu 192.168.50.10 port 52474 [preauth]
-2026-10-29T16:12:17.772997+05:30 omkarvm sshd[4779]: Accepted password for omkarubuntu from 192.168.50.10 port 52484 ssh2
-2026-10-29T16:12:50.006853+05:30 omkarvm sshd[4862]: Accepted publickey for omkarubuntu from 192.168.50.10 port 54812 ssh2: ED25519 [REDACTED]
-2026-10-29T16:13:09.080302+05:30 omkarvm sshd[4926]: Connection closed by authenticating user omkarubuntu 192.168.50.10 port 42762 [preauth]
-2026-10-29T16:13:09.356446+05:30 omkarvm sshd[4928]: Accepted publickey for omkarubuntu from 192.168.50.10 port 42776 ssh2: ED25519 [REDACTED]
-2026-10-29T16:13:09.797182+05:30 omkarvm sshd[4973]: Accepted publickey for omkarubuntu from 192.168.50.10 port 42784 ssh2: ED25519 [REDACTED]
-2026-10-29T16:52:58.817807+05:30 omkarvm sshd[3942]: Accepted password for omkarubuntu from 192.168.50.20 port 48460 ssh2
-2026-10-29T17:00:09.441016+05:30 omkarvm sshd[4237]: Accepted publickey for omkarubuntu from 192.168.50.10 port 54730 ssh2: ED25519 [REDACTED]
-2026-10-29T17:01:01.463902+05:30 omkarvm sshd[4303]: Accepted publickey for omkarubuntu from 192.168.50.10 port 45080 ssh2: ED25519 [REDACTED]
-2026-10-29T17:07:09.443901+05:30 omkarvm sshd[4497]: Accepted publickey for omkarubuntu from 192.168.50.10 port 37982 ssh2: ED25519 [REDACTED]
-2026-10-29T17:14:01.259333+05:30 omkarvm sshd[4702]: Accepted publickey for omkarubuntu from 192.168.50.10 port 46132 ssh2: ED25519 [REDACTED]
+2026-10-27T16:25:46.617092+05:30 lab-ubuntu-01 sshd[5985]: Connection closed by 192.168.50.10 port 40206
+2026-10-27T16:26:11.220035+05:30 lab-ubuntu-01 sshd[5990]: Connection closed by 192.168.50.10 port 55170
+2026-10-27T16:28:38.825142+05:30 lab-ubuntu-01 sshd[6012]: Connection closed by 192.168.50.10 port 35268
+2026-10-27T16:31:38.103549+05:30 lab-ubuntu-01 sshd[6042]: Connection closed by 192.168.50.10 port 42928
+2026-10-27T16:32:06.272209+05:30 lab-ubuntu-01 sshd[6046]: Connection closed by 192.168.50.10 port 47160
+2026-10-27T16:40:22.619503+05:30 lab-ubuntu-01 sshd[6090]: Invalid user invaliduser from 192.168.50.10 port 33230
+2026-10-27T16:40:22.643073+05:30 lab-ubuntu-01 sshd[6090]: Connection closed by invalid user invaliduser 192.168.50.10 port 33230 [preauth]
+2026-10-28T16:34:17.105280+05:30 lab-ubuntu-01 sshd[4468]: Failed password for labuser from 192.168.50.10 port 54830 ssh2
+2026-10-28T16:34:26.465008+05:30 lab-ubuntu-01 sshd[4468]: Accepted password for labuser from 192.168.50.10 port 54830 ssh2
+2026-10-29T16:12:07.475396+05:30 lab-ubuntu-01 sshd[4775]: Connection closed by authenticating user labuser 192.168.50.10 port 52468 [preauth]
+2026-10-29T16:12:07.715129+05:30 lab-ubuntu-01 sshd[4777]: Connection closed by authenticating user labuser 192.168.50.10 port 52474 [preauth]
+2026-10-29T16:12:17.772997+05:30 lab-ubuntu-01 sshd[4779]: Accepted password for labuser from 192.168.50.10 port 52484 ssh2
+2026-10-29T16:12:50.006853+05:30 lab-ubuntu-01 sshd[4862]: Accepted publickey for labuser from 192.168.50.10 port 54812 ssh2: ED25519 [REDACTED]
+2026-10-29T16:13:09.080302+05:30 lab-ubuntu-01 sshd[4926]: Connection closed by authenticating user labuser 192.168.50.10 port 42762 [preauth]
+2026-10-29T16:13:09.356446+05:30 lab-ubuntu-01 sshd[4928]: Accepted publickey for labuser from 192.168.50.10 port 42776 ssh2: ED25519 [REDACTED]
+2026-10-29T16:13:09.797182+05:30 lab-ubuntu-01 sshd[4973]: Accepted publickey for labuser from 192.168.50.10 port 42784 ssh2: ED25519 [REDACTED]
+2026-10-29T16:52:58.817807+05:30 lab-ubuntu-01 sshd[3942]: Accepted password for labuser from 192.168.50.20 port 48460 ssh2
+2026-10-29T17:00:09.441016+05:30 lab-ubuntu-01 sshd[4237]: Accepted publickey for labuser from 192.168.50.10 port 54730 ssh2: ED25519 [REDACTED]
+2026-10-29T17:01:01.463902+05:30 lab-ubuntu-01 sshd[4303]: Accepted publickey for labuser from 192.168.50.10 port 45080 ssh2: ED25519 [REDACTED]
+2026-10-29T17:07:09.443901+05:30 lab-ubuntu-01 sshd[4497]: Accepted publickey for labuser from 192.168.50.10 port 37982 ssh2: ED25519 [REDACTED]
+2026-10-29T17:14:01.259333+05:30 lab-ubuntu-01 sshd[4702]: Accepted publickey for labuser from 192.168.50.10 port 46132 ssh2: ED25519 [REDACTED]
