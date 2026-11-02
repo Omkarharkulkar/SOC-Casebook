@@ -7,7 +7,7 @@
 | Case ID | CASE-001 |
 | Investigation Title | SSH Authentication and Honeypot Investigation |
 | Investigation Date | 2 November 2026 |
-| Analyst | SOC Casebook |
+| Analyst | Omkar Harkulkar |
 | Case Provenance | Lab Evidence + Public Dataset |
 | Data Sources | Ubuntu SSH logs and public SSH honeypot dataset |
 | Alert Source | Manual retrospective log review |
@@ -498,6 +498,8 @@ This threshold is a proposed starting point, not a validated detection rule. It 
 The following additional evidence could change or strengthen the investigation conclusions.
 
 The checks listed below are not represented by results in the evidence reviewed for this report.
+
+The SSH service journal records service startup activity at approximately 16:46 and again at 16:48 on October 29. An accepted password authentication from the Ubuntu host's own internal IP, 192.168.50.20, was recorded at 16:52:58, roughly four minutes after the later startup. This timing is a lead for further review: a post-startup process or a lab test may explain the sequence. The available evidence does not identify the process that initiated the login or establish a causal relationship between the service restarts and the authentication event. Reviewing relevant system and authentication logs around this period could help clarify the sequence.
 
 ### Ubuntu Lab
 

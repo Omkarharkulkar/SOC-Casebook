@@ -77,7 +77,7 @@ The 28 command events occurred across 16 sessions.
 One session was selected for closer investigation:
 
 - Date: 7 September 2025
-- Source IP: `47.251.118.172`
+- Source IP: `47[.]251[.]118[.]172`
 - Session ID: `9caa7e8b-7378-41b7-9bdd-4ae800e2466e`
 - Events: SSH connect, SSH login, and two command events.
 
@@ -120,11 +120,14 @@ The parser currently recognizes:
 
 - Failed password authentication
 - Failed public-key authentication
-- Successful password authentication
-- Successful public-key authentication
+- Accepted password authentication
+- Accepted public-key authentication
 - Invalid username attempts
 - SSH connection closures
 - SSH disconnection events
+- PAM authentication failures
+- PAM session opened and closed events
+- SSH server listening events
 
 It supports ISO-format timestamps with timezone information and classic syslog timestamps. Timezone-aware timestamps are also converted to UTC. Classic syslog timestamps are preserved without assigning an assumed year or timezone.
 
@@ -133,30 +136,32 @@ Parser results for `ssh-auth-events.txt`:
 - Total input lines: 21
 - Recognized events: 21
 - Unrecognized lines: 0
-- Unit tests: 12 passed
+- Unit tests: 16 passed
 
 The zero unrecognized count applies only to this filtered evidence file. It does not mean that every possible OpenSSH log format is supported.
 
+The broader SSH journal contains 71 lines, of which 54 are recognized by the current parser and 17 remain unrecognized. The authentication log and journal overlap, so their parser counts must not be added together without deduplication. Classic syslog timestamps are preserved without assuming a year or timezone.
+
 The public honeypot CSV was analysed separately using read-only Python scripts.
-
-## Corroborating Context
-
-Previous NetSentry lab records were reviewed to interpret activity between:
-
-- Kali VM: `192.168.50.10`
-- Ubuntu VM: `192.168.50.20`
-
-These records provide supporting context but are separate from the original Ubuntu log evidence.
 
 ## Limitations
 
 - Logs establish recorded events, not the intent behind them.
 - A failed password or invalid username does not independently establish a brute-force attack.
 - Connection closures are not automatically failed logins.
-- October 28 activity correlates with documented lab testing.
 - October 27 invalid-user activity is likely lab-related, but exact attribution has not been independently established.
 - The public dataset represents activity recorded by a honeypot, not evidence from a confirmed compromised production host.
 - A recorded SSH login event does not, by itself, prove successful authentication on a real system.
 - The September 7 command sequence is consistent with attempted payload delivery, but successful download or execution is not established.
 - The public CSV timestamps do not include an explicit timezone offset.
 - The investigation covers only the available evidence and collection periods.
+
+## Evidence Integrity
+
+SHA-256 hashes are recorded in [`SHA256SUMS`](SHA256SUMS) for the two lab log files and the downloaded public dataset files.
+
+The authentication log and SSH journal are included in the repository. The extracted public dataset CSV and original compressed archive are retained locally but excluded from Git because of their size.
+
+The hashes allow the local files to be checked for accidental changes. They do not independently establish the authenticity of the original log collection or dataset.
+
+The public dataset source is [Zenodo record 19731615](https://zenodo.org/records/19731615). The source's published checksum should be treated separately from the locally calculated SHA-256 values.
