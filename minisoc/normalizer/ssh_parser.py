@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Parse common Ubuntu OpenSSH authentication log entries."""
+"""Parse common Ubuntu OpenSSH authentication and session log entries."""
 
 import re
 import sys
@@ -51,6 +51,27 @@ EVENT_PATTERNS = [
         ),
     ),
     (
+        "pam_auth_failure",
+        re.compile(
+            r"pam_unix\(sshd:auth\): authentication failure;.*?"
+            r"rhost=(?P<src_ip>\S+).*?user=(?P<username>\S+)"
+        ),
+    ),
+    (
+        "pam_session_opened",
+        re.compile(
+            r"pam_unix\(sshd:session\): session opened for user "
+            r"(?P<username>[^(\s]+)"
+        ),
+    ),
+    (
+        "pam_session_closed",
+        re.compile(
+            r"pam_unix\(sshd:session\): session closed for user "
+            r"(?P<username>\S+)"
+        ),
+    ),
+    (
         "connection_closed",
         re.compile(
             rf"Connection closed by "
@@ -66,6 +87,13 @@ EVENT_PATTERNS = [
             rf"(?:authenticating user (?P<auth_user>\S+)\s+)?"
             rf"(?:invalid user (?P<invalid_user>\S+)\s+)?"
             rf"{IP_PORT}"
+        ),
+    ),
+    (
+        "ssh_server_listening",
+        re.compile(
+            r"Server listening on (?P<listen_address>\S+) "
+            r"port (?P<listen_port>\d+)"
         ),
     ),
 ]
@@ -126,6 +154,12 @@ def parse_line(line):
                 if details.get("src_port")
                 else None
             ),
+            "listening_address": details.get("listen_address"),
+            "listening_port": (
+                int(details["listen_port"])
+                if details.get("listen_port")
+                else None
+            ),
             "raw_message": message,
         }
 
@@ -166,7 +200,7 @@ def parse_file(file_path):
 def main():
     if len(sys.argv) != 2:
         print(
-            "Usage: python3 ssh_parser.py <auth-log-file>",
+            "Usage: python3 ssh_parser.py <ssh-log-file>",
             file=sys.stderr,
         )
         return 1

@@ -140,6 +140,56 @@ class TestSSHParser(unittest.TestCase):
         self.assertEqual(event["timestamp"], "Nov  2 15:30:00")
         self.assertIsNone(event["timestamp_utc"])
 
+    def test_pam_auth_failure(self):
+        line = (
+            "Oct 28 16:34:15 lab-ubuntu-01 sshd[4468]: "
+            "pam_unix(sshd:auth): authentication failure; "
+            "logname= uid=0 euid=0 tty=ssh ruser= "
+            "rhost=192.168.50.10  user=labuser"
+        )
+
+        event = parse_line(line)
+
+        self.assertEqual(event["event_type"], "pam_auth_failure")
+        self.assertEqual(event["username"], "labuser")
+        self.assertEqual(event["source_ip"], "192.168.50.10")
+        self.assertIsNone(event["source_port"])
+
+    def test_pam_session_opened(self):
+        line = (
+            "Oct 28 16:34:26 lab-ubuntu-01 sshd[4468]: "
+            "pam_unix(sshd:session): session opened for user "
+            "labuser(uid=1000) by labuser(uid=0)"
+        )
+
+        event = parse_line(line)
+
+        self.assertEqual(event["event_type"], "pam_session_opened")
+        self.assertEqual(event["username"], "labuser")
+
+    def test_pam_session_closed(self):
+        line = (
+            "Oct 28 16:34:27 lab-ubuntu-01 sshd[4468]: "
+            "pam_unix(sshd:session): session closed for user labuser"
+        )
+
+        event = parse_line(line)
+
+        self.assertEqual(event["event_type"], "pam_session_closed")
+        self.assertEqual(event["username"], "labuser")
+
+    def test_ssh_server_listening(self):
+        line = (
+            "Oct 27 16:22:56 lab-ubuntu-01 sshd[5934]: "
+            "Server listening on 0.0.0.0 port 22."
+        )
+
+        event = parse_line(line)
+
+        self.assertEqual(event["event_type"], "ssh_server_listening")
+        self.assertEqual(event["listening_address"], "0.0.0.0")
+        self.assertEqual(event["listening_port"], 22)
+
     def test_unrelated_line_is_ignored(self):
         line = (
             "2026-10-29T16:12:07+05:30 lab-ubuntu-01 "
