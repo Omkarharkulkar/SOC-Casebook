@@ -162,6 +162,16 @@ SHA-256 hashes are recorded in [`SHA256SUMS`](SHA256SUMS) for the two lab log fi
 
 The authentication log and SSH journal are included in the repository. The extracted public dataset CSV and original compressed archive are retained locally but excluded from Git because of their size.
 
-The hashes allow the local files to be checked for accidental changes. They do not independently establish the authenticity of the original log collection or dataset.
+To verify the files available in a repository clone, run:
 
-The public dataset source is [Zenodo record 19731615](https://zenodo.org/records/19731615). The source's published checksum should be treated separately from the locally calculated SHA-256 values.
+`sha256sum -c --ignore-missing SHA256SUMS`
+
+This verifies files that are present and skips files that are not included in the clone, such as the local-only CSV and archive. It does not verify missing files.
+
+The hashes allow local files to be checked for accidental changes. They do not independently establish the authenticity of the original log collection or dataset.
+
+The public dataset is available from [Zenodo record 19731615](https://zenodo.org/records/19731615). Zenodo publishes the following MD5 checksum for the compressed archive:
+
+`d1ce5b9a0f9428b90b42d3d20360fd9a`
+
+This publisher-provided MD5 value is separate from the SHA-256 hashes calculated locally. The two checksum types should not be compared directly.
