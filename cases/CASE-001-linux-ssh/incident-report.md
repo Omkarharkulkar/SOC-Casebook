@@ -499,10 +499,9 @@ The following additional evidence could change or strengthen the investigation c
 
 The checks listed below are not represented by results in the evidence reviewed for this report.
 
-The SSH service journal records service startup activity at approximately 16:46 and again at 16:48 on October 29. An accepted password authentication from the Ubuntu host's own internal IP, 192.168.50.20, was recorded at 16:52:58, roughly four minutes after the later startup. This timing is a lead for further review: a post-startup process or a lab test may explain the sequence. The available evidence does not identify the process that initiated the login or establish a causal relationship between the service restarts and the authentication event. Reviewing relevant system and authentication logs around this period could help clarify the sequence.
-
 ### Ubuntu Lab
 
+- The journal contains a system boot marker before the SSH service startup at 16:48:24 on October 29. An accepted password authentication from the Ubuntu host's own internal IP, 192.168.50.20, was recorded at 16:52:58, approximately four minutes and 34 seconds after that boot. This timing is a lead for further review. The available evidence does not identify the process that initiated the login or establish that the boot caused the authentication event. Reviewing system and authentication logs around this period could help clarify the sequence.
 - Shell history or audit records confirming the exact command responsible for the October 27 invalid username event.
 - Process and terminal records identifying the source of the October 29 self-originating SSH connection.
 - Additional records confirming the purpose of successful authentication sessions.
