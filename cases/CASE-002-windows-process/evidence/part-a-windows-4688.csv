@@ -1,0 +1,5 @@
+"Timestamp","EventID","RecordID","ProcessName","ParentProcess","NewProcessID","CreatorProcessID"
+"2026-11-13 11:34:26","4688","1934540","WmiPrvSE.exe","svchost.exe","0x2860","0x504"
+"2026-11-13 11:34:25","4688","1934539","WmiApSrv.exe","services.exe","0x31bc","0x44c"
+"2026-11-13 11:34:04","4688","1934528","whoami.exe","powershell.exe","0x3de0","0x3480"
+"2026-11-13 11:33:45","4688","1934519","auditpol.exe","powershell.exe","0x26a4","0x3480"
