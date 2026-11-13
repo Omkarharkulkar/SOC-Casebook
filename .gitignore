@@ -24,6 +24,5 @@ cases/CASE-001-linux-ssh/evidence/ssh_honeypot_dataset.csv.v2.tar.gz
 # Generated analysis output
 cases/*/analysis/output/
 
-# CASE-002 local evidence (not redistributed)
+# CASE-002 original public evidence (not redistributed)
 cases/CASE-002-windows-process/evidence/exec_sysmon_1_ftp.evtx
-cases/CASE-002-windows-process/evidence/SHA256SUMS

@@ -1,0 +1,5 @@
+HayabusaTimestampUTC,SysmonUtcTime,RecordID,Process,PID,ParentProcess,ParentPID,RuleTitle,Level
+2019-05-12T17:20:01.980Z,2019-05-12T17:20:01.964Z,16511,cmd.exe,4092,explorer.exe,3192,Proc Exec,info
+2019-05-12T17:20:31.183Z,2019-05-12T17:20:31.183Z,16512,python.exe,956,cmd.exe,4092,Proc Exec,info
+2019-05-12T17:20:49.443Z,2019-05-12T17:20:49.261Z,16513,cmd.exe,2392,ftp.exe,3668,Proc Exec,info
+2019-05-12T17:20:49.458Z,2019-05-12T17:20:49.277Z,16514,calc.exe,684,cmd.exe,2392,Proc Exec,info

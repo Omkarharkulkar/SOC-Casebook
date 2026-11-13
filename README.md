@@ -20,7 +20,7 @@ The project simulates selected responsibilities of a Level 1 Security Operations
 | Case ID | Investigation | Status |
 |---|---|---|
 | CASE-001 | SSH Authentication and Honeypot Investigation | Complete |
-| CASE-002 | Suspicious Windows Process Execution | Planned |
+| CASE-002 | Suspicious Windows Process Execution | Analysis complete |
 | CASE-003 | Legitimate Administrative Activity | Planned |
 | CASE-004 | Phishing Email Investigation | Planned |
 | CASE-005 | Suspicious DNS / Network Communication | Planned |
