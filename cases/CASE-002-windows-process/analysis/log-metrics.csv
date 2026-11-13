@@ -1,0 +1,2 @@
+Filename,Computers,Events,First Timestamp,Last Timestamp,Channels,Providers,Size
+exec_sysmon_1_ftp.evtx,IEWIN7,4,2019-05-12 22:50:01.980 +05:30,2019-05-12 22:50:49.458 +05:30,Sysmon,Sysmon,68.0 KiB

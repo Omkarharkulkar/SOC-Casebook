@@ -1,0 +1,6 @@
+Timestamp,RuleTitle,Level,Computer,Channel,EventID,RecordID,RuleID
+2019-05-12 22:50:01.980 +05:30,Proc Exec,info,IEWIN7,Sysmon,1,16511,85790e3e-e270-499f-a6ad-f8afe85c35f1
+2019-05-12 22:50:31.183 +05:30,Proc Exec,info,IEWIN7,Sysmon,1,16512,85790e3e-e270-499f-a6ad-f8afe85c35f1
+2019-05-12 22:50:49.443 +05:30,Proc Exec,info,IEWIN7,Sysmon,1,16513,85790e3e-e270-499f-a6ad-f8afe85c35f1
+2019-05-12 22:50:49.458 +05:30,Proc Exec,info,IEWIN7,Sysmon,1,16514,85790e3e-e270-499f-a6ad-f8afe85c35f1
+2019-05-12 22:50:49.443 +05:30,Potential Arbitrary Command Execution Via FTP.EXE,med,IEWIN7,Sysmon,1,16513,086262f5-1aee-ce11-2ddf-4692b9e51b3e
