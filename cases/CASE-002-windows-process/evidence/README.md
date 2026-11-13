@@ -17,9 +17,14 @@ The CSV contains selected event fields: timestamp, event ID, record ID, process 
 
 Usernames, full executable paths, and command-line arguments were excluded from the exported evidence.
 
-SHA-256:
+SHA-256 hashes:
 
-`092094762cda223cef201090e01095359d6734901c2e68cf1a17f18a4f2c825f`
+- Original Windows export (452 bytes):
+  `B5CF68E240263C4C971387D08DFD6235109A00CB34E951D6EE73C42AD818A44F`
+- Normalized repository copy (444 bytes):
+  `092094762cda223cef201090e01095359d6734901c2e68cf1a17f18a4f2c825f`
+
+The original Windows export hash was verified against the file retained in the Windows Documents folder. Before publication, the CSV was normalized to UTF-8 without BOM and LF line endings. The second hash identifies the normalized file committed to this repository.
 
 Process Creation auditing was temporarily enabled for collection and restored to its original `No Auditing` setting afterwards.
 
@@ -46,6 +51,13 @@ The upstream repository includes a GNU General Public License, version 3. Refer 
 ### Dataset Notes
 
 The dataset contains Windows event samples associated with attack and post-exploitation techniques. Its README states that ATT&CK mapping is at the technique level, not the procedure level.
+
+## Analysis Outputs
+
+- `../analysis/timeline.csv` contains the Hayabusa detection timeline with timestamps displayed in IST (+05:30).
+- `../analysis/process-tree.csv` contains the four unique process events, including process and parent-process names and IDs.
+- The process-tree file preserves `HayabusaTimestampUTC` and `SysmonUtcTime` as separate UTC fields. They may differ slightly because they originate from different event timestamp fields.
+- `../analysis/SHA256SUMS` contains the integrity hashes for the analysis CSV files.
 
 ## Evidence Limitations
 

@@ -12,13 +12,13 @@
 
 This case examines Windows process-creation activity using two separate evidence sources.
 
-Part A uses four Windows Security Event ID 4688 records collected from my own Windows PC during normal activity.
+Part A uses four Windows Security Event ID 4688 records collected from my own Windows PC during a limited collection session.
 
 Part B uses a public Sysmon EVTX sample from the EVTX-ATTACK-SAMPLES repository. Hayabusa generated a medium-level detection related to FTP-based command execution.
 
 The two sources are analysed separately because they come from different systems and collection contexts.
 
-Part A provides a small baseline of ordinary process activity. Part B contains suspicious process activity that requires further investigation.
+Part A provides a limited sample of local process activity. Part B contains suspicious process activity that requires further investigation.
 
 Neither source provides sufficient evidence to confirm system compromise.
 
@@ -84,7 +84,7 @@ The original EVTX binary was analysed locally and is not redistributed in this r
 
 Four Security Event ID 4688 records were collected from my Windows PC.
 
-| Timestamp | Record ID | Process | Parent process |
+| Timestamp (IST, +05:30) | Record ID | Process | Parent process |
 |---|---:|---|---|
 | 11:33:45 | 1934519 | auditpol.exe | powershell.exe |
 | 11:34:04 | 1934528 | whoami.exe | powershell.exe |
@@ -108,19 +108,17 @@ The exported CSV was hashed after collection and again after transfer to Ubuntu.
 
 SHA-256:
 
-`b5cf68e240263c4c971387d08dfd6235109a00cb34e951d6ee73c42ad818a44f`
+`092094762cda223cef201090e01095359d6734901c2e68cf1a17f18a4f2c825f`
 
-The matching hashes confirm that the transferred CSV retained its contents.
+This hash identifies the normalized CSV included in this repository. The file was converted to UTF-8 without BOM and LF line endings before publication.
 
 Process Creation auditing was restored to `No Auditing` after collection.
 
 ### Part A Assessment
 
-The four records are consistent with the expected administrative checks and other Windows service-related activity.
+The first two records are consistent with the administrative checks performed during collection. The two WMI-related records show Windows service-related parent processes, but their full operational context was not established.
 
-No suspicious activity or confirmed compromise was identified in this limited sample.
-
-This should be treated as a small benign-activity baseline, not proof that the entire Windows system was free from suspicious activity.
+No confirmed suspicious activity or compromise was identified in this limited sample. The available evidence is insufficient to classify every observed process as benign or to assess the wider system.
 
 ## 6. Part B — Public EVTX Analysis
 
@@ -155,6 +153,10 @@ The medium alert is attached to an event already represented by an informational
 | 16514 | 22:50:49.458 | Command Prompt started Windows Calculator | Proc Exec — Informational |
 
 The events show a sequence of process creation activity over approximately 47.5 seconds.
+
+The `timeline.csv` uses Hayabusa timestamps displayed in IST (+05:30). The separate `process-tree.csv` preserves both the Hayabusa timestamp and the Sysmon `UtcTime` field in UTC. These timestamps can differ slightly because they originate from different event fields; they should not be treated as interchangeable.
+
+The process-tree file also records the process and parent-process names and IDs for the four unique events.
 
 The FTP-related event is notable because Hayabusa generated a medium-level detection for it. The subsequent Calculator process is part of the recorded sequence, but its presence alone does not establish malicious impact.
 
@@ -228,7 +230,7 @@ Do not treat a detection alone as sufficient justification for a confirmed-compr
 
 This case used two separate evidence sources to investigate Windows process creation.
 
-Part A demonstrated how Windows Security Event ID 4688 records can be collected and reviewed using PowerShell. The small sample provided a baseline of ordinary process activity from my own PC.
+Part A demonstrated how Windows Security Event ID 4688 records can be collected and reviewed using PowerShell. The limited sample illustrates selected process activity from my own PC; it is not a comprehensive baseline.
 
 Part B demonstrated how Hayabusa can analyse a public Sysmon EVTX sample and identify suspicious FTP-related process activity through a built-in Sigma detection.
 
@@ -239,6 +241,7 @@ The findings show why process relationships and surrounding context matter durin
 - `evidence/part-a-windows-4688.csv` — Sanitised local Windows process-creation records
 - `evidence/README.md` — Evidence sources, provenance, and limitations
 - `analysis/log-metrics.csv` — Public sample event metrics
-- `analysis/timeline.csv` — Public sample Hayabusa detection timeline
+- `analysis/timeline.csv` — Public sample Hayabusa detection timeline (IST, +05:30)
+- `analysis/process-tree.csv` — Sanitised process relationships with Hayabusa and Sysmon timestamps in UTC
 - `analysis/SHA256SUMS` — Analysis file integrity manifest
 - `playbooks/ftp-process-investigation.md` — Investigation checklist
