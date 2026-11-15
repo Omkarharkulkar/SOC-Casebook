@@ -26,7 +26,7 @@ SHA-256 hashes:
 
 The original Windows export hash was verified against the file retained in the Windows Documents folder. Before publication, the CSV was normalized to UTF-8 without BOM and LF line endings. The second hash identifies the normalized file committed to this repository.
 
-Process Creation auditing was temporarily enabled for collection and restored to its original `No Auditing` setting afterwards.
+Process Creation auditing was temporarily enabled for collection. A follow-up check on 15 November 2026 confirmed that the setting was `No Auditing`. This confirms the current configuration only; the original post-collection restoration was not independently recorded.
 
 This is a small sample collected during normal system activity. It is not a complete Windows activity record or a comprehensive security assessment.
 
@@ -58,6 +58,24 @@ The dataset contains Windows event samples associated with attack and post-explo
 - `../analysis/process-tree.csv` contains the four unique process events, including process and parent-process names and IDs.
 - The process-tree file preserves `HayabusaTimestampUTC` and `SysmonUtcTime` as separate UTC fields. They may differ slightly because they originate from different event timestamp fields.
 - `../analysis/SHA256SUMS` contains the integrity hashes for the analysis CSV files.
+
+## Dated Re-analysis — 15 November 2026
+
+The public EVTX sample was re-analysed using Hayabusa v4.4.0 CODE BLUE and the Hayabusa rules repository at commit:
+
+`58f8f145c65ed0bc0dcf888efde4ca9ca87ba846`
+
+The relevant Sysmon detection rule was:
+
+- Rule: `proc_creation_win_ftp_arbitrary_command_execution.yml`
+- Rule ID: `086262f5-1aee-ce11-2ddf-4692b9e51b3e`
+- Rule SHA-256: `4f003775e7c36d1f9a8c1de50cf326e3e01101fbd0d4ae280a1081938f7c9d7d`
+
+The re-analysis processed four events and produced five timeline rows: four informational process-event rows and one Medium detection row associated with Record ID 16513.
+
+The dated re-analysis outputs are in `../analysis/rerun-2026-11-15/`. The repository includes the sanitised timeline, log metrics, run notes, and a checksum manifest. The raw timeline is retained locally and excluded from Git.
+
+The exact ruleset revision used in the original analysis was not recorded. This dated run documents a reproducible re-analysis using the pinned revision above; it does not establish the exact historical ruleset.
 
 ## Evidence Limitations
 
