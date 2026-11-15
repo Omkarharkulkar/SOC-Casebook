@@ -56,7 +56,7 @@ The dataset contains Windows event samples associated with attack and post-explo
 
 ## Analysis Outputs
 
-- `../analysis/timeline.csv` contains the Hayabusa detection timeline with timestamps displayed in IST (+05:30), including PID and ParentPID fields.
+- `../analysis/timeline.csv` contains the Hayabusa detection timeline with timestamps displayed in IST (+05:30). PID and ParentPID columns were added after the initial analysis.
 - `../analysis/process-tree.csv` contains the four unique process events, including process and parent-process names and IDs.
 - The process-tree file preserves `HayabusaTimestampUTC` and `SysmonUtcTime` as separate UTC fields. They may differ slightly because they originate from different event timestamp fields.
 - `../analysis/SHA256SUMS` contains the integrity hashes for the analysis CSV files.
@@ -72,10 +72,15 @@ The relevant Sysmon detection rule was:
 - Rule: `proc_creation_win_ftp_arbitrary_command_execution.yml`
 - Rule ID: `086262f5-1aee-ce11-2ddf-4692b9e51b3e`
 - Rule SHA-256: `4f003775e7c36d1f9a8c1de50cf326e3e01101fbd0d4ae280a1081938f7c9d7d`
+- Pinned rule source: https://github.com/Yamato-Security/hayabusa-rules/blob/58f8f145c65ed0bc0dcf888efde4ca9ca87ba846/sigma/sysmon/process_creation/proc_creation_win_ftp_arbitrary_command_execution.yml
 
 The re-analysis processed four events and produced five timeline rows: four informational process-event rows and one Medium detection row associated with Record ID 16513.
 
-The original analysis timeline and the dated re-analysis timeline are byte-identical. Both include PID and ParentPID fields. Their SHA-256 is:
+Before PID enrichment, the original analysis timeline and the 15 November 2026 re-analysis timeline both had SHA-256:
+
+`d8bde7859a37ebc2e38e5ae009c23a43b343a298f7cbfb4779af2054cfd358f3`
+
+This matching hash records the reproduction check before additional columns were added. After that comparison, PID and ParentPID columns were added to both published timelines by matching Record IDs with the process identifiers in `process-tree.csv`. The enriched files are byte-identical and have SHA-256:
 
 `6c041760e9690726f49f7533812f67d7792c2e5340dcf87a3016564143dd6d89`
 

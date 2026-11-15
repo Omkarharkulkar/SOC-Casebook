@@ -96,7 +96,7 @@ The Hayabusa timeline timestamps and Sysmon `UtcTime` values are retained as sep
 
 ### Analysis Outputs
 
-- `analysis/timeline.csv` — original Hayabusa timeline.
+- `analysis/timeline.csv` — Hayabusa timeline with PID and ParentPID columns added after initial analysis.
 - `analysis/process-tree.csv` — four unique process events with process and parent-process details.
 - `analysis/log-metrics.csv` — original EVTX processing metrics.
 - `analysis/rerun-2026-11-15/timeline-public.csv` — sanitised dated re-analysis timeline.
@@ -150,7 +150,7 @@ The public EVTX file was analysed with Hayabusa v4.4.0 CODE BLUE.
 
 The original analysis identified four unique Event ID 1 records and a Medium alert. The additional alert row does not represent a fifth unique process event.
 
-The 15 November 2026 re-analysis produced a timeline that is byte-identical to the original analysis timeline. Both files have SHA-256 `6c041760e9690726f49f7533812f67d7792c2e5340dcf87a3016564143dd6d89`. This confirms that the re-analysis reproduced the original timeline for this sample.
+Before PID enrichment, the original analysis timeline and the 15 November 2026 re-analysis timeline both had SHA-256 `d8bde7859a37ebc2e38e5ae009c23a43b343a298f7cbfb4779af2054cfd358f3`. This matching hash is the reproduction check for the original Hayabusa output. After that comparison, PID and ParentPID columns were added to both published timelines by matching Record IDs with the process identifiers in `analysis/process-tree.csv`. The enriched files are byte-identical and have SHA-256 `6c041760e9690726f49f7533812f67d7792c2e5340dcf87a3016564143dd6d89`.
 
 The detection rule is:
 
