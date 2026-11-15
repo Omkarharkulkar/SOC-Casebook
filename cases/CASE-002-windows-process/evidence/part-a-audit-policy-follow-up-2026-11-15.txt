@@ -1,0 +1,22 @@
+Follow-up check date: 2026-11-15
+Recorded time: 2026-11-15 12:12:33 +05:30
+
+Command:
+Get-Date -Format "yyyy-MM-dd HH:mm:ss zzz"
+
+Output:
+2026-11-15 12:12:33 +05:30
+
+Command:
+auditpol /get /subcategory:"Process Creation"
+
+Output:
+System audit policy
+Category/Subcategory                      Setting
+Detailed Tracking
+  Process Creation                        No Auditing
+
+Analyst note:
+This records the Process Creation audit policy state at the time of
+the follow-up check. It does not independently document the original
+post-collection restoration.

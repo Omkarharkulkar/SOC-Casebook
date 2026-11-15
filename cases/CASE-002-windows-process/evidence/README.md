@@ -26,7 +26,9 @@ SHA-256 hashes:
 
 The original Windows export hash was verified against the file retained in the Windows Documents folder. Before publication, the CSV was normalized to UTF-8 without BOM and LF line endings. The second hash identifies the normalized file committed to this repository.
 
-Process Creation auditing was temporarily enabled for collection. A follow-up check on 15 November 2026 confirmed that the setting was `No Auditing`. This confirms the current configuration only; the original post-collection restoration was not independently recorded.
+Process Creation auditing was temporarily enabled for collection. The recorded follow-up check on 15 November 2026 at 12:12:33 IST showed `No Auditing`. This confirms the policy state at that time only; the original post-collection restoration was not independently recorded.
+
+- `part-a-audit-policy-follow-up-2026-11-15.txt` contains the recorded PowerShell command output from this follow-up check.
 
 This is a small sample collected during normal system activity. It is not a complete Windows activity record or a comprehensive security assessment.
 
@@ -54,7 +56,7 @@ The dataset contains Windows event samples associated with attack and post-explo
 
 ## Analysis Outputs
 
-- `../analysis/timeline.csv` contains the Hayabusa detection timeline with timestamps displayed in IST (+05:30).
+- `../analysis/timeline.csv` contains the Hayabusa detection timeline with timestamps displayed in IST (+05:30), including PID and ParentPID fields.
 - `../analysis/process-tree.csv` contains the four unique process events, including process and parent-process names and IDs.
 - The process-tree file preserves `HayabusaTimestampUTC` and `SysmonUtcTime` as separate UTC fields. They may differ slightly because they originate from different event timestamp fields.
 - `../analysis/SHA256SUMS` contains the integrity hashes for the analysis CSV files.
@@ -72,6 +74,10 @@ The relevant Sysmon detection rule was:
 - Rule SHA-256: `4f003775e7c36d1f9a8c1de50cf326e3e01101fbd0d4ae280a1081938f7c9d7d`
 
 The re-analysis processed four events and produced five timeline rows: four informational process-event rows and one Medium detection row associated with Record ID 16513.
+
+The original analysis timeline and the dated re-analysis timeline are byte-identical. Both include PID and ParentPID fields. Their SHA-256 is:
+
+`6c041760e9690726f49f7533812f67d7792c2e5340dcf87a3016564143dd6d89`
 
 The dated re-analysis outputs are in `../analysis/rerun-2026-11-15/`. The repository includes the sanitised timeline, log metrics, run notes, and a checksum manifest. The raw timeline is retained locally and excluded from Git.
 

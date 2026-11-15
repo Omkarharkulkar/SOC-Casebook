@@ -10,7 +10,7 @@
 | Investigation Date | 13–15 November 2026 |
 | Evidence Sources | Local Windows Security logs and public Sysmon EVTX sample |
 | Primary Tool | Hayabusa v4.4.0 CODE BLUE |
-| Case Status | Analysis documented; final publication checks pending |
+| Case Status | Ready for publication |
 
 This case contains two separate evidence sources. Part A is a limited collection from my own Windows PC. Part B is a public Windows Sysmon sample. Their timelines and findings are assessed separately.
 
@@ -60,7 +60,7 @@ All times are local time (IST, UTC+05:30).
 
 These are the four selected records in the local export. The export does not contain full executable paths or enough context to independently validate the two WMI-related process records.
 
-Process Creation auditing was temporarily enabled for collection. A follow-up check on 15 November 2026 showed `No Auditing`. This confirms the current configuration only; the original post-collection restoration was not independently recorded.
+Process Creation auditing was temporarily enabled for collection. The recorded follow-up check on 15 November 2026 at 12:12:33 IST showed `No Auditing`. The command output is preserved in `evidence/part-a-audit-policy-follow-up-2026-11-15.txt`. This confirms the policy state at that time only; the original post-collection restoration was not independently recorded.
 
 ### Part B — Public Sysmon Sample
 
@@ -140,7 +140,7 @@ The records include two process events initiated under PowerShell and two WMI-re
 
 Because this context is unavailable, the WMI-related records cannot be independently validated as expected activity from the evidence retained in this case.
 
-Process Creation auditing was initially reported as `No Auditing`. It was temporarily enabled for the collection. A follow-up check on 15 November 2026 again showed `No Auditing`, but the original restoration was not independently recorded at the time it occurred.
+Process Creation auditing was initially reported as `No Auditing` and was temporarily enabled for collection. A recorded follow-up check on 15 November 2026 at 12:12:33 IST again showed `No Auditing`; its command output is preserved in `evidence/part-a-audit-policy-follow-up-2026-11-15.txt`. This confirms the policy state at the time of the follow-up check, but the original post-collection restoration was not independently recorded.
 
 **Part A outcome:** Collection validated; no alert was generated, so no incident verdict is required.
 
@@ -150,6 +150,8 @@ The public EVTX file was analysed with Hayabusa v4.4.0 CODE BLUE.
 
 The original analysis identified four unique Event ID 1 records and a Medium alert. The additional alert row does not represent a fifth unique process event.
 
+The 15 November 2026 re-analysis produced a timeline that is byte-identical to the original analysis timeline. Both files have SHA-256 `6c041760e9690726f49f7533812f67d7792c2e5340dcf87a3016564143dd6d89`. This confirms that the re-analysis reproduced the original timeline for this sample.
+
 The detection rule is:
 
 `proc_creation_win_ftp_arbitrary_command_execution.yml`
@@ -158,11 +160,13 @@ Its rule ID is:
 
 `086262f5-1aee-ce11-2ddf-4692b9e51b3e`
 
-The rule has status `test` and severity `medium`. Its detection logic includes a condition involving the parent image ending in `\\ftp.exe`.
+The rule has status `test` and severity `medium`. Its detection logic includes a condition involving the parent image ending in `\ftp.exe`.
 
-The matching event is Record ID 16513, where `cmd.exe` has `ftp.exe` as its parent process.
+The matching event is Record ID 16513, where `cmd.exe` (PID 2392) has `ftp.exe` (PID 3668) as its parent process.
 
-The four records show two separate process chains. The Python process is a child of the first Command Prompt process, not the FTP process. The available records do not establish that Python was launched by FTP.
+The available four process-creation records do not include a creation event for `ftp.exe` (PID 3668). Its own parent process, creation time, and launch context therefore cannot be established from this sample.
+
+The four records show two separate process chains. The Python process is a child of the first Command Prompt process, not the FTP process. The available records do not establish that Python was launched by FTP or that the two chains are related.
 
 The dataset repository describes its contents as Windows event samples associated with attack and post-exploitation techniques. Its README also states that ATT&CK mapping is at the technique level rather than the procedure level. The original environment and whether the recorded activity was confined to a simulation have not been independently verified.
 
@@ -278,6 +282,7 @@ The investigation checklist is documented in:
 - The original post-collection audit-policy restoration was not independently recorded.
 - Part B is a public dataset sample and not activity from the analyst's own Windows PC.
 - The original environment of the public sample has not been independently verified.
+- The available Part B records do not include a process-creation event for `ftp.exe` (PID 3668), so its launch context and parent process cannot be established.
 - The exact Hayabusa ruleset revision used in the original analysis was not recorded.
 - The re-analysis uses a pinned rules repository revision and does not establish the exact historical ruleset.
 - No network, file-activity, authentication, or endpoint-response telemetry was available to confirm impact.
@@ -313,6 +318,7 @@ The investigation checklist is documented in:
 The assessment could be strengthened or changed by obtaining:
 
 - Full executable paths, command lines, user context, and file signatures for the relevant process events.
+- The process-creation event for `ftp.exe` (PID 3668), including its parent process, command line, and timestamp, to establish how the FTP process was launched.
 - Additional Sysmon process and network connection events from the same time period.
 - Windows file-creation and file-modification records.
 - FTP client and server logs showing whether a transfer occurred.
