@@ -53,7 +53,7 @@ The detection matched Sysmon Event ID 1, Record ID 16513.
 | `evidence/part-a-windows-4688.csv` | Sanitised local Windows process-creation records |
 | `evidence/README.md` | Evidence provenance and collection notes |
 | `analysis/process-tree.csv` | Four unique public-sample process events |
-| `analysis/timeline.csv` | Original Hayabusa timeline |
+| `analysis/timeline.csv` | Hayabusa timeline with PID and ParentPID columns added after initial analysis |
 | `analysis/log-metrics.csv` | Original event-log metrics |
 | `analysis/SHA256SUMS` | Original analysis integrity manifest |
 | `analysis/rerun-2026-11-15/timeline-public.csv` | Sanitised dated re-analysis timeline |
@@ -93,4 +93,4 @@ The exact ruleset revision used in the original analysis was not recorded. The s
 
 ## Current Status
 
-The investigation and dated re-analysis are documented. Report review, checksum validation, and Git review are complete. The changes are ready for commit and publication.
+The investigation and dated re-analysis are documented. Report review, checksum validation, and Git review are complete. The final documentation changes are prepared for publication.
