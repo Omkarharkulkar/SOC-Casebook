@@ -1,0 +1,37 @@
+Re-analysis date: 2026-11-15
+Hayabusa version: v4.4.0 CODE BLUE
+
+Input:
+cases/CASE-002-windows-process/evidence/exec_sysmon_1_ftp.evtx
+Input SHA256: aadae0e31b5f2310284687062010251fdd9ed9b8e8d76be14b79896d05f970ef
+
+Rules repository:
+https://github.com/Yamato-Security/hayabusa-rules
+Rules repository commit: 58f8f145c65ed0bc0dcf888efde4ca9ca87ba846
+Rules repository commit date: 2026-11-10
+
+Detection rule:
+sigma/sysmon/process_creation/proc_creation_win_ftp_arbitrary_command_execution.yml
+Rule SHA256: 4f003775e7c36d1f9a8c1de50cf326e3e01101fbd0d4ae280a1081938f7c9d7d
+
+Threads: 1
+Timezone: +05:30
+Wizard: Disabled
+
+Analysis command:
+hayabusa dfir-timeline -f <EVTX> --no-wizard -r <RULES> -c <RULES/config> --threads 1 -Z +05:30 -o <OUTPUT>
+
+Results:
+4 events processed.
+5 total detection rows.
+2 unique detections: 1 informational and 1 medium.
+Medium detection: Potential Arbitrary Command Execution Via FTP.EXE
+Matching event: Sysmon Event ID 1, Record ID 16513.
+Rule ID: 086262f5-1aee-ce11-2ddf-4692b9e51b3e.
+
+timeline-public.csv is the sanitised timeline prepared for publication.
+The raw timeline contains detailed process metadata and is retained locally.
+
+Limitation:
+The exact ruleset revision used during the original analysis was not recorded.
+This re-analysis uses the pinned rules repository commit listed above.

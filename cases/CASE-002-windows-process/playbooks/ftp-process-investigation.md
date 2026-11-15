@@ -15,9 +15,9 @@ Provide a basic SOC L1 checklist for reviewing suspicious FTP-related process cr
 ### 2. Review process activity
 - Examine the parent and child process relationships and the surrounding process tree.
 - Identify which process relationship or rule condition caused the detection.
-- Review process names, executable paths, users, and available command-line metadata when authorized.
+- Collect and review full executable paths, command lines, user context, and available hashes or signatures internally when authorised. These fields help validate process identity and possible masquerading.
 - Check whether the activity is expected for the host and user.
-- Handle sensitive metadata securely. Do not expose usernames, full paths, or command lines in public reports.
+- Store sensitive metadata securely. Sanitise usernames, full paths, and command lines before publishing public reports.
 
 ### 3. Correlate supporting evidence
 - Review nearby Sysmon and Windows events.
