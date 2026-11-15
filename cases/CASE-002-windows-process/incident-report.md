@@ -10,7 +10,7 @@
 | Investigation Date | 13–15 November 2026 |
 | Evidence Sources | Local Windows Security logs and public Sysmon EVTX sample |
 | Primary Tool | Hayabusa v4.4.0 CODE BLUE |
-| Case Status | Ready for publication |
+| Case Status | Complete |
 
 This case contains two separate evidence sources. Part A is a limited collection from my own Windows PC. Part B is a public Windows Sysmon sample. Their timelines and findings are assessed separately.
 

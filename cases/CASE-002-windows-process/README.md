@@ -1,6 +1,6 @@
 # CASE-002 — Suspicious Windows Process Execution
 
-**Status:** Ready for publication
+**Status:** Complete
 **Category:** Windows Process Monitoring
 **Focus:** Process creation, parent-child relationships, and detection validation
 **Analyst:** Omkar Harkulkar
@@ -93,4 +93,4 @@ The exact ruleset revision used in the original analysis was not recorded. The s
 
 ## Current Status
 
-The investigation and dated re-analysis are documented. Report review, checksum validation, and Git review are complete. The final documentation changes are prepared for publication.
+The investigation, dated re-analysis, documentation review, checksum validation, and publication are complete.
