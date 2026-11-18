@@ -1,4 +1,4 @@
-# CASE-003 SUPP-001 — Public Windows Event Dataset Analysis
+# SUPP-001 — Public Windows Event Dataset Analysis
 
 ## Dataset and scope
 
@@ -38,11 +38,13 @@ The six source files passed verification using `evidence/SOURCE-SHA256SUMS`.
 
 The analysis script selected 161 events for review: 3 Event ID 1102, 36 Event ID 4672, 72 Event ID 4688, 6 Event ID 4728, 10 Event ID 4740, 31 Event ID 4771 and 3 Event ID 7045. The chronological output is `review-timeline.csv`; counts are in `event-summary.csv`.
 
+The review timeline was enriched using the supplied account and computer lookup tables. It includes account type, department and operating-system context where available. Account names and email addresses are not included.
+
 Notable records:
 
 - Three Event ID 1102 records report Security audit-log clearing: one on HOST-9211 and two on HOST-2105.
 - Three Event ID 7045 records report service installations: two named Spooler and one named PSEXESVC on HOST-5541.
-- Six Event ID 4728 records report additions to privileged or operational groups, including Helpdesk Operators, VPN Users and Remote Desktop Users.
+- Six Event ID 4728 records report group-member additions: four to Helpdesk Operators, one to VPN Users and one to Remote Desktop Users.
 - Event ID 4672 records show special privileges assigned to logon sessions. This event alone does not establish misuse.
 - Event ID 4688 records show process creation, including cmd.exe, powershell.exe, wmic.exe, rundll32.exe, svchost.exe and msedge.exe. Process names alone do not establish malicious execution.
 
@@ -52,7 +54,17 @@ The audit-log clearing, service installation and group-membership events warrant
 
 The presence of PSEXESVC is notable, but it does not independently prove unauthorized remote execution. Similarly, Event ID 1102 is a high-priority investigation lead, not proof of an attacker covering tracks.
 
+The enriched review timeline adds account type, department and operating-system context where the source records support those lookups:
+
+- The three Event ID 1102 records are associated with standard-user accounts: one from Engineering on HOST-9211, and two from Operations and Sales on HOST-2105.
+- Of the six Event ID 4728 records, one is associated with a privileged account in Engineering and five with standard-user accounts.
+- The three service-installation records are on Windows 11 Enterprise systems. The source records do not associate an account ID with those installations.
+
+These classifications provide investigative context; they do not establish who initiated an action or whether it was approved. The group names and account classifications should not be treated as proof that a particular membership change was unauthorized.
+
 The source uses reserved example IP ranges and a teaching-subset event catalogue. Findings must not be presented as evidence of a real organization or real compromise.
+
+**Training triage recommendation:** Escalate the three audit-log-clearing records, the PSEXESVC installation and the six group-membership changes for authorization review. This is a follow-up recommendation for the synthetic dataset only; it does not establish malicious activity.
 
 ## SUPP-001 conclusion
 
@@ -62,6 +74,15 @@ The source uses reserved example IP ranges and a teaching-subset event catalogue
 
 Run from the repository root:
 
-`python3 supplementary/SUPP-001-synthetic-windows-events/analysis/analyze_public_dataset.py`
+```bash
+python3 supplementary/SUPP-001-synthetic-windows-events/analysis/analyze_public_dataset.py
+```
 
-The script reads the six source CSVs and regenerates the event summary and selected chronological review timeline. The source files are separately checked with `sha256sum -c SOURCE-SHA256SUMS` from `evidence/`.
+The script reads four source CSVs (`host_events.csv`, `directory_events.csv`, `accounts.csv` and `computers.csv`) and regenerates the event summary and selected chronological review timeline, including account and operating-system context where available.
+
+The six original source files are separately checked with:
+
+```bash
+cd supplementary/SUPP-001-synthetic-windows-events/evidence
+sha256sum -c SOURCE-SHA256SUMS
+```
