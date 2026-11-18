@@ -1,0 +1,8 @@
+step,start_time_ist,end_time_ist,start_time_utc,end_time_utc,exact_command_typed,shell,elevation,deviations
+1,2026-11-16 11:22:10.077,2026-11-16 11:22:10.195,2026-11-16 05:52:10.077,2026-11-16 05:52:10.195,"whoami /all",Windows PowerShell 5.1,Elevated,None recorded
+2,2026-11-16 11:22:10.213,2026-11-16 11:22:16.973,2026-11-16 05:52:10.213,2026-11-16 05:52:16.973,"systeminfo",Windows PowerShell 5.1,Elevated,None recorded
+3,2026-11-16 11:22:16.990,2026-11-16 11:22:17.371,2026-11-16 05:52:16.990,2026-11-16 05:52:17.371,"ipconfig /all",Windows PowerShell 5.1,Elevated,None recorded
+4,2026-11-16 11:22:17.375,2026-11-16 11:22:17.972,2026-11-16 05:52:17.375,2026-11-16 05:52:17.972,"tasklist",Windows PowerShell 5.1,Elevated,None recorded
+5,2026-11-16 11:22:17.984,2026-11-16 11:22:18.174,2026-11-16 05:52:17.984,2026-11-16 05:52:18.174,"sc.exe query",Windows PowerShell 5.1,Elevated,None recorded
+6,2026-11-16 11:22:18.178,2026-11-16 11:22:18.693,2026-11-16 05:52:18.178,2026-11-16 05:52:18.693,"netstat -ano",Windows PowerShell 5.1,Elevated,None recorded
+7,2026-11-16 11:22:18.696,2026-11-16 11:22:18.944,2026-11-16 05:52:18.696,2026-11-16 05:52:18.944,"net user",Windows PowerShell 5.1,Elevated,None recorded

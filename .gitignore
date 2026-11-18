@@ -27,3 +27,6 @@ cases/*/analysis/output/
 # CASE-002 original public evidence (not redistributed)
 cases/CASE-002-windows-process/evidence/exec_sysmon_1_ftp.evtx
 cases/CASE-002-windows-process/analysis/rerun-2026-11-15/timeline.csv
+
+# Local raw Windows event export (do not publish)
+/cases/CASE-003-legitimate-admin/evidence/CASE-003-4688-window.evtx

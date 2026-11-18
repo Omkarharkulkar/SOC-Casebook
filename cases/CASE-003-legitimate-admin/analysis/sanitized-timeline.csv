@@ -1,0 +1,14 @@
+timestamp,record_id,event_id,process,parent_process,detection_titles,detection_levels,rule_ids,ground_truth_relationship,ground_truth_assessment
+2026-11-16 11:22:05.564 +05:30,1952605,4688,SearchProtocolHost.exe,SearchIndexer.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,Before command execution,Concurrent background activity
+2026-11-16 11:22:10.106 +05:30,1952606,4688,whoami.exe,powershell.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,whoami /all,Direct command match
+2026-11-16 11:22:10.238 +05:30,1952607,4688,systeminfo.exe,powershell.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,systeminfo,Direct command match
+2026-11-16 11:22:12.519 +05:30,1952610,4688,TrustedInstaller.exe,services.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,During systeminfo,Concurrent background activity
+2026-11-16 11:22:12.646 +05:30,1952611,4688,TiWorker.exe,svchost.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,During systeminfo,Concurrent background activity
+2026-11-16 11:22:17.149 +05:30,1952612,4688,ipconfig.exe,powershell.exe,Possible LOLBIN; Proc Exec,info; low,6c34b782-a5b5-4298-80f3-1918caf1f558; ac933178-c222-430d-8dcf-17b4f3a2fed8,ipconfig /all,Direct command match
+2026-11-16 11:22:17.278 +05:30,1952615,4688,WmiApSrv.exe,services.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,During command execution,Concurrent background activity
+2026-11-16 11:22:17.428 +05:30,1952616,4688,tasklist.exe,powershell.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,tasklist,Direct command match
+2026-11-16 11:22:17.893 +05:30,1952619,4688,WmiApSrv.exe,services.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,During command execution,Concurrent background activity
+2026-11-16 11:22:18.059 +05:30,1952620,4688,sc.exe,powershell.exe,Possible LOLBIN; Proc Exec,info; low,6c34b782-a5b5-4298-80f3-1918caf1f558; ac933178-c222-430d-8dcf-17b4f3a2fed8,sc.exe query,Direct command match
+2026-11-16 11:22:18.331 +05:30,1952621,4688,NETSTAT.EXE,powershell.exe,Possible LOLBIN; Proc Exec,info; low,6c34b782-a5b5-4298-80f3-1918caf1f558; ac933178-c222-430d-8dcf-17b4f3a2fed8,netstat -ano,Direct command match
+2026-11-16 11:22:18.809 +05:30,1952622,4688,net.exe,powershell.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,net user,Direct command match
+2026-11-16 11:22:18.872 +05:30,1952623,4688,net1.exe,net.exe,Proc Exec,info,ac933178-c222-430d-8dcf-17b4f3a2fed8,Child of net.exe,Related child process
