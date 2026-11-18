@@ -54,7 +54,7 @@ The audit-log clearing, service installation and group-membership events warrant
 
 The presence of PSEXESVC is notable, but it does not independently prove unauthorized remote execution. Similarly, Event ID 1102 is a high-priority investigation lead, not proof of an attacker covering tracks.
 
-The enriched review timeline adds account type, department and operating-system context where the source records support those lookups. **HOST-2105 is a useful host-centred investigation pivot:** two Event ID 1102 records are associated with this host. Review the surrounding events on HOST-2105, including any Event ID 4728 records, using timestamps, account identifiers and logon context before treating them as related. The supplied tables do not establish that these events form one activity chain.
+The enriched review timeline adds account type, department and operating-system context where the source records support those lookups. **HOST-2105 is a useful host-centred investigation pivot:** the review timeline shows a Spooler service installation at 11:18, followed by two Event ID 1102 audit-log-clearing records at 19:00 and 19:23. These events provide a sequence for further review, but the available records do not establish that they were performed by the same account or form one activity chain. The Event ID 4728 group-membership records in this dataset occurred on domain controllers, not HOST-2105.
 
 - The three Event ID 1102 records are associated with standard-user accounts: one from Engineering on HOST-9211, and two from Operations and Sales on HOST-2105.
 - Of the six Event ID 4728 records, one is associated with a privileged account in Engineering and five with standard-user accounts.
