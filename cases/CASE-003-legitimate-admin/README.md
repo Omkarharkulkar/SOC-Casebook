@@ -9,7 +9,7 @@
 
 This case examines process-creation activity generated while executing seven planned Windows administrative discovery commands on my own Windows PC.
 
-Windows Security Event ID 4688 records were exported and analysed with Hayabusa. The investigation compares the recorded process activity with a separate ground-truth reference containing the commands and their execution timestamps.
+Windows Security Event ID 4688 records were exported and analysed with Hayabusa. The investigation compares recorded process activity with the seven known commands from the controlled exercise. A retrospective timestamp reference is retained, but its individual timestamps are not independently verified.
 
 The objective was to understand how legitimate administrative activity appears in process-creation logs and how detection rules can produce low-severity alerts for ordinary system utilities.
 
@@ -57,13 +57,13 @@ Command output was not retained in the public evidence package.
 | `evidence/collection-methodology.md` | Collection environment, method and limitations |
 | `evidence/collection-checklist.md` | Collection and review checklist |
 | `evidence/policy-before.txt` | Audit and Security log baseline |
-| `evidence/ground-truth-log.csv` | Command execution timestamps and ground-truth reference |
+| `evidence/ground-truth-log.csv` | Retrospective command reference; individual timestamps are unverified |
 | `analysis/ground-truth-comparison.csv` | Comparison of process events with the executed commands |
 | `analysis/sanitized-timeline.csv` | Reviewed, sanitized process-event and detection summary |
 
 The original EVTX is retained locally and excluded from the public repository. The raw Hayabusa timeline is also retained privately.
 
-The ground-truth CSV was reconstructed from retained execution timestamps after the original file was found to contain only its header. The seven entries and their timestamp intervals were validated.
+The ground-truth CSV was reconstructed retrospectively after the original file was found to contain only its header. The seven-command list is known, but independent source records for the individual timestamps were not retained. Timestamp-based correlation is therefore not independently verified.
 
 ## Detection Details
 
@@ -84,7 +84,7 @@ These matches demonstrate a limitation of broad process-name suffix conditions. 
 - Five concurrent background events were not directly attributable to the seven commands.
 - The available records do not independently establish whether those background events were benign.
 - The Security log was close to its configured maximum size, with retention and automatic backup disabled. Snapshot counts were consistent with older records being overwritten or removed during collection.
-- The ground-truth CSV was reconstructed from retained timestamps rather than preserved as a complete original CSV.
+- The ground-truth CSV was reconstructed retrospectively; its individual timestamps cannot be independently verified because the original source records were not retained.
 - The original EVTX and raw Hayabusa timeline are not included in the public repository.
 
 See [`incident-report.md`](incident-report.md) for the detailed findings, assessment and recommendations.

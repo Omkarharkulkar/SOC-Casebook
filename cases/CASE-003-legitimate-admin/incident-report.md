@@ -23,7 +23,7 @@ A short Security Event ID 4688 time window was exported and analysed with Hayabu
 
 The three low-severity matches were associated with `ipconfig.exe`, `sc.exe` and `NETSTAT.EXE`. Review of the detection rule showed that these matches were explained by its process-name conditions, including a suffix condition that matched `NETSTAT.EXE`.
 
-The separate ground-truth comparison linked seven process events directly to the seven commands. The `net user` command also generated a related `net1.exe` child process. Five other events occurred during or shortly before the command window and were not direct children of the commands.
+The comparison linked seven process events to the seven known commands using matching command lines, executable paths and account/session context. The reconstructed timestamps are not independently verified. The `net user` command also generated a related `net1.exe` child process. Five other events occurred during or shortly before the command window and were not direct children of the commands.
 
 The collected evidence supports the recorded administrative activity. It does not establish malicious activity. The five concurrent background events remain unverified beyond their recorded process relationships and event context.
 
@@ -73,15 +73,13 @@ The following commands were executed:
 6. `netstat -ano`
 7. `net user`
 
-The recorded execution interval was:
+The retrospective ground-truth CSV lists the following execution interval. Its individual timestamps are not independently verified:
 
 - Start: 16 November 2026, 11:22:10.077 IST.
 - End: 16 November 2026, 11:22:18.944 IST.
 - UTC: 05:52:10.077–05:52:18.944.
 
-The ground-truth CSV was found to contain only its header during review. It was reconstructed using the actual per-command execution timestamps retained in the collection records. All seven entries and their IST/UTC intervals were subsequently validated.
-
-This reconstructed CSV is a reference for comparison; it is not an untouched contemporaneous copy of the original file.
+The ground-truth CSV was found to contain only its header during review. It was reconstructed retrospectively with seven known commands and timestamp intervals. The original independent timestamp source records were not present in the retained package, so the individual command timestamps cannot now be independently verified. The CSV is a comparison aid, not contemporaneously preserved independent evidence.
 
 ## 6. Event Collection
 
@@ -145,9 +143,11 @@ The `NETSTAT.EXE` result is an example of a broad suffix condition producing a m
 
 The rule matches are valid matches against the configured conditions. They are not evidence of malicious activity on their own.
 
+The pinned rule file is `hayabusa/builtin/Security/DetailedTracking/ProcessCreation/Sec_4688_Low_ProcExec_PossibleLOLBIN-Abuse.yml`. Its SHA-256 is `bab6b3f352f8006ceec553715cbd4689477ba21d4113f26d7a17d1c412e8deed`. The rule was reviewed at the pinned rules repository commit `58f8f145c65ed0bc0dcf888efde4ca9ca87ba846` ([rule file at that commit](https://github.com/Yamato-Security/hayabusa-rules/blob/58f8f145c65ed0bc0dcf888efde4ca9ca87ba846/hayabusa/builtin/Security/DetailedTracking/ProcessCreation/Sec_4688_Low_ProcExec_PossibleLOLBIN-Abuse.yml)).
+
 ## 8. Ground-Truth Comparison
 
-The 13 unique event records were compared separately with the reconstructed ground-truth log.
+The 13 unique event records were reviewed against the known list of seven commands. The reconstructed CSV provides retrospective timestamp context only; its individual timestamps are not independently verified. The stronger correlation is the matching command lines, executable paths, account reference and logon-session reference in the event records.
 
 | Relationship | Count |
 |---|---:|
@@ -156,7 +156,7 @@ The 13 unique event records were compared separately with the reconstructed grou
 | Concurrent background activity | 5 |
 | **Total unique events** | **13** |
 
-The seven direct matches corresponded to the seven commands executed by the analyst.
+The seven event records contain command lines and executable paths matching the seven known commands. The account and logon-session references provide additional context. The retrospective timestamps are not used as independent confirmation.
 
 The `net user` command generated `net.exe`, followed by `net1.exe`. The latter was classified as a related child process rather than a separate direct command match.
 
@@ -177,7 +177,7 @@ The event records alone do not establish that these background processes were ca
 
 The seven planned commands were represented in the process-creation records.
 
-**Assessment:** Consistent with the recorded ground truth.
+**Assessment:** The event command lines and executable paths match the seven known commands. The retrospective timestamp intervals are not independent confirmation.
 
 ### Finding 2 — Additional `net1.exe` process
 
@@ -197,6 +197,22 @@ Five records were not directly attributable to the seven commands.
 
 **Assessment:** Unresolved background activity. Additional process context would be required to establish their origin and purpose.
 
+### ATT&CK Technique References
+
+The observed administrative commands can be associated with the following MITRE ATT&CK techniques. These are behavioural references for the commands, not evidence that an adversary used them.
+
+| Observed command | Technique | Technique name |
+|---|---|---|
+| `whoami /all` | T1033 | System Owner/User Discovery |
+| `systeminfo` | T1082 | System Information Discovery |
+| `ipconfig /all` | T1016 | System Network Configuration Discovery |
+| `tasklist` | T1057 | Process Discovery |
+| `sc.exe query` | T1007 | System Service Discovery |
+| `netstat -ano` | T1049 | System Network Connections Discovery |
+| `net user` | T1087.001 | Account Discovery: Local Account |
+
+These mappings describe possible technique overlap. The commands were part of the known administrative exercise and do not establish malicious intent.
+
 ## 10. What Would Have Made This Malicious?
 
 The administrative commands observed in this case can also appear during legitimate troubleshooting and system administration. Their presence alone is not enough to establish malicious activity.
@@ -214,15 +230,29 @@ These are investigation leads, not findings from this collection. The available 
 
 ## 11. Verdict and Severity Assessment
 
-**Verdict:** Expected administrative activity observed; three low-severity detection matches explained; no malicious activity established by the collected evidence.
+**Verdict:** Process activity consistent with the seven known administrative commands; three low-severity rule matches explained by rule conditions; no malicious activity established by the available evidence.
 
-The ground-truth comparison supports the seven planned commands and the related `net1.exe` child process.
+The event command lines, executable paths and shared account/session context support the correlation with the seven known commands and the related `net1.exe` child process. Retrospective timestamps are not independently verified.
 
 The three `Possible LOLBIN` detections are assessed as explainable rule matches in this controlled activity. They do not establish a security incident.
 
 The five concurrent background events remain unresolved as to their underlying purpose. They were not directly attributable to the controlled commands, and the available records do not support classifying them as malicious.
 
-**Overall assessment:** Informational. The low-severity rule matches should be reviewed in context rather than treated as confirmed malicious activity.
+### Confidence and Evidence Assessment
+
+| Assessment area | Confidence | Basis |
+|---|---|---|
+| Process creation and recorded command lines | High | Present in the exported Event ID 4688 records |
+| Executable paths and account/session context | High | Present in the event records and reviewed timeline |
+| Correlation with the seven known commands | Moderate to high | Matching command lines, paths and shared account/session context; retrospective timestamps are not independent confirmation |
+| Authorization and human attribution | Not established | The available records do not prove who initiated or approved the activity |
+| Purpose of five background events | Low | Their process relationships and purpose could not be established from the selected records |
+
+**Established:** Thirteen unique process-creation events were exported; seven have command lines and paths matching the known administrative commands; `net1.exe` is a related child process; three low-severity rule matches occurred.
+
+**Not established:** Unauthorized execution, malicious intent, compromise, the identity of the human initiating the commands, or the purpose of the five background events.
+
+**Overall assessment and disposition:** Informational. No escalation as a confirmed security incident is recommended on the available evidence. In an operational environment, verify the initiating user, authorization and surrounding activity before closing a similar alert.
 
 ## 12. Recommended SOC Actions
 
@@ -241,21 +271,24 @@ The five concurrent background events remain unresolved as to their underlying p
 - The Security log was close to its configured 20 MiB maximum.
 - Retention and automatic backup were disabled. Between the recorded snapshots, the event count fell from 33,470 to 33,396 while the latest Record ID increased from 1,952,485 to 1,952,526. This is consistent with older records being overwritten or removed, although the exact records affected cannot be established. The separately exported investigation window was retained and hashed.
 - Five concurrent background events could not be fully attributed using the selected records.
-- The ground-truth CSV was reconstructed from retained timestamps after the original file was found to contain only its header.
+- The ground-truth CSV was reconstructed retrospectively. The independent source records for its individual timestamps were not present in the retained package, so timestamp-based correlation cannot be independently verified.
 - The original EVTX and raw Hayabusa timeline are retained locally and are not part of the public evidence package.
 
 ## 14. Evidence Inventory
 
-| File | Purpose |
-|---|---|
-| `evidence/collection-methodology.md` | Collection method and environment |
-| `evidence/collection-checklist.md` | Collection and review checklist |
-| `evidence/policy-before.txt` | Audit and Security log baseline |
-| `evidence/ground-truth-log.csv` | Reconstructed command execution reference |
-| `analysis/ground-truth-comparison.csv` | Event-to-command comparison |
-| `analysis/sanitized-timeline.csv` | Reviewed 13-event timeline and detection summary |
+| Evidence ID | File or reference | Purpose / handling |
+|---|---|---|
+| E-01 | `evidence/collection-methodology.md` | Collection environment, method and limitations |
+| E-02 | `evidence/collection-checklist.md` | Collection and review checklist |
+| E-03 | `evidence/policy-before.txt` | Audit and Security log baseline |
+| E-04 | `evidence/ground-truth-log.csv` | Retrospectively reconstructed command reference; individual timestamps are unverified |
+| E-05 | `analysis/ground-truth-comparison.csv` | Event-to-command comparison |
+| E-06 | `analysis/sanitized-timeline.csv` | Sanitized 13-event timeline and detection summary |
+| E-07 | `analysis/enrich_timeline.py` | Script used to enrich the public timeline; requires the private raw timeline input |
+| E-08 | `CASE-003-4688-window.evtx` (private, local only) | Original exported Event ID 4688 evidence; SHA-256 recorded in §6 |
+| E-09 | `timeline-original.csv` (private, local only) | Raw Hayabusa timeline used for enrichment; not published |
 
-The original EVTX and raw Hayabusa timeline are excluded from the public repository.
+E-08 is stored locally under the case evidence directory and excluded from Git. E-09 is stored in the private `~/case003-private/analysis/` directory. Neither private source is included in the public repository.
 
 ## 15. Conclusion
 
@@ -264,69 +297,3 @@ This case demonstrates how ordinary Windows administrative commands appear in Se
 The ground-truth comparison helped separate the seven planned commands and their related child process from five concurrent background events. It also showed why detections need to be reviewed in context.
 
 The evidence supports the recorded administrative activity but does not establish malicious activity or compromise. The background events remain a documented limitation rather than being assigned an unsupported verdict.
-
-
-## Assessment and Disposition
-
-### Process activity and account context
-
-The exported Security log contained 13 Event ID 4688 process-creation records in the investigation window.
-
-Eight records were associated with the seven planned administrative discovery commands. The additional record was `net1.exe`, launched as part of the `net.exe user` operation. These eight records shared the same anonymized account reference (`USER-01`) and logon-session reference (`SESSION-01`).
-
-The remaining five records were associated with a separate machine-account and SYSTEM-session context. They included Windows Search and servicing-related processes. They were concurrent background activity and were not direct children of the seven planned commands.
-
-### Detection results
-
-Hayabusa generated:
-- 13 informational `Proc Exec` detections.
-- 3 low-severity `Possible LOLBIN` detections.
-- No medium-, high-, or critical-severity detections.
-
-The three low-severity matches involved:
-- `ipconfig.exe /all`
-- `sc.exe query`
-- `NETSTAT.EXE -ano`
-
-The rule matched these process executions. Comparison with the reconstructed ground truth explains the matches as part of the controlled administrative activity. The rule match itself does not establish malicious intent.
-
-### MITRE ATT&CK mapping
-
-The observed command lines are consistent with the following discovery techniques:
-
-| Command | ATT&CK technique | Technique ID |
-|---|---|---|
-| `whoami /all` | System Owner/User Discovery | T1033 |
-| `systeminfo` | System Information Discovery | T1082 |
-| `ipconfig /all` | System Network Configuration Discovery | T1016 |
-| `tasklist` | Process Discovery | T1057 |
-| `sc.exe query` | System Service Discovery | T1007 |
-| `netstat -ano` | System Network Connections Discovery | T1049 |
-| `net user` | Account Discovery: Local Account | T1087.001 |
-
-These mappings describe the observed command behavior. They do not mean that an adversary performed the activity.
-
-### Confidence and limitations
-
-- **High confidence:** The exported records show the listed process names, command lines, timestamps, account context, and logon-session context.
-- **Moderate confidence:** The process events correspond to the planned administrative commands. The reconstructed ground-truth timestamps support this correlation.
-- **Limited confidence in authorization:** The event records do not independently establish who initiated the commands or whether the activity was authorized.
-- **Ground-truth limitation:** The ground-truth CSV was reconstructed after collection. Independent source records for its timestamps were not present in the retained package, and the reference was not frozen before analysis.
-
-### What the evidence establishes
-
-| Established | Not established |
-|---|---|
-| 13 process-creation records were present in the exported window. | The identity of the person who initiated each command. |
-| Eight records shared the controlled activity's account and session references. | Authorization based on Windows event logs alone. |
-| Five records belonged to a separate SYSTEM context. | That the background processes were malicious or directly related to the commands. |
-| Three low-severity rule matches occurred. | That the rule matches indicate an actual compromise. |
-| The observed commands performed system, account, process, service, and network discovery. | Data theft, persistence, lateral movement, or other impact. |
-
-### Escalation decision
-
-**Decision: No escalation as a confirmed security incident based on the available evidence.**
-
-The activity is explained by the controlled administrative discovery exercise, with moderate confidence because the ground-truth reference was reconstructed retrospectively. The low-severity detections should be retained as documented rule matches, not treated as proof of malicious activity.
-
-If this activity were encountered in an operational environment without the controlled-exercise context, the analyst should verify the initiating user, authorization, change or support ticket, and surrounding process and logon activity before closing the alert.
