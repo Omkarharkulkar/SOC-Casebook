@@ -16,11 +16,11 @@
 
 - [x] Use one elevated PowerShell session.
 - [x] Execute seven planned administrative discovery commands.
-- [x] Record individual command start and end timestamps.
-- [x] Record timestamps in IST and UTC.
+- [x] Retain reconstructed command intervals in the ground-truth CSV; their independent source records were not retained.
+- [x] Preserve reconstructed timestamps in IST and UTC, clearly labelled as unverified.
 - [x] Keep command output out of the public evidence package.
-- [x] Reconstruct the ground-truth CSV from retained execution timestamps after finding the original CSV contained only its header.
-- [x] Validate all seven command records and timestamp intervals.
+- [x] Reconstruct the ground-truth CSV after finding the original CSV contained only its header; the independent timestamp source was not retained.
+- [x] Check that all seven command entries are present; individual timestamp intervals remain unverified.
 
 ## Audit configuration
 

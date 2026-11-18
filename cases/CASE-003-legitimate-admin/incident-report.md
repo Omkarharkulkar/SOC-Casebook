@@ -129,7 +129,7 @@ There were 16 detection rows but only 13 unique process-creation events. The thr
 - Rule severity: Low
 - Rule status: Stable
 
-The rule checks for a command line containing a space and a process name matching one of its configured conditions.
+The rule checks for a command line containing a space and a process name matching one of its configured conditions. Four other reviewed process events did not meet the configured conditions. A non-match only means the rule did not trigger; it does not establish that a process is benign.
 
 The three matching processes were:
 
@@ -195,11 +195,11 @@ Three process events matched the `Possible LOLBIN` rule.
 
 Five records were not directly attributable to the seven commands.
 
-**Assessment:** Unresolved background activity. Additional process context would be required to establish their origin and purpose.
+**Assessment:** The five events (SearchProtocolHost.exe, TrustedInstaller.exe, TiWorker.exe and two WmiApSrv.exe records) were not direct children of the controlled commands. The selected Event ID 4688 records do not establish their origin or purpose. Treat them as unresolved, not as confirmed benign or malicious activity.
 
 ### ATT&CK Technique References
 
-The observed administrative commands can be associated with the following MITRE ATT&CK techniques. These are behavioural references for the commands, not evidence that an adversary used them.
+Framework reference: **MITRE ATT&CK Enterprise v20.1 (released 5 November 2026)**. The observed administrative commands can be associated with the following techniques. These are behavioural references for the commands, not evidence that an adversary used them.
 
 | Observed command | Technique | Technique name |
 |---|---|---|
