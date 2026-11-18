@@ -1,10 +1,10 @@
-# CASE-003 Part B — Public Windows Event Dataset Analysis
+# CASE-003 SUPP-001 — Public Windows Event Dataset Analysis
 
 ## Dataset and scope
 
 The source is the Windows Security, System and AD Event Log Test Set, supplied as six CSV tables. The event catalogue identifies itself as a `teaching-subset`. This is synthetic/sample data, not a live collection from a production Windows environment.
 
-The six source files passed verification using `evidence/public-dataset/SOURCE-SHA256SUMS`.
+The six source files passed verification using `evidence/SOURCE-SHA256SUMS`.
 
 | Dataset table | Records |
 |---|---:|
@@ -36,7 +36,7 @@ The six source files passed verification using `evidence/public-dataset/SOURCE-S
 
 ## Review performed
 
-The analysis script selected 161 events for review: 3 Event ID 1102, 36 Event ID 4672, 72 Event ID 4688, 6 Event ID 4728, 10 Event ID 4740, 31 Event ID 4771 and 3 Event ID 7045. The chronological output is `part-b-review-timeline.csv`; counts are in `part-b-event-summary.csv`.
+The analysis script selected 161 events for review: 3 Event ID 1102, 36 Event ID 4672, 72 Event ID 4688, 6 Event ID 4728, 10 Event ID 4740, 31 Event ID 4771 and 3 Event ID 7045. The chronological output is `review-timeline.csv`; counts are in `event-summary.csv`.
 
 Notable records:
 
@@ -54,7 +54,7 @@ The presence of PSEXESVC is notable, but it does not independently prove unautho
 
 The source uses reserved example IP ranges and a teaching-subset event catalogue. Findings must not be presented as evidence of a real organization or real compromise.
 
-## Part B conclusion
+## SUPP-001 conclusion
 
 **Review Required — notable security events identified; authorization and malicious intent cannot be established from the available synthetic dataset.**
 
@@ -62,6 +62,6 @@ The source uses reserved example IP ranges and a teaching-subset event catalogue
 
 Run from the repository root:
 
-`python3 cases/CASE-003-legitimate-admin/analysis/analyze_public_dataset.py`
+`python3 supplementary/SUPP-001-synthetic-windows-events/analysis/analyze_public_dataset.py`
 
-The script reads the six source CSVs and regenerates the event summary and selected chronological review timeline. The source files are separately checked with `sha256sum -c SOURCE-SHA256SUMS` from `evidence/public-dataset/`.
+The script reads the six source CSVs and regenerates the event summary and selected chronological review timeline. The source files are separately checked with `sha256sum -c SOURCE-SHA256SUMS` from `evidence/`.

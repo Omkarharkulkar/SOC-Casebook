@@ -1,6 +1,6 @@
 # CASE-003 — Legitimate Windows Administrative Activity
 
-**Status:** Complete — Part A
+**Status:** Complete
 **Category:** Windows Process Monitoring
 **Focus:** Administrative process activity, Event ID 4688, detection validation
 **Analyst:** Omkar Harkulkar
@@ -88,3 +88,20 @@ These matches demonstrate a limitation of broad process-name suffix conditions. 
 - The original EVTX and raw Hayabusa timeline are not included in the public repository.
 
 See [`incident-report.md`](incident-report.md) for the detailed findings, assessment and recommendations.
+
+## Revision History
+
+### Revised investigation
+
+Following the original `case-003-complete` milestone, the investigation was updated to improve reproducibility and evidence handling.
+
+- Added executable image paths and command lines to the sanitized process timeline.
+- Added anonymized account and logon-session references.
+- Distinguished eight controlled-activity process events from five separate SYSTEM-context background events.
+- Saved the timeline enrichment as `analysis/enrich_timeline.py`.
+- Expanded the incident report with ATT&CK mappings, confidence, evidence limitations, and an escalation decision.
+- Documented retrospective ground-truth reconstruction and its limitations.
+- Refreshed and verified the SHA-256 manifest.
+- Kept the original EVTX export private and excluded it from Git.
+
+The original `case-003-complete` tag remains unchanged. This revision represents additional analysis and documentation, not a replacement of the original historical milestone.

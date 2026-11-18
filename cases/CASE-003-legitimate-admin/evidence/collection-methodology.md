@@ -142,3 +142,30 @@ The original one-off Python CSV transformation was not retained as a standalone 
 ### Validation
 
 The public analysis outputs were reviewed for unique event records, Event ID 4688, ground-truth relationships, detection totals and unnecessary identifying details. The raw EVTX and original timeline remain private.
+
+
+## Process Timeline Enrichment and Anonymization
+
+The Hayabusa timeline was enriched using the `Details` field from the original private timeline CSV. Records were matched by Windows Event Record ID.
+
+The enrichment retained:
+- Executable image path.
+- Process command line.
+- An anonymized account reference.
+- An anonymized logon-session reference.
+
+The controlled activity was assigned `USER-01` and `SESSION-01`. The machine account was assigned `HOST-ACCOUNT-01`, and its SYSTEM logon context was assigned `SYSTEM-SESSION`. Actual account names, hostnames, and logon IDs were not included in the published analysis CSV.
+
+The enriched timeline contains 13 unique Event ID 4688 records. Eight records were grouped with the controlled administrative commands, including the `net1.exe` child process. Five records were grouped separately as SYSTEM-context background activity.
+
+The three `Possible LOLBIN` detections were not counted as additional process events because they refer to records already represented by the 13 unique Event ID 4688 events.
+
+### Ground-truth limitation
+
+The ground-truth command timestamps were reconstructed after collection. The independent source records for those timestamps were not present in the retained private package. The ground-truth reference was therefore not frozen before analysis and cannot be independently verified from the retained package.
+
+It is used as a retrospective comparison reference, not as contemporaneously preserved independent evidence.
+
+### Data handling
+
+The original Hayabusa timeline and exported EVTX remain private. The published timeline contains selected process details and anonymized account/session references. The local EVTX is excluded from Git tracking.
