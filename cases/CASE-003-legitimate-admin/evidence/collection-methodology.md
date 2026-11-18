@@ -42,9 +42,7 @@ Seven administrative discovery commands were executed in an elevated PowerShell 
 6. netstat -ano
 7. net user
 
-The actual start and end timestamps for each command were captured during collection and retained in the collection records in IST and UTC.
-
-The ground-truth CSV was maintained separately from the Windows event evidence. During review, the file was found to contain only its header. It was reconstructed using the actual per-command execution timestamps retained in the collection records. All seven command entries and their IST/UTC timestamp intervals were subsequently validated. Command output was not included in the CSV.
+The seven-command list is the known ground-truth reference for this exercise. The original ground-truth CSV was found to contain only its header. A replacement CSV was reconstructed retrospectively with command timestamp intervals in IST and UTC. The independent source records for those individual timestamps were not present in the retained package, so the timestamps cannot be independently verified. The replacement CSV is a retrospective comparison aid, not contemporaneously preserved independent evidence. Command output was not included.
 
 Actual command execution interval:
 Start: 2026-11-16 11:22:10.077 IST
@@ -85,7 +83,7 @@ The original EVTX was retained locally. It was not committed to the public repos
 
 The EVTX export and ground-truth CSV were treated as separate evidence sources.
 
-The ground-truth CSV was used to compare expected command execution with the recorded process-creation events. It was not treated as part of the event log itself.
+The known seven-command list was compared with the recorded process-creation events. The reconstructed timestamp CSV provides retrospective context only. Because its independent timestamp source records were not retained, timestamp-based correlation is not independent confirmation.
 
 The public analysis timeline is a reviewed and sanitized CSV containing 13 unique Event ID 4688 records derived from the 16-row Hayabusa timeline. The 16 detection rows represent 13 process events, including three additional Possible LOLBIN detections. The sanitized CSV includes timestamps, record IDs, event IDs, process and parent-process names, detection titles, levels, rule IDs and the separate ground-truth comparison. Hostnames, account identifiers, SIDs, raw command lines, full paths and network details are excluded.
 
@@ -104,7 +102,7 @@ The public analysis timeline is a reviewed and sanitized CSV containing 13 uniqu
 
 ## 9. Reproducibility
 
-The collection can be reviewed using the documented operating-system context, audit settings, command list, execution timestamps, UTC event window, export method and SHA-256 hash. The reviewed sanitized timeline provides a public-facing summary of the 13 unique process-creation events and their associated detections.
+The collection can be reviewed using the documented operating-system context, audit settings, known command list, UTC event window, export method and SHA-256 hash. The reconstructed individual command timestamps are not independently verifiable from the retained package. The reviewed sanitized timeline provides a public-facing summary of the 13 unique process-creation events and their associated detections.
 
 ## 10. Analysis Reproducibility
 
@@ -162,7 +160,7 @@ The three `Possible LOLBIN` detections were not counted as additional process ev
 
 ### Ground-truth limitation
 
-The ground-truth command timestamps were reconstructed after collection. The independent source records for those timestamps were not present in the retained private package. The ground-truth reference was therefore not frozen before analysis and cannot be independently verified from the retained package.
+The seven-command list is known, but the individual timestamps in the reconstructed CSV are not independently verifiable. The independent source records were not present in the retained private package, and the reference was not frozen before analysis.
 
 It is used as a retrospective comparison reference, not as contemporaneously preserved independent evidence.
 

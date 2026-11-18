@@ -1,3 +1,10 @@
+"""Enrich the public timeline from a private Hayabusa timeline.
+
+Requires ~/case003-private/analysis/timeline-original.csv. This private
+input is intentionally not included in the public repository; readers
+cannot reproduce the enrichment without obtaining the original local
+timeline independently.
+"""
 import csv
 from pathlib import Path
 
