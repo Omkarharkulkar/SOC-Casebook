@@ -116,11 +116,18 @@ The collection can be reviewed using the documented operating-system context, au
 - Input: CASE-003 Security EVTX export, retained privately.
 - Original timeline: ~/case003-private/analysis/timeline-original.csv, retained privately.
 
-Timeline generation command:
+Timeline generation command (executed from `~/tools/hayabusa`):
 
+```bash
+./hayabusa-4.4.0-lin-x64-gnu dfir-timeline -f ~/SOC-Casebook/cases/CASE-003-legitimate-admin/evidence/CASE-003-4688-window.evtx -r ~/tools/hayabusa/rules/hayabusa -c ~/tools/hayabusa/rules/config -w -o ~/case003-private/analysis/timeline-original.csv -Z "+05:30"
+```
 
 
 The original timeline contained 16 detection rows representing 13 unique Event ID 4688 records. Its SHA-256 was 7d6e3aa444cd91d00eac9317ad0a433f4d30b90d51d5a59961a2ca669690d7cf.
+
+### Independent rerun
+
+On 2026-11-18, the same command and inputs generated a separate private output, `timeline-rerun.csv`. The original and rerun files had identical SHA-256 hashes: `7d6e3aa444cd91d00eac9317ad0a433f4d30b90d51d5a59961a2ca669690d7cf`. A byte-for-byte comparison using `cmp` returned `IDENTICAL`. The rerun also reported 16 detection rows across 13 events: 13 informational Proc Exec detections and three low-severity Possible LOLBIN detections. This confirms reproducibility with the recorded tool and rules configuration.
 
 ### Ground-truth comparison
 

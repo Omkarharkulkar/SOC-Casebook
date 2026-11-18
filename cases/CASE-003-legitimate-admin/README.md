@@ -1,6 +1,6 @@
 # CASE-003 — Legitimate Windows Administrative Activity
 
-**Status:** Part A Complete — Part B Pending
+**Status:** Complete — Part A
 **Category:** Windows Process Monitoring
 **Focus:** Administrative process activity, Event ID 4688, detection validation
 **Analyst:** Omkar Harkulkar
@@ -83,17 +83,8 @@ These matches demonstrate a limitation of broad process-name suffix conditions. 
 - Event ID 4688 records process creation but does not independently establish user intent or business purpose.
 - Five concurrent background events were not directly attributable to the seven commands.
 - The available records do not independently establish whether those background events were benign.
-- The Security log was close to its configured maximum size, with retention and automatic backup disabled.
+- The Security log was close to its configured maximum size, with retention and automatic backup disabled. Snapshot counts were consistent with older records being overwritten or removed during collection.
 - The ground-truth CSV was reconstructed from retained timestamps rather than preserved as a complete original CSV.
 - The original EVTX and raw Hayabusa timeline are not included in the public repository.
 
 See [`incident-report.md`](incident-report.md) for the detailed findings, assessment and recommendations.
-
-## Part B Analysis
-
-- [Part B findings and assessment](analysis/part-b-findings.md)
-- [Event summary](analysis/part-b-event-summary.csv)
-- [Chronological review timeline](analysis/part-b-review-timeline.csv)
-- Reproduce with `python3 analysis/analyze_public_dataset.py` from the case directory.
-
-**Status:** Part A and Part B analysis complete. Part B outcome: Review Required; no confirmed compromise.

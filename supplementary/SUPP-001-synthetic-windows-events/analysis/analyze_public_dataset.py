@@ -3,7 +3,7 @@ from collections import Counter
 from pathlib import Path
 
 case = Path(__file__).resolve().parents[1]
-source = case / "evidence/public-dataset"
+source = case / "evidence"
 
 def load(name):
     with (source / name).open(encoding="utf-8-sig", newline="") as f:

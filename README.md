@@ -83,17 +83,12 @@ CASE-001 covers Ubuntu SSH authentication activity and a public SSH honeypot dat
 
 CASE-002 investigates Windows process creation activity using local Windows Security logs and a public Sysmon EVTX sample. It includes timeline analysis, detection validation using Hayabusa, an incident report, and documented evidence limitations.
 
-CASE-003 documents controlled Windows administrative activity and a public Windows event-log dataset investigation. It includes ground-truth comparison, event timeline analysis, detection review, reproducible analysis scripts, and documented evidence limitations.
+CASE-003 documents controlled Windows administrative activity using local Windows Security Event ID 4688 logs. It includes ground-truth comparison, process timeline analysis, Hayabusa detection review, and documented evidence limitations.
+
+SUPP-001 contains a separate review of a synthetic Windows event-log dataset. It is supplementary training work and is not counted as one of the eight planned investigation cases.
 
 The remaining investigation cases and supporting MiniSOC components are planned for development.
 
-CASE-002 investigates Windows process creation activity using local
-Windows Security logs and a public Sysmon EVTX sample. It includes
-timeline analysis, detection validation using Hayabusa, an incident
-report, and documented evidence limitations.
-
-The remaining investigation cases and supporting MiniSOC components
-are planned for development.
 
 ## Disclaimer
 

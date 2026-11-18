@@ -239,7 +239,7 @@ The five concurrent background events remain unresolved as to their underlying p
 - The selected export contains only Event ID 4688.
 - Process creation does not independently establish user intent or business purpose.
 - The Security log was close to its configured 20 MiB maximum.
-- Retention and automatic backup were disabled. The available snapshots do not establish whether event overwriting occurred during collection.
+- Retention and automatic backup were disabled. Between the recorded snapshots, the event count fell from 33,470 to 33,396 while the latest Record ID increased from 1,952,485 to 1,952,526. This is consistent with older records being overwritten or removed, although the exact records affected cannot be established. The separately exported investigation window was retained and hashed.
 - Five concurrent background events could not be fully attributed using the selected records.
 - The ground-truth CSV was reconstructed from retained timestamps after the original file was found to contain only its header.
 - The original EVTX and raw Hayabusa timeline are retained locally and are not part of the public evidence package.
@@ -264,11 +264,3 @@ This case demonstrates how ordinary Windows administrative commands appear in Se
 The ground-truth comparison helped separate the seven planned commands and their related child process from five concurrent background events. It also showed why detections need to be reviewed in context.
 
 The evidence supports the recorded administrative activity but does not establish malicious activity or compromise. The background events remain a documented limitation rather than being assigned an unsupported verdict.
-
-## Part B — Public Dataset Investigation
-
-Part B reviewed a synthetic Windows event-log teaching dataset containing 443 host events and 180 domain-controller events. A reproducible analysis selected 161 records for focused review. Three audit-log-clearing events (1102), three service installations (7045), and six group-membership additions (4728) were identified alongside logon, privilege, process-creation and Kerberos activity.
-
-The notable events require validation against authorization records and fuller endpoint context. The supplied dataset does not establish whether they were approved or malicious. Part B is therefore assessed as **Review Required**, not as a confirmed incident or confirmed benign activity.
-
-Detailed counts, notable records, limitations and reproduction steps are documented in `analysis/part-b-findings.md`.
