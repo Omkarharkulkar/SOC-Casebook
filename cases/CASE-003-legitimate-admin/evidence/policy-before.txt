@@ -1,0 +1,70 @@
+CASE-003 — Windows Audit Policy Baseline
+Collection date: 2026-11-16
+Collection time: 11:16 IST (UTC+05:30)
+
+Process Creation auditing:
+Success
+
+ProcessCreationIncludeCmdLine_Enabled:
+REG_DWORD 0x1
+
+Group Policy:
+No applied Group Policy Objects listed.
+Computer is a standalone workstation.
+
+PowerShell:
+5.1
+
+Time zone:
+India Standard Time (UTC+05:30)
+
+Recorded local time:
+2026-11-16 11:16:54 IST
+
+Recorded UTC time:
+2026-11-16 05:46:54 UTC
+
+Windows Time:
+Source: time.windows.com,0x9
+Last successful sync: 2026-11-16 10:32:54 IST
+Stratum: 5
+Leap indicator: 0 (no warning)
+
+Elevation:
+High Mandatory Level; Administrators group membership confirmed.
+
+Collection notes:
+Process Creation auditing and command-line inclusion were already
+enabled at baseline. No audit-policy or registry changes were made.
+
+Security Event Log:
+Enabled: Yes
+Log type: Admin
+Current record count: 33,433
+Reported file size: 20,975,616 bytes
+Configured maximum size: 20,971,520 bytes
+Retention: Disabled
+Auto-backup: Disabled
+
+Collection note:
+The Security log was enabled but near its configured capacity.
+Existing log contents were not cleared, and log settings were
+not modified.
+
+Earlier Security log snapshot:
+Recorded at: 2026-11-16 11:20:18 IST
+UTC equivalent: 2026-11-16 05:50:18 UTC
+Latest Security event:
+  Event ID: 4798
+  Event timestamp: 2026-11-16 11:20:15 IST
+  Record ID: 1952485
+Security log record count at snapshot: 33470
+
+Final pre-collection event-log boundary:
+Recorded at: 2026-11-16 11:21:54.579 IST
+UTC equivalent: 2026-11-16 05:51:54.587 UTC
+Latest Security event:
+  Event ID: 4798
+  Record ID: 1952526
+  Event timestamp: 2026-11-16 11:21:47 IST
+Security log record count at boundary: 33396

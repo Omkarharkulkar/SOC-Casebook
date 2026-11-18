@@ -1,0 +1,137 @@
+# Evidence Collection Methodology
+
+## 1. Collection Objective
+
+The objective was to record Windows administrative discovery activity on a controlled workstation and examine the corresponding Windows Security process-creation events.
+
+The collection was designed to establish a ground-truth reference for comparing commands executed by the analyst with process-creation events recorded by Windows.
+
+## 2. Collection Environment
+
+- Operating system: Windows 11 Home Single Language
+- Version: 26H2
+- OS build: 26300.9818
+- Shell: Windows PowerShell 5.1
+- Execution context: Elevated PowerShell session
+- Time zone: India Standard Time (UTC+05:30)
+
+Raw system-discovery output was retained locally and excluded from the public repository because it contained host, account and network information.
+
+## 3. Audit Configuration Before Collection
+
+The following settings were checked before collection:
+
+- Security Process Creation auditing: Success
+- ProcessCreationIncludeCmdLine_Enabled: REG_DWORD 0x1
+- Security event log: Enabled
+- Configured maximum log size: 20 MiB
+- Retention: Disabled
+- Auto-backup: Disabled
+
+No audit-policy, registry or event-log configuration changes were made for this collection.
+
+## 4. Ground-Truth Collection
+
+Seven administrative discovery commands were executed in an elevated PowerShell session:
+
+1. whoami /all
+2. systeminfo
+3. ipconfig /all
+4. tasklist
+5. sc.exe query
+6. netstat -ano
+7. net user
+
+The actual start and end timestamps for each command were captured during collection and retained in the collection records in IST and UTC.
+
+The ground-truth CSV was maintained separately from the Windows event evidence. During review, the file was found to contain only its header. It was reconstructed using the actual per-command execution timestamps retained in the collection records. All seven command entries and their IST/UTC timestamp intervals were subsequently validated. Command output was not included in the CSV.
+
+Actual command execution interval:
+Start: 2026-11-16 11:22:10.077 IST
+End:   2026-11-16 11:22:18.944 IST
+
+UTC equivalent:
+Start: 2026-11-16 05:52:10.077 UTC
+End:   2026-11-16 05:52:18.944 UTC
+
+## 5. Windows Event Collection
+
+Windows Security Event ID 4688 was selected to examine process creation.
+
+The Security log was exported using `wevtutil epl` with an XPath query filtering Event ID 4688 within the following UTC window:
+
+- Start: 2026-11-16 05:52:05 UTC
+- End: 2026-11-16 05:52:24 UTC
+
+The window included a five-second margin around the recorded command execution period.
+
+The export was opened and inspected using PowerShell `Get-WinEvent`.
+
+The export contained 13 Event ID 4688 records. Eight process-creation
+records corresponded to the seven planned commands, including the
+net1.exe child process launched by net.exe. Five additional records
+represented concurrent background process activity.
+
+## 6. Exported Evidence
+
+- File: CASE-003-4688-window.evtx
+- Size: 69,632 bytes
+- Event records: 13
+- SHA-256: 160F89E3D67838A423791070ED6D1D726A534952347AC2759A43449775F7BB9F
+
+The original EVTX was retained locally. It was not committed to the public repository.
+
+## 7. Evidence Handling
+
+The EVTX export and ground-truth CSV were treated as separate evidence sources.
+
+The ground-truth CSV was used to compare expected command execution with the recorded process-creation events. It was not treated as part of the event log itself.
+
+The public analysis timeline is a reviewed and sanitized CSV containing 13 unique Event ID 4688 records derived from the 16-row Hayabusa timeline. The 16 detection rows represent 13 process events, including three additional Possible LOLBIN detections. The sanitized CSV includes timestamps, record IDs, event IDs, process and parent-process names, detection titles, levels, rule IDs and the separate ground-truth comparison. Hostnames, account identifiers, SIDs, raw command lines, full paths and network details are excluded.
+
+## 8. Collection Limitations
+
+- The Security log was close to its configured 20 MiB maximum.
+- Retention and automatic backup were disabled. Older events could
+  therefore be overwritten as new events were recorded, but the
+  available record-count snapshots do not establish that overwriting
+  occurred during this collection.
+- The collection therefore relied on a short event window and prompt export.
+- The export contains only Event ID 4688, not all Security events.
+- The five-second margins may include unrelated background activity.
+- Event ID 4688 establishes process creation but does not independently establish the user's intent or the business purpose of a command.
+- The original EVTX and ground-truth CSV remain local for further verification.
+
+## 9. Reproducibility
+
+The collection can be reviewed using the documented operating-system context, audit settings, command list, execution timestamps, UTC event window, export method and SHA-256 hash. The reviewed sanitized timeline provides a public-facing summary of the 13 unique process-creation events and their associated detections.
+
+## 10. Analysis Reproducibility
+
+### Tools and commands
+
+- Analysis system: Ubuntu.
+- Tool: Hayabusa v4.4.0 CODE BLUE.
+- Rules commit: 58f8f145c65ed0bc0dcf888efde4ca9ca87ba846.
+- Input: CASE-003 Security EVTX export, retained privately.
+- Original timeline: ~/case003-private/analysis/timeline-original.csv, retained privately.
+
+Timeline generation command:
+
+
+
+The original timeline contained 16 detection rows representing 13 unique Event ID 4688 records. Its SHA-256 was 7d6e3aa444cd91d00eac9317ad0a433f4d30b90d51d5a59961a2ca669690d7cf.
+
+### Ground-truth comparison
+
+The seven administrative commands were compared with the 13 unique events: seven direct command matches, one related child process (net1.exe), and five concurrent background events.
+
+### Detection review and sanitization
+
+Hayabusa produced 13 informational Proc Exec rows and three low-severity Possible LOLBIN rows. The latter involved ipconfig.exe, sc.exe and NETSTAT.EXE. The public sanitized timeline contains 13 unique event records. Hostnames, account identifiers, SIDs, raw command lines, full paths and network details were excluded.
+
+The original one-off Python CSV transformation was not retained as a standalone script. This section documents the analysis process and does not claim to reproduce that original script.
+
+### Validation
+
+The public analysis outputs were reviewed for unique event records, Event ID 4688, ground-truth relationships, detection totals and unnecessary identifying details. The raw EVTX and original timeline remain private.

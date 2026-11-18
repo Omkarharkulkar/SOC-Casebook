@@ -1,0 +1,14 @@
+record_id,process,ground_truth_relationship,assessment
+1952605,SearchProtocolHost.exe,Before command execution,Concurrent background activity
+1952606,whoami.exe,whoami /all,Direct command match
+1952607,systeminfo.exe,systeminfo,Direct command match
+1952610,TrustedInstaller.exe,During systeminfo,Concurrent background activity
+1952611,TiWorker.exe,During systeminfo,Concurrent background activity
+1952612,ipconfig.exe,ipconfig /all,Direct command match
+1952615,WmiApSrv.exe,During command execution,Concurrent background activity
+1952616,tasklist.exe,tasklist,Direct command match
+1952619,WmiApSrv.exe,During command execution,Concurrent background activity
+1952620,sc.exe,sc.exe query,Direct command match
+1952621,NETSTAT.EXE,netstat -ano,Direct command match
+1952622,net.exe,net user,Direct command match
+1952623,net1.exe,Child of net.exe,Related child process
