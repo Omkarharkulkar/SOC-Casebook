@@ -1,0 +1,5 @@
+id,hostname,site,last_boot_at
+1,DC65,branch-south,2025-03-10 16:44:51
+2,DC12,head-office,2025-03-10 05:13:07
+3,DC35,datacentre,2025-03-10 01:33:48
+4,DC60,branch-north,2025-03-10 06:01:58

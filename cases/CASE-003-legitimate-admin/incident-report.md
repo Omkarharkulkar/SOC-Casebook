@@ -264,3 +264,11 @@ This case demonstrates how ordinary Windows administrative commands appear in Se
 The ground-truth comparison helped separate the seven planned commands and their related child process from five concurrent background events. It also showed why detections need to be reviewed in context.
 
 The evidence supports the recorded administrative activity but does not establish malicious activity or compromise. The background events remain a documented limitation rather than being assigned an unsupported verdict.
+
+## Part B — Public Dataset Investigation
+
+Part B reviewed a synthetic Windows event-log teaching dataset containing 443 host events and 180 domain-controller events. A reproducible analysis selected 161 records for focused review. Three audit-log-clearing events (1102), three service installations (7045), and six group-membership additions (4728) were identified alongside logon, privilege, process-creation and Kerberos activity.
+
+The notable events require validation against authorization records and fuller endpoint context. The supplied dataset does not establish whether they were approved or malicious. Part B is therefore assessed as **Review Required**, not as a confirmed incident or confirmed benign activity.
+
+Detailed counts, notable records, limitations and reproduction steps are documented in `analysis/part-b-findings.md`.
