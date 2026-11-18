@@ -1,6 +1,6 @@
 # CASE-003 — Legitimate Windows Administrative Activity
 
-**Status:** Complete
+**Status:** Part A Complete — Part B Pending
 **Category:** Windows Process Monitoring
 **Focus:** Administrative process activity, Event ID 4688, detection validation
 **Analyst:** Omkar Harkulkar
@@ -88,3 +88,12 @@ These matches demonstrate a limitation of broad process-name suffix conditions. 
 - The original EVTX and raw Hayabusa timeline are not included in the public repository.
 
 See [`incident-report.md`](incident-report.md) for the detailed findings, assessment and recommendations.
+
+## Part B Analysis
+
+- [Part B findings and assessment](analysis/part-b-findings.md)
+- [Event summary](analysis/part-b-event-summary.csv)
+- [Chronological review timeline](analysis/part-b-review-timeline.csv)
+- Reproduce with `python3 analysis/analyze_public_dataset.py` from the case directory.
+
+**Status:** Part A and Part B analysis complete. Part B outcome: Review Required; no confirmed compromise.

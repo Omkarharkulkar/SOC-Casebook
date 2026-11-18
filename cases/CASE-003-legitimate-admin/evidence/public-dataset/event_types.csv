@@ -1,0 +1,15 @@
+id,catalogue,event_code,channel,category,logged_on
+1,teaching-subset,4624,Security,logon_success,host
+2,teaching-subset,4625,Security,logon_failure,host
+3,teaching-subset,4634,Security,logoff,host
+4,teaching-subset,4648,Security,explicit_credentials,host
+5,teaching-subset,4672,Security,special_privileges,host
+6,teaching-subset,4688,Security,process_created,host
+7,teaching-subset,1102,Security,audit_log_cleared,host
+8,teaching-subset,7036,System,service_state_changed,host
+9,teaching-subset,7045,System,service_installed,host
+10,teaching-subset,6005,System,event_log_started,host
+11,teaching-subset,4728,Security,group_member_added,domain_controller
+12,teaching-subset,4740,Security,account_locked_out,domain_controller
+13,teaching-subset,4768,Security,kerberos_tgt_requested,domain_controller
+14,teaching-subset,4771,Security,kerberos_preauth_failed,domain_controller

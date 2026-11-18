@@ -77,13 +77,13 @@ Each case will clearly identify its data provenance. No real organizational or p
 
 ## Project Status
 
-The repository foundation and CASE-001, CASE-002, and CASE-003 investigations are complete.
+The repository foundation and CASE-001 and CASE-002 investigations are complete. CASE-003 Part A is complete; Part B remains in progress.
 
 CASE-001 covers Ubuntu SSH authentication evidence, a public SSH honeypot dataset analysis, an incident report, and a lightweight Python SSH log parser with unit tests.
 
 CASE-002 examines suspicious Windows process execution using local Windows event evidence and a public Sysmon sample.
 
-CASE-003 documents controlled Windows administrative activity, compares 13 process-creation events against a seven-command ground-truth record, and reviews the resulting low-severity detections.
+CASE-003 Part A documents controlled Windows administrative activity, compares 13 process-creation events against a seven-command ground-truth record, and reviews the resulting low-severity detections. Part B will analyse a public Windows event-log dataset.
 
 The remaining investigation cases and supporting MiniSOC components are planned for development.
 

@@ -1,0 +1,15 @@
+source,event_id,category,count
+host,1102,audit_log_cleared,3
+host,4624,logon_success,135
+host,4625,logon_failure,44
+host,4634,logoff,98
+host,4648,explicit_credentials,14
+host,4672,special_privileges,36
+host,4688,process_created,72
+host,6005,event_log_started,8
+host,7036,service_state_changed,30
+host,7045,service_installed,3
+directory,4728,group_member_added,6
+directory,4740,account_locked_out,10
+directory,4768,kerberos_tgt_requested,133
+directory,4771,kerberos_preauth_failed,31
