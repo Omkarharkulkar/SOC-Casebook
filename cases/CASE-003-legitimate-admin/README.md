@@ -1,8 +1,8 @@
 # CASE-003 — Legitimate Windows Administrative Activity
 
-**Status:** Complete  
-**Category:** Windows Process Monitoring  
-**Focus:** Administrative process activity, Event ID 4688, detection validation  
+**Status:** Complete
+**Category:** Windows Process Monitoring
+**Focus:** Administrative process activity, Event ID 4688, detection validation
 **Analyst:** Omkar Harkulkar
 
 ## Overview
