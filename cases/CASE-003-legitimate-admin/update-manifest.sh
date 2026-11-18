@@ -19,3 +19,4 @@ find . -type f \
 mv "$tmp" SHA256SUMS
 trap - EXIT
 echo "Updated CASE-003 SHA256SUMS."
+sha256sum -c SHA256SUMS
