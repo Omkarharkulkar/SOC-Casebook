@@ -33,7 +33,7 @@ Case verdicts will be based on collected evidence rather than predetermined assu
 ## Project Components
 
 ### 1. Security Investigations
-Eight documented investigations covering Linux, Windows, phishing, network traffic, and SIEM alerts.
+A planned set of eight documented investigations covering Linux, Windows, phishing, network traffic, and SIEM alert analysis.
 
 ### 2. MiniSOC
 A lightweight Python-based Linux log collection and analysis module using structured storage and basic detection logic.
@@ -77,15 +77,23 @@ Each case will clearly identify its data provenance. No real organizational or p
 
 ## Project Status
 
-The repository foundation and CASE-001 and CASE-002 investigations are complete. CASE-003 Part A is complete; Part B remains in progress.
+The repository foundation and CASE-001, CASE-002, and CASE-003 investigations are complete.
 
-CASE-001 covers Ubuntu SSH authentication evidence, a public SSH honeypot dataset analysis, an incident report, and a lightweight Python SSH log parser with unit tests.
+CASE-001 covers Ubuntu SSH authentication activity and a public SSH honeypot dataset. It includes an incident report, evidence documentation, and a lightweight Python SSH log parser with unit tests.
 
-CASE-002 examines suspicious Windows process execution using local Windows event evidence and a public Sysmon sample.
+CASE-002 investigates Windows process creation activity using local Windows Security logs and a public Sysmon EVTX sample. It includes timeline analysis, detection validation using Hayabusa, an incident report, and documented evidence limitations.
 
-CASE-003 Part A documents controlled Windows administrative activity, compares 13 process-creation events against a seven-command ground-truth record, and reviews the resulting low-severity detections. Part B will analyse a public Windows event-log dataset.
+CASE-003 documents controlled Windows administrative activity and a public Windows event-log dataset investigation. It includes ground-truth comparison, event timeline analysis, detection review, reproducible analysis scripts, and documented evidence limitations.
 
 The remaining investigation cases and supporting MiniSOC components are planned for development.
+
+CASE-002 investigates Windows process creation activity using local
+Windows Security logs and a public Sysmon EVTX sample. It includes
+timeline analysis, detection validation using Hayabusa, an incident
+report, and documented evidence limitations.
+
+The remaining investigation cases and supporting MiniSOC components
+are planned for development.
 
 ## Disclaimer
 
