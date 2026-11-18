@@ -264,3 +264,69 @@ This case demonstrates how ordinary Windows administrative commands appear in Se
 The ground-truth comparison helped separate the seven planned commands and their related child process from five concurrent background events. It also showed why detections need to be reviewed in context.
 
 The evidence supports the recorded administrative activity but does not establish malicious activity or compromise. The background events remain a documented limitation rather than being assigned an unsupported verdict.
+
+
+## Assessment and Disposition
+
+### Process activity and account context
+
+The exported Security log contained 13 Event ID 4688 process-creation records in the investigation window.
+
+Eight records were associated with the seven planned administrative discovery commands. The additional record was `net1.exe`, launched as part of the `net.exe user` operation. These eight records shared the same anonymized account reference (`USER-01`) and logon-session reference (`SESSION-01`).
+
+The remaining five records were associated with a separate machine-account and SYSTEM-session context. They included Windows Search and servicing-related processes. They were concurrent background activity and were not direct children of the seven planned commands.
+
+### Detection results
+
+Hayabusa generated:
+- 13 informational `Proc Exec` detections.
+- 3 low-severity `Possible LOLBIN` detections.
+- No medium-, high-, or critical-severity detections.
+
+The three low-severity matches involved:
+- `ipconfig.exe /all`
+- `sc.exe query`
+- `NETSTAT.EXE -ano`
+
+The rule matched these process executions. Comparison with the reconstructed ground truth explains the matches as part of the controlled administrative activity. The rule match itself does not establish malicious intent.
+
+### MITRE ATT&CK mapping
+
+The observed command lines are consistent with the following discovery techniques:
+
+| Command | ATT&CK technique | Technique ID |
+|---|---|---|
+| `whoami /all` | System Owner/User Discovery | T1033 |
+| `systeminfo` | System Information Discovery | T1082 |
+| `ipconfig /all` | System Network Configuration Discovery | T1016 |
+| `tasklist` | Process Discovery | T1057 |
+| `sc.exe query` | System Service Discovery | T1007 |
+| `netstat -ano` | System Network Connections Discovery | T1049 |
+| `net user` | Account Discovery: Local Account | T1087.001 |
+
+These mappings describe the observed command behavior. They do not mean that an adversary performed the activity.
+
+### Confidence and limitations
+
+- **High confidence:** The exported records show the listed process names, command lines, timestamps, account context, and logon-session context.
+- **Moderate confidence:** The process events correspond to the planned administrative commands. The reconstructed ground-truth timestamps support this correlation.
+- **Limited confidence in authorization:** The event records do not independently establish who initiated the commands or whether the activity was authorized.
+- **Ground-truth limitation:** The ground-truth CSV was reconstructed after collection. Independent source records for its timestamps were not present in the retained package, and the reference was not frozen before analysis.
+
+### What the evidence establishes
+
+| Established | Not established |
+|---|---|
+| 13 process-creation records were present in the exported window. | The identity of the person who initiated each command. |
+| Eight records shared the controlled activity's account and session references. | Authorization based on Windows event logs alone. |
+| Five records belonged to a separate SYSTEM context. | That the background processes were malicious or directly related to the commands. |
+| Three low-severity rule matches occurred. | That the rule matches indicate an actual compromise. |
+| The observed commands performed system, account, process, service, and network discovery. | Data theft, persistence, lateral movement, or other impact. |
+
+### Escalation decision
+
+**Decision: No escalation as a confirmed security incident based on the available evidence.**
+
+The activity is explained by the controlled administrative discovery exercise, with moderate confidence because the ground-truth reference was reconstructed retrospectively. The low-severity detections should be retained as documented rule matches, not treated as proof of malicious activity.
+
+If this activity were encountered in an operational environment without the controlled-exercise context, the analyst should verify the initiating user, authorization, change or support ticket, and surrounding process and logon activity before closing the alert.

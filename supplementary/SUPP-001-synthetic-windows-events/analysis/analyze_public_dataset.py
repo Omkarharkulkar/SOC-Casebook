@@ -34,7 +34,7 @@ for filename, records in (("host", hosts), ("directory", directory)):
 
 timeline.sort(key=lambda x: (x["timestamp"], x["hostname"], x["event_id"]))
 fields = list(timeline[0])
-with (case / "analysis/part-b-review-timeline.csv").open("w", newline="") as f:
+with (case / "analysis/review-timeline.csv").open("w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=fields)
     writer.writeheader()
     writer.writerows(timeline)
@@ -45,7 +45,7 @@ for label, records in (("host", hosts), ("directory", directory)):
     for (code, category), count in sorted(counts.items()):
         summary.append({"source": label, "event_id": code, "category": category, "count": count})
 
-with (case / "analysis/part-b-event-summary.csv").open("w", newline="") as f:
+with (case / "analysis/event-summary.csv").open("w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=["source", "event_id", "category", "count"])
     writer.writeheader()
     writer.writerows(summary)
@@ -55,4 +55,4 @@ print("Review timeline:", len(timeline))
 for event in timeline:
     if event["event_id"] in {"1102", "7045", "4728"}:
         print(event["timestamp"], event["hostname"], event["event_id"], event["category"], "account_id=" + event["account_id"], "service=" + event["service"], "group=" + event["group"])
-print("Created analysis/part-b-review-timeline.csv and analysis/part-b-event-summary.csv")
+print("Created analysis/review-timeline.csv and analysis/event-summary.csv")
