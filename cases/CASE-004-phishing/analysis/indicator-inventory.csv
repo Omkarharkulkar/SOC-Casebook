@@ -1,0 +1,8 @@
+Evidence ID,Type,Indicator,Context,Assessment
+E-004-A-01,Domain,accounts.google.com,From and links,Google domain and DKIM aligned
+E-004-A-01,Domain,gaia.bounces.google.com,Return-Path,Google-associated bounce domain
+E-004-A-01,Domain,notifications.google.com,Message-ID,Google-associated notification domain
+E-004-A-01,Domain,myaccount.google.com,Links,Google account domain
+E-004-A-01,Domain,www.gstatic.com,Remote image,Google-hosted static content
+E-004-A-01,Domain,lh3.googleusercontent.com,Remote image,Google-hosted user content
+E-004-A-01,IPv4,209.85.220.73,Mail sending IP,SPF passed; no reputation lookup performed

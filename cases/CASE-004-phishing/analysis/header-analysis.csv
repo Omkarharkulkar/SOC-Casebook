@@ -1,12 +1,9 @@
-field,observed_value,assessment,notes
-From,news@example.com,Consistent,Fictional reserved example domain
-Reply-To,news@example.com,Consistent,Matches From domain
-Return-Path,bounce@example.com,Consistent,Same domain; synthetic
-Subject,November Community Newsletter,Routine,No urgency or threat language
-Received,example route / 192.0.2.20,Illustrative only,Documentation IP; not actual route
-SPF,pass,Simulated,Not server-verified
-DKIM,pass,Simulated,Not server-verified
-DMARC,pass,Simulated,Not server-verified
-Link,hxxps://newsletter[.]example.com/preferences,Reserved and defanged,Not visited
-Attachments,None,Absent,No attachment
-Body,Routine community updates,No obvious lure,Sample text only
+Header,Observed value,Assessment
+From,Google <no-reply@accounts.google.com>,Consistent with Google security notifications
+To,[REDACTED],Recipient privacy preserved
+Reply-To,Absent,No alternate reply destination
+Return-Path,gaia.bounces.google.com,Google-associated bounce domain
+Sender,Absent,No separate Sender header
+Message-ID,[REDACTED] (notifications.google.com),Google-associated notification domain
+Date,19 Nov 2026 05:58:50 UTC,Consistent with receiving timestamp
+Subject,Security alert,Consistent with security notification
