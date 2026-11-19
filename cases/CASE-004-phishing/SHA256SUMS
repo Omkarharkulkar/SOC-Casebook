@@ -1,0 +1,13 @@
+cadf7f07d58cf1aa9d54b84fc1eb8a84e822545672c9f07d8f21aa2c45bea2d0  ./analysis/header-analysis.csv
+b96f151893060fadeadaab236b58b31b451b42b53df2f3f5b723213d678a8cdf  ./analysis/indicator-inventory.csv
+1d694c8052b18ee8cdd0c26e99b3fd7229e46d0043a2e12a3006ef0001d3965e  ./analysis/part-a-log-assessment.md
+b9fdc75bac5a40cf8bbd88575f63dae848e331d65e6f499ff1a3a403887500ac  ./analysis/part-b-indicators.csv
+c558d3f693bc9828748e45e69c9478006ddba707d95b6a418ec8f102ac04b113  ./analysis/README.md
+92a0de31053164d781abfa55c004bab7a8f05c4b9d3a6c6223a27aed8eada0be  ./analysis/sanitize_email.py
+fbb5ca5795947b0e13c7e6c72d718bb4cb78c135d6e9bd4fde64f9136b82f5f3  ./evidence/control-google-security-alert-sanitized.eml
+1b16b30ddb696f20e260c92f323a829a20aaf6a1477f610ba473933138dc4191  ./evidence/README-part-a.md
+8871700b2ea02f22174357fd5097e9f06fc8def1978af7c5db77517b04e33acb  ./.gitignore
+88f41590c44f7e49bf63bc25fcff9c42c71b021f0a2b35d55177c3e7fa36dc6b  ./part-a-report.md
+7f17d290bda10ef190d49e1b5d7dac95747add88c7e927b54feb735e87bac175  ./part-b-report.md
+b3cda6db10ccff8225254818c5a44eed208cc51e4e653b5996c28f2e94753009  ./playbooks/phishing-triage.md
+6cddf7b5ecf4677fa79fb65106bc05bf75c7cb0a203ea744b4dffc8e75b5f859  ./README.md

@@ -4,58 +4,85 @@ from email import policy
 from email.parser import BytesParser
 from email.generator import BytesGenerator
 from io import BytesIO
+from urllib.parse import urlsplit, urlunsplit
 import hashlib
 import re
+import sys
 
-SOURCE = Path("evidence/Security alert.eml")
+PRIVATE = Path.home() / "case004-private"
+SOURCE = PRIVATE / "Security alert.eml"
+PRIVATE_FILE = PRIVATE / "private-strings.txt"
 OUTPUT = Path("evidence/control-google-security-alert-sanitized.eml")
+
+REMOVE = {
+    "x-notifications",
+    "x-notifications-bounce-info",
+    "x-gm-message-state",
+}
 
 EMAIL_RE = re.compile(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}')
 URL_RE = re.compile(r'https?://[^\s<>"\']+', re.I)
 
+def sha256(data):
+    return hashlib.sha256(data).hexdigest()
 
-def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
+def redact_email(match):
+    local, domain = match.group(0).split("@", 1)
+    return "[REDACTED]@" + domain.replace(".", "[.]")
 
 def clean_url(match):
-    url = match.group(0).rstrip('.,;)')
-    suffix = match.group(0)[len(url):]
-    url = re.sub(r'[?#].*$', '', url)
-    url = url.replace('https://', 'hxxps://')
-    url = url.replace('http://', 'hxxp://')
-    url = re.sub(
-        r'(?<=://)([^/]+)',
-        lambda m: m.group(1).replace('.', '[.]'),
-        url
+    raw = match.group(0)
+    url = raw.rstrip(".,;)")
+    suffix = raw[len(url):]
+    p = urlsplit(url)
+    if not p.hostname:
+        return "[URL-REDACTED]" + suffix
+    host = p.hostname.replace(".", "[.]")
+    scheme = "hxxps" if p.scheme.lower() == "https" else "hxxp"
+    return f"{scheme}://{host}" + suffix
+
+def clean_text(text):
+    text = URL_RE.sub(clean_url, text)
+    text = re.sub(
+        r'(?i)(https?://)?lh3[.]googleusercontent[.]com/[^\s"\'<>]+',
+        'https://lh3[.]googleusercontent[.]com/[REDACTED-PATH]',
+        text
     )
-    return url + suffix
-
-
-def sanitize(text):
-    text = EMAIL_RE.sub('[REDACTED-EMAIL]', text)
-    return URL_RE.sub(clean_url, text)
-
+    return EMAIL_RE.sub(redact_email, text)
 
 def main():
-    original_hash = sha256(SOURCE)
-    msg = BytesParser(policy=policy.default).parsebytes(
-        SOURCE.read_bytes()
-    )
+    if not SOURCE.is_file() or not PRIVATE_FILE.is_file():
+        sys.exit("Missing private source or private-strings.txt")
 
-    for header in ("To", "Cc", "Bcc"):
-        if header in msg:
-            msg.replace_header(header, "[REDACTED]")
+    private_values = [
+        x.strip() for x in PRIVATE_FILE.read_text().splitlines() if x.strip()
+    ]
+    if not private_values:
+        sys.exit("Private strings file is empty.")
 
-    if "Message-ID" in msg:
-        msg.replace_header("Message-ID", "[REDACTED]")
+    raw = SOURCE.read_bytes()
+    msg = BytesParser(policy=policy.default).parsebytes(raw)
 
-    for header in list(msg.keys()):
-        if header not in ("To", "Cc", "Bcc", "Message-ID"):
-            value = str(msg[header])
-            cleaned = EMAIL_RE.sub("[REDACTED-EMAIL]", value)
-            if cleaned != value:
-                msg.replace_header(header, cleaned)
+    # Preserve all header occurrences while sanitizing duplicate Received headers.
+    new_headers = []
+    for name, value in msg.items():
+        lname = name.lower()
+        if lname in REMOVE or lname.startswith("x-notifications-"):
+            continue
+        value = str(value)
+
+        if lname in {"to", "cc", "bcc"}:
+            value = "[REDACTED]"
+        elif lname == "message-id":
+            value = "<redacted@notifications.google.com>"
+        elif lname in {"received", "return-path", "authentication-results"}:
+            value = EMAIL_RE.sub(redact_email, value)
+
+        new_headers.append((name, value))
+
+    msg._headers = []
+    for name, value in new_headers:
+        msg[name] = value
 
     for part in msg.walk():
         if part.get_content_maintype() == "text":
@@ -63,23 +90,52 @@ def main():
                 content = part.get_content()
             except Exception:
                 continue
-
             if isinstance(content, str):
                 part.set_content(
-                    sanitize(content),
+                    clean_text(content),
                     subtype=part.get_content_subtype(),
                     charset=part.get_content_charset() or "utf-8"
                 )
 
     buffer = BytesIO()
     BytesGenerator(buffer, policy=policy.default).flatten(msg)
-    OUTPUT.write_bytes(buffer.getvalue())
+    output = buffer.getvalue()
 
-    print("Sanitized copy regenerated.")
-    print(f"Raw SHA-256:       {original_hash}")
-    print(f"Sanitized SHA-256: {sha256(OUTPUT)}")
-    print("Original unchanged.")
+    # Final privacy pass across every serialized header and body section.
+    decoded = output.decode("utf-8", errors="replace")
 
+    # Preserve the verified Return-Path domain, not its private local part.
+    decoded = re.sub(
+        r"(?im)^Return-Path:.*$",
+        "Return-Path: <[REDACTED]@gaia.bounces.google.com>",
+        decoded,
+    )
+    for value in private_values:
+        decoded = decoded.replace(value, "[REDACTED]")
+        decoded = decoded.replace(value.lower(), "[REDACTED]")
+        decoded = decoded.replace(value.upper(), "[REDACTED]")
+    output = decoded.encode("utf-8")
+    decoded = output.decode("utf-8", errors="replace")
+
+    # Final fail-closed checks.
+    for value in private_values:
+        if value.casefold() in decoded.casefold():
+            sys.exit("PRIVACY CHECK FAILED: private value remains; no output written.")
+
+    if re.search(r'lh3[.]googleusercontent[.]com/(?!\[REDACTED-PATH\])\S+', decoded, re.I):
+        sys.exit("PRIVACY CHECK FAILED: avatar path remains.")
+
+    for header in REMOVE:
+        if re.search(rf'(?im)^{re.escape(header)}:', decoded):
+            sys.exit("PRIVACY CHECK FAILED: token header remains.")
+
+    OUTPUT.write_bytes(output)
+    print("PASS: sanitized email generated")
+    print("PASS: private-string leak check")
+    print("PASS: token headers removed")
+    print("PASS: avatar paths redacted")
+    print("Raw SHA-256:", sha256(raw))
+    print("Sanitized SHA-256:", sha256(output))
 
 if __name__ == "__main__":
     main()

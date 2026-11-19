@@ -1,0 +1,190 @@
+Delivered-To: [REDACTED]
+Received: by 2002:a05:6675:281:b0:779:3a19:b73f with SMTP id q1csp565391pxq;
+        Wed, 18 Nov 2026 21:58:51 -0800 (PST)
+X-Received: by 2002:a05:6808:1385:b0:572:86f8:9e73 with SMTP id
+ 5614622812f47-57739d17a47mr6289116b6e.3.1795067931575;        Wed, 18 Nov
+ 2026 21:58:51 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795067931; cv=none;        d=google.com;
+ s=arc-20260327;       
+ b=srqArVZDi14wZDjY0jMkhWQeVrx4Fmd45nVWE9jXsujGePSRZyv+YKYHa3pABRpzeT        
+ Guf9Mu0UVWkXYxa+9HUWCVzO+9BjOSyLHmAbb+imKfCkXm9u+mNrNN4MJR2Ak1Rg+5UM        
+ VFVYRFDzfXkjKZEJFRBXlNjkg5ZlaI5Ee1yeXgZ/cWnQRkDOd7oO+NxeGpb9zV8Wkv51        
+ pO3f9XpcESxm0dKn0WzEvw2veA1Wfp7wYt3e5DpMLS2DgpFPzCYdyLOHfCos7FQA7r4k        
+ KDyibPI8IcDDAk1gcFI9BXVpuzJhcETeHA9zjmcMJJZH+nf8VDmUzXNEO7E3tSVy7ltQ        
+ Yn2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327;       
+ h=to:from:subject:message-id:gmsai:feedback-id:date:mime-version        
+ :dkim-signature;        bh=OcQyHDpg7VyItTGgpabVVcwKxAFiNrfPIJwNvdenhAA=;
+        fh=AoWywJHyYsYwkP2y1JFUavw0u4uDX5yEKLnNuZY/mOU=;       
+ b=hNTQ8s76A0Kg+Dg0FYQPeGfJMOpvgc0+7fi914O1NwKl9f93vLEIZom4e0SMJ5Dnjj        
+ glA9cvfSvooZM9HhN8kHhVaa07qjIL1e89spQVLQT5OCdCVPk8EJ7xPl5YIedcAzdEND        
+ qsv3okO+WXblDPMcSCcUnvtgeExOK+mV6eBX3DY5iAJU2GAJKOojAnuZrBqjD0AHB8Kn        
+ X+1GINSs14YCfUP8DPYIvp0kXt4gL/FtBL3YXwQdKosIBr1fjzDhoKt8ETLsPnFnY3/Y        
+ mzQJNfydoE9qqD8K5qFB8iMgG4pXzki91IWZwNt7ZcXqOGIAjSl8S3iT/lrMQq1sGfk4        
+ ACwg==;        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;       dkim=pass
+ header.i=@accounts.google.com header.s=20260707 header.b=g+9hAFZK;      
+ spf=pass (google.com: domain of =?utf-8?q?3g5d-aggtdpqbc-f2d9my00cibhg=2E4c?=
+ =?utf-8?q?c492=2E0ca5yf8i98yfca8yf4ay69=2E0ca=40gaia=2Ebounces=2Egoogle=2Ec?=
+ =?utf-8?q?om_designates_209=2E85=2E220=2E73_as_permitted_sender=29_smtp=2Em?=
+ =?utf-8?q?ailfrom=3D3G5D-aggTDpQBC-F2D9My00CIBHG=2E4CC492=2E0CA5yF8I98yFCA8?=
+ =?utf-8?q?yF4Ay69=2E0CA=40gaia=2Ebounces=2Egoogle=2Ecom=3B?=       dmarc=pass
+ (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com;      
+ dara=pass header.i=@gmail.com
+Return-Path: <[REDACTED]@gaia.bounces.google.com>
+Received: from mail-sor-f73.google.com (mail-sor-f73.google.com.
+ [209.85.220.73])        by mx.google.com with SMTPS id
+ 5614622812f47-578a6027839sor1601501b6e.6.2026.11.18.21.58.51        for
+ <[REDACTED]@gmail[.]com>        (Google Transport Security);        Wed, 18
+ Nov 2026 21:58:51 -0800 (PST)
+Received-SPF: pass (google.com: domain of =?utf-8?q?3g5d-aggtdpqbc-f2d9my00c?=
+ =?utf-8?q?ibhg=2E4cc492=2E0ca5yf8i98yfca8yf4ay69=2E0ca=40gaia=2Ebounces=2Eg?=
+ =?utf-8?q?oogle=2Ecom?= designates 209.85.220.73 as permitted sender)
+ client-ip=209.85.220.73;
+Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@accounts.google.com header.s=20260707 header.b=g+9hAFZK;      
+ spf=pass (google.com: domain of [REDACTED]@gaia[.]bounces[.]google[.]com
+ designates 209.85.220.73 as permitted sender)
+ smtp.mailfrom=[REDACTED]@gaia[.]bounces[.]google[.]com;       dmarc=pass
+ (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com;      
+ dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;       
+ d=accounts.google.com; s=20260707; t=1795067931; x=1795672731;
+ dara=google.com;       
+ h=content-type:to:from:subject:message-id:gmsai:feedback-id:date        
+ :mime-version:from:to:cc:subject:date:message-id:reply-to        
+ :content-type;        bh=OcQyHDpg7VyItTGgpabVVcwKxAFiNrfPIJwNvdenhAA=;
+        b=g+9hAFZKZSOy+EHEWQlTQ/jUFOphnpKV9emAlxgliblCkdbauvUWEsk4yFp9/Uo7Ak
+         ML5ASE/AKVvesmfn84hS9ajc0tiJkiJ9vcLT6m5bcChvJUK0++/Rb/4xo3LcGEA+QWaW
+         xPNQp8ENpJAhMo8DVZYVb8b+klpgVuBCG27gH4wANPU6YCHo3r1fUIL7IoatXCu+A1OL
+         SSRh+M/jeDeJSmh0eWAaSfZySRzEx9EJf9J1/CpXwdxrlbMqlA7CYkrGFEWrzjTgP0dl
+         r4sGYKVb5FJY+cFI7UHwpgeqSNo1n8f6jzHJ6Eof4YBxt8FH0y0NdjukyapK3os27f/k
+         rpig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;       
+ d=1e100.net; s=20260707; t=1795067931; x=1795672731;       
+ h=content-type:to:from:subject:message-id:gmsai:feedback-id:date        
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id        
+ :reply-to:content-type;       
+ bh=OcQyHDpg7VyItTGgpabVVcwKxAFiNrfPIJwNvdenhAA=;       
+ b=HnFtb8JbkVqyd1dHD8NpUU1SeHPLw9vAqg0y3y6NE8s/cHhc7csv0XpplRIO+UFXr4        
+ QWucOP/eac7STS91QivZzgI1fGWIlJo5/+PH7bcOKVT9ztCSYeNzQtQFyorvrlRB2dIW        
+ HtZbTUQzkWQBXlL9cZHbMgPgcIHTbnOaqnTv+3x9gmgeHd8aQoCDcpo/xojq3Kuk4mgX        
+ sgDTwSofkQpTxVgR9r49G+aFYOXczld8zsAanC1K0Ru/cJTqEY0fW5WXqp+Qwzqg9SL5        
+ HY1lGQjPXpXnv9kGG4ChgdmLMYzeTReFG8WTAjn5EkWvKrWRkbIO3lCGNIgIPEf0cd8O        
+ YNMQ==
+MIME-Version: 1.0
+X-Received: by 2002:a05:6808:3384:b0:55c:6ea:3e3f with SMTP id
+ 5614622812f47-5773c527ae2mr6088005b6e.28.1795067931220; Wed, 18 Nov 2026
+ 21:58:51 -0800 (PST)
+Date: Thu, 19 Nov 2026 05:58:50 +0000
+X-Account-Notification-Type: 127
+Feedback-ID: 127:account-notifier
+gmsai: true
+X-Google-Notification-Metadata: CgISAA
+Message-ID: <redacted@notifications.google.com>
+Subject: Security alert
+From: Google <no-reply@accounts.google.com>
+To: [REDACTED]
+Content-Type: multipart/alternative; boundary="000000000000635bc406609ad215"
+
+--000000000000635bc406609ad215
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+[image: Google]
+You allowed Microsoft apps & services access to some of your Google Account
+data
+
+
+[REDACTED]@gmail[.]com
+
+If you didn't allow Microsoft apps & services access to some of your Google
+Account data, someone else may be trying to access your Google Account data.
+
+Take a moment now to check your account activity and secure your account.
+Check activity
+<hxxps://accounts[.]google[.]com>
+To make changes at any time to the access that Microsoft apps & services
+has to your data, go to your Google Account
+<hxxps://accounts[.]google[.]com>
+You can also see security activity at
+hxxps://myaccount[.]google[.]com
+You received this email to let you know about important changes to your
+Google Account and services.
+© 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA
+
+--000000000000635bc406609ad215
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<!DOCTYPE html><html lang=3D"en"><head><meta name=3D"format-detection" conten=
+t=3D"email=3Dno"/><meta name=3D"format-detection" content=3D"date=3Dno"/><sty=
+le nonce=3D"qEJlZ5Dlw64Akyq7_C7kdw">.awl a {color: #FFFFFF; text-decoration: =
+none;} .abml a {color: #000000; font-family: Roboto-Medium,Helvetica,Arial,sa=
+ns-serif; font-weight: bold; text-decoration: none;} .adgl a {color: rgba(0, =
+0, 0, 0.87); text-decoration: none;} .afal a {color: #b0b0b0; text-decoration=
+: none;} @media screen and (min-width: 600px) {.v2sp {padding: 6px 30px 0px;}=
+ .v2rsp {padding: 0px 10px;}} @media screen and (min-width: 600px) {.mdv2rw {=
+padding: 40px 40px;}} </style><link href=3D"//fonts.googleapis.com/css?family=
+=3DGoogle+Sans" rel=3D"stylesheet" type=3D"text/css" nonce=3D"qEJlZ5Dlw64Akyq=
+7_C7kdw"/></head><body style=3D"margin: 0; padding: 0;" bgcolor=3D"#FFFFFF"><=
+table width=3D"100%" height=3D"100%" style=3D"min-width: 348px;" border=3D"0"=
+ cellspacing=3D"0" cellpadding=3D"0" lang=3D"en"><tr height=3D"32" style=3D"h=
+eight: 32px;"><td></td></tr><tr align=3D"center"><td><div itemscope itemtype=
+=3D"//schema.org/EmailMessage"><div itemprop=3D"action" itemscope itemtype=3D=
+"//schema.org/ViewAction"><link itemprop=3D"url" href=3D"hxxps://accounts[.]g=
+oogle[.]com"/><meta itemprop=3D"name" content=3D"Review Activity"/></div></di=
+v><table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"padding-bo=
+ttom: 20px; max-width: 516px; min-width: 220px;"><tr><td width=3D"8" style=3D=
+"width: 8px;"></td><td><div style=3D"border-style: solid; border-width: thin;=
+ border-color:#dadce0; border-radius: 8px; padding: 40px 20px;" align=3D"cent=
+er" class=3D"mdv2rw"><img src=3D"hxxps://www[.]gstatic[.]com" width=3D"74" he=
+ight=3D"24" aria-hidden=3D"true" style=3D"margin-bottom: 16px;" alt=3D"Google=
+"><div style=3D"font-family: &#39;Google Sans&#39;,Roboto,RobotoDraft,Helveti=
+ca,Arial,sans-serif;border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87=
+); line-height: 32px; padding-bottom: 24px;text-align: center; word-break: br=
+eak-word;"><div style=3D"font-size: 24px;">You allowed Microsoft apps &amp; s=
+ervices access to some of your Google Account data </div><table align=3D"cent=
+er" style=3D"margin-top:8px;"><tr style=3D"line-height: normal;"><td align=3D=
+"right" style=3D"padding-right:8px;"><img width=3D"20" height=3D"20" style=3D=
+"width: 20px; height: 20px; vertical-align: sub; border-radius: 50%;;" src=3D=
+"hxxps://lh3[.]googleusercontent[.]com" alt=3D""></td><td><a style=3D"font-fa=
+mily: &#39;Google Sans&#39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;col=
+or: rgba(0,0,0,0.87); font-size: 14px; line-height: 20px;">[REDACTED]@gmail[.=
+]com</a></td></tr></table> </div><div style=3D"font-family: Roboto-Regular,He=
+lvetica,Arial,sans-serif; font-size: 14px; color: rgba(0,0,0,0.87); line-heig=
+ht: 20px;padding-top: 20px; text-align: left;"><br><p>If you didn't allow Mic=
+rosoft apps &amp; services access to some of your Google Account data, someon=
+e else may be trying to access your Google Account data.</p><p>Take a moment =
+now to check your account activity and secure your account.</p><div style=3D"=
+padding-top: 32px; text-align: center;"><a href=3D"hxxps://accounts[.]google[=
+.]com" target=3D"_blank" link-id=3D"main-button-link" style=3D"font-family: &=
+#39;Google Sans Flex&#39;,&#39;Google Sans Text&#39;,&#39;Google Sans&#39;,&#=
+39;Noto Sans&#39;,Arial,Helvetica,sans-serif; line-height: 16px; color: #ffff=
+ff; font-weight: 500; text-decoration: none; font-size: 14px;display:inline-b=
+lock;padding: 12px 24px;background-color: #0b57d0; border-radius: 9999px; min=
+-width: 64px;">Check activity</a></div><div style=3D"padding-top: 40px;"><div=
+ style=3D"border-bottom: thin solid #dadce0; padding-bottom: 24px;">To make c=
+hanges at any time to the access that Microsoft apps &amp; services has to yo=
+ur data, go to your <a href=3D"hxxps://accounts[.]google[.]com" style=3D"text=
+-decoration: none; color: #4285F4;" target=3D"_blank">Google Account</a></div=
+></div></div><div style=3D"padding-top: 20px; font-size: 12px; line-height: 1=
+6px; color: #5f6368; letter-spacing: 0.3px; text-align: center">You can also =
+see security activity at<br><a href=3D"hxxps://myaccount[.]google[.]com" styl=
+e=3D"text-decoration: none; color: #4285F4;" target=3D"_blank">hxxps://myacco=
+unt[.]google[.]com</a></div></div><div style=3D"text-align: left;"><div style=
+=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif;color: rgba(0,0,0,=
+0.54); font-size: 11px; line-height: 18px; padding-top: 12px; text-align: cen=
+ter;"><div>You received this email to let you know about important changes to=
+ your Google Account and services.</div><div style=3D"direction: ltr;">&copy;=
+ 2026 Google LLC, <a class=3D"afal" style=3D"font-family: Roboto-Regular,Helv=
+etica,Arial,sans-serif;color: rgba(0,0,0,0.54); font-size: 11px; line-height:=
+ 18px; padding-top: 12px; text-align: center;">1600 Amphitheatre Parkway, Mou=
+ntain View, CA 94043, USA</a></div></div></div></td><td width=3D"8" style=3D"=
+width: 8px;"></td></tr></table></td></tr><tr height=3D"32" style=3D"height: 3=
+2px;"><td></td></tr></table></body></html>
+
+--000000000000635bc406609ad215--
