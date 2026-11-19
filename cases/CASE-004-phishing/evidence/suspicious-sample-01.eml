@@ -1,0 +1,23 @@
+From: Account Security <security@account-alert.example>
+To: User <user@example.net>
+Reply-To: helpdesk@different.example
+Return-Path: <bounce@account-alert.example>
+Date: Wed, 18 Nov 2026 08:15:00 +0530
+Message-ID: <synthetic-suspicious-004@example.com>
+Subject: Action required: review account access
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Received: from mail.account-alert.example (192.0.2.45) by mail.example.net; Wed, 18 Nov 2026 02:45:00 +0000
+Authentication-Results: mail.example.net; spf=fail; dkim=fail; dmarc=fail
+
+Hello User,
+
+This message requests that the recipient review account access using the link below.
+
+Account review:
+hxxps://account-check[.]example.com/review
+
+This is a synthetic training email. Sender, recipient, route, authentication results, content and link are fictional.
+
+Regards,
+Account Security

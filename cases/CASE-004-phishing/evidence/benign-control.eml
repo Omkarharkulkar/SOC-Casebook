@@ -1,0 +1,23 @@
+From: Example Newsletter <news@example.com>
+To: Reader <reader@example.net>
+Reply-To: news@example.com
+Return-Path: <bounce@example.com>
+Date: Tue, 17 Nov 2026 09:00:00 +0530
+Message-ID: <synthetic-control-004@example.com>
+Subject: November Community Newsletter
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Received: from newsletter.example (192.0.2.20) by mail.example.net; Tue, 17 Nov 2026 03:30:00 +0000
+Authentication-Results: mail.example.net; spf=pass smtp.mailfrom=example.com; dkim=pass header.d=example.com; dmarc=pass header.from=example.com
+
+Hello Reader,
+
+Here is the November community newsletter with event updates and general announcements.
+
+You can review your preferences here:
+hxxps://newsletter[.]example.com/preferences
+
+This is a synthetic training message. The sender, recipient, route, authentication results and content are fictional.
+
+Regards,
+Example Newsletter Team
