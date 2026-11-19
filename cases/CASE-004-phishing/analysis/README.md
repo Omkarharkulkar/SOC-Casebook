@@ -31,3 +31,7 @@ The sanitized derivative has been modified and reserialized. Its DKIM signature 
 The account holder's recognition of the authorization is retrospective user confirmation, not independent forensic verification.
 
 Legacy synthetic exercises are retained separately under `supplementary/SUPP-002/`.
+
+## Sanitizer scope
+
+`sanitize_email.py` was written specifically for the Google security notification examined in CASE-004 Part A. Its redaction rules include Google-specific headers, domains and message identifiers. Do not reuse it for other email samples or Part B evidence without reviewing and adapting the rules and privacy checks for that sample.

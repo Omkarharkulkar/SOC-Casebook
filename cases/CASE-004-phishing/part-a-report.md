@@ -43,13 +43,11 @@ The visible link hosts were `accounts.google.com` and `myaccount.google.com`. Th
 
 ## Stage 2 — Retrospective account review
 
-After the email-only assessment, the user directly reviewed Google Account settings, including third-party app connections and recent security activity.
+On 19 November 2026 at 13:11:59 IST, the account holder reviewed Google Account third-party connections and recent security activity.
 
-The user recognized the Microsoft apps and services authorization as an activity they had legitimately approved.
+The Microsoft apps and services authorization was recognized by the account holder as legitimate. The authorization date recorded during this review was 19 November 2026.
 
-The exact review timestamp and displayed authorization date were not recorded in the available investigation notes. No redacted screenshot was retained.
-
-This is user confirmation, not independent forensic verification of the account event.
+This confirmation provides user-reported context supporting the legitimacy of the activity. It is not independent forensic verification or proof that the account had no other unauthorized activity.
 
 **Stage 2 conclusion:** The reported authorization was recognized by the account holder. No evidence of unauthorized access was identified during this review.
 
