@@ -25,30 +25,26 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  ACwg==;        dara=google.com
 ARC-Authentication-Results: i=1; mx.google.com;       dkim=pass
  header.i=@accounts.google.com header.s=20260707 header.b=g+9hAFZK;      
- spf=pass (google.com: domain of =?utf-8?q?3g5d-aggtdpqbc-f2d9my00cibhg=2E4c?=
- =?utf-8?q?c492=2E0ca5yf8i98yfca8yf4ay69=2E0ca=40gaia=2Ebounces=2Egoogle=2Ec?=
- =?utf-8?q?om_designates_209=2E85=2E220=2E73_as_permitted_sender=29_smtp=2Em?=
- =?utf-8?q?ailfrom=3D3G5D-aggTDpQBC-F2D9My00CIBHG=2E4CC492=2E0CA5yF8I98yFCA8?=
- =?utf-8?q?yF4Ay69=2E0CA=40gaia=2Ebounces=2Egoogle=2Ecom=3B?=       dmarc=pass
- (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com;      
- dara=pass header.i=@gmail.com
+ spf=pass (google.com: domain of [REDACTED]@gaia.bounces.google.com designates
+ 209.85.220.73 as permitted sender)
+ smtp.mailfrom=[REDACTED]@gaia.bounces.google.com;       dmarc=pass (p=REJECT
+ sp=REJECT dis=NONE) header.from=accounts.google.com;       dara=pass
+ header.i=@gmail.com
 Return-Path: <[REDACTED]@gaia.bounces.google.com>
 Received: from mail-sor-f73.google.com (mail-sor-f73.google.com.
  [209.85.220.73])        by mx.google.com with SMTPS id
  5614622812f47-578a6027839sor1601501b6e.6.2026.11.18.21.58.51        for
- <[REDACTED]@gmail[.]com>        (Google Transport Security);        Wed, 18
- Nov 2026 21:58:51 -0800 (PST)
-Received-SPF: pass (google.com: domain of =?utf-8?q?3g5d-aggtdpqbc-f2d9my00c?=
- =?utf-8?q?ibhg=2E4cc492=2E0ca5yf8i98yfca8yf4ay69=2E0ca=40gaia=2Ebounces=2Eg?=
- =?utf-8?q?oogle=2Ecom?= designates 209.85.220.73 as permitted sender)
- client-ip=209.85.220.73;
+ <[REDACTED]@gmail.com>        (Google Transport Security);        Wed, 18 Nov
+ 2026 21:58:51 -0800 (PST)
+Received-SPF: pass (google.com: domain of [REDACTED]@gaia.bounces.google.com
+ designates 209.85.220.73 as permitted sender) client-ip=209.85.220.73;
 Authentication-Results: mx.google.com;       dkim=pass
  header.i=@accounts.google.com header.s=20260707 header.b=g+9hAFZK;      
- spf=pass (google.com: domain of [REDACTED]@gaia[.]bounces[.]google[.]com
- designates 209.85.220.73 as permitted sender)
- smtp.mailfrom=[REDACTED]@gaia[.]bounces[.]google[.]com;       dmarc=pass
- (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com;      
- dara=pass header.i=@gmail.com
+ spf=pass (google.com: domain of [REDACTED]@gaia.bounces.google.com designates
+ 209.85.220.73 as permitted sender)
+ smtp.mailfrom=[REDACTED]@gaia.bounces.google.com;       dmarc=pass (p=REJECT
+ sp=REJECT dis=NONE) header.from=accounts.google.com;       dara=pass
+ header.i=@gmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;       
  d=accounts.google.com; s=20260707; t=1795067931; x=1795672731;
  dara=google.com;       
@@ -98,7 +94,7 @@ You allowed Microsoft apps & services access to some of your Google Account
 data
 
 
-[REDACTED]@gmail[.]com
+[REDACTED]@gmail.com
 
 If you didn't allow Microsoft apps & services access to some of your Google
 Account data, someone else may be trying to access your Google Account data.
@@ -151,40 +147,40 @@ ervices access to some of your Google Account data </div><table align=3D"cent=
 er" style=3D"margin-top:8px;"><tr style=3D"line-height: normal;"><td align=3D=
 "right" style=3D"padding-right:8px;"><img width=3D"20" height=3D"20" style=3D=
 "width: 20px; height: 20px; vertical-align: sub; border-radius: 50%;;" src=3D=
-"hxxps://lh3[.]googleusercontent[.]com" alt=3D""></td><td><a style=3D"font-fa=
-mily: &#39;Google Sans&#39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;col=
-or: rgba(0,0,0,0.87); font-size: 14px; line-height: 20px;">[REDACTED]@gmail[.=
-]com</a></td></tr></table> </div><div style=3D"font-family: Roboto-Regular,He=
-lvetica,Arial,sans-serif; font-size: 14px; color: rgba(0,0,0,0.87); line-heig=
-ht: 20px;padding-top: 20px; text-align: left;"><br><p>If you didn't allow Mic=
-rosoft apps &amp; services access to some of your Google Account data, someon=
-e else may be trying to access your Google Account data.</p><p>Take a moment =
-now to check your account activity and secure your account.</p><div style=3D"=
-padding-top: 32px; text-align: center;"><a href=3D"hxxps://accounts[.]google[=
-.]com" target=3D"_blank" link-id=3D"main-button-link" style=3D"font-family: &=
-#39;Google Sans Flex&#39;,&#39;Google Sans Text&#39;,&#39;Google Sans&#39;,&#=
-39;Noto Sans&#39;,Arial,Helvetica,sans-serif; line-height: 16px; color: #ffff=
-ff; font-weight: 500; text-decoration: none; font-size: 14px;display:inline-b=
-lock;padding: 12px 24px;background-color: #0b57d0; border-radius: 9999px; min=
--width: 64px;">Check activity</a></div><div style=3D"padding-top: 40px;"><div=
- style=3D"border-bottom: thin solid #dadce0; padding-bottom: 24px;">To make c=
-hanges at any time to the access that Microsoft apps &amp; services has to yo=
-ur data, go to your <a href=3D"hxxps://accounts[.]google[.]com" style=3D"text=
--decoration: none; color: #4285F4;" target=3D"_blank">Google Account</a></div=
-></div></div><div style=3D"padding-top: 20px; font-size: 12px; line-height: 1=
-6px; color: #5f6368; letter-spacing: 0.3px; text-align: center">You can also =
-see security activity at<br><a href=3D"hxxps://myaccount[.]google[.]com" styl=
-e=3D"text-decoration: none; color: #4285F4;" target=3D"_blank">hxxps://myacco=
-unt[.]google[.]com</a></div></div><div style=3D"text-align: left;"><div style=
-=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif;color: rgba(0,0,0,=
-0.54); font-size: 11px; line-height: 18px; padding-top: 12px; text-align: cen=
-ter;"><div>You received this email to let you know about important changes to=
- your Google Account and services.</div><div style=3D"direction: ltr;">&copy;=
- 2026 Google LLC, <a class=3D"afal" style=3D"font-family: Roboto-Regular,Helv=
-etica,Arial,sans-serif;color: rgba(0,0,0,0.54); font-size: 11px; line-height:=
- 18px; padding-top: 12px; text-align: center;">1600 Amphitheatre Parkway, Mou=
-ntain View, CA 94043, USA</a></div></div></div></td><td width=3D"8" style=3D"=
-width: 8px;"></td></tr></table></td></tr><tr height=3D"32" style=3D"height: 3=
-2px;"><td></td></tr></table></body></html>
+"[URL-REDACTED]" alt=3D""></td><td><a style=3D"font-family: &#39;Google Sans&=
+#39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;color: rgba(0,0,0,0.87); f=
+ont-size: 14px; line-height: 20px;">[REDACTED]@gmail.com</a></td></tr></table=
+> </div><div style=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif;=
+ font-size: 14px; color: rgba(0,0,0,0.87); line-height: 20px;padding-top: 20p=
+x; text-align: left;"><br><p>If you didn't allow Microsoft apps &amp; service=
+s access to some of your Google Account data, someone else may be trying to a=
+ccess your Google Account data.</p><p>Take a moment now to check your account=
+ activity and secure your account.</p><div style=3D"padding-top: 32px; text-a=
+lign: center;"><a href=3D"hxxps://accounts[.]google[.]com" target=3D"_blank" =
+link-id=3D"main-button-link" style=3D"font-family: &#39;Google Sans Flex&#39;=
+,&#39;Google Sans Text&#39;,&#39;Google Sans&#39;,&#39;Noto Sans&#39;,Arial,H=
+elvetica,sans-serif; line-height: 16px; color: #ffffff; font-weight: 500; tex=
+t-decoration: none; font-size: 14px;display:inline-block;padding: 12px 24px;b=
+ackground-color: #0b57d0; border-radius: 9999px; min-width: 64px;">Check acti=
+vity</a></div><div style=3D"padding-top: 40px;"><div style=3D"border-bottom: =
+thin solid #dadce0; padding-bottom: 24px;">To make changes at any time to the=
+ access that Microsoft apps &amp; services has to your data, go to your <a hr=
+ef=3D"hxxps://accounts[.]google[.]com" style=3D"text-decoration: none; color:=
+ #4285F4;" target=3D"_blank">Google Account</a></div></div></div><div style=
+=3D"padding-top: 20px; font-size: 12px; line-height: 16px; color: #5f6368; le=
+tter-spacing: 0.3px; text-align: center">You can also see security activity a=
+t<br><a href=3D"hxxps://myaccount[.]google[.]com" style=3D"text-decoration: n=
+one; color: #4285F4;" target=3D"_blank">hxxps://myaccount[.]google[.]com</a><=
+/div></div><div style=3D"text-align: left;"><div style=3D"font-family: Roboto=
+-Regular,Helvetica,Arial,sans-serif;color: rgba(0,0,0,0.54); font-size: 11px;=
+ line-height: 18px; padding-top: 12px; text-align: center;"><div>You received=
+ this email to let you know about important changes to your Google Account an=
+d services.</div><div style=3D"direction: ltr;">&copy; 2026 Google LLC, <a cl=
+ass=3D"afal" style=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif;=
+color: rgba(0,0,0,0.54); font-size: 11px; line-height: 18px; padding-top: 12p=
+x; text-align: center;">1600 Amphitheatre Parkway, Mountain View, CA 94043, U=
+SA</a></div></div></div></td><td width=3D"8" style=3D"width: 8px;"></td></tr>=
+</table></td></tr><tr height=3D"32" style=3D"height: 32px;"><td></td></tr></t=
+able></body></html>
 
 --000000000000635bc406609ad215--

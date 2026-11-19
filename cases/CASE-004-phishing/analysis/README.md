@@ -1,20 +1,33 @@
 # Part A Analysis
 
 ## Method
-The raw `.eml` was parsed offline using Python's standard-library email parser. Header fields and plain-text body were reviewed. No email client, HTML rendering, remote-resource loading, URL navigation, attachment execution, DNS, or reputation lookups were used.
+
+The original Google security notification was reviewed offline using Python's standard-library email parser and command-line inspection.
+
+The analysis covered headers, provider authentication results, routing timestamps, MIME content and URL references.
+
+No email client rendering, link navigation, remote-resource loading, attachment execution, DNS lookup or reputation lookup was performed.
 
 ## Reproduction
-Run from the case directory:
-`python3 analysis/parse_control.py`
+
+Run from the CASE-004 directory:
+
+`python3 analysis/sanitize_email.py`
+
+The script reads the private original from `~/case004-private/` and generates the sanitized derivative in `evidence/`.
+
+The original email is not included in the repository.
 
 ## Tools
-- Python 3 standard library (`email` parser)
+
+- Python 3 standard library (`email` parser and generator)
 - Command-line text review
-- SHA-256 integrity manifest
+- SHA-256 integrity verification
 
 ## Limitations
-The email is synthetic. Authentication and routing values are illustrative; no real SPF, DKIM, DMARC or delivery-route validation is possible. The reserved example domain is not a real service. A benign-looking sample does not establish that a real email or sender is safe.
 
-## Part B
+The sanitized derivative has been modified and reserialized. Its DKIM signature cannot be independently verified.
 
-`part-b-indicators.csv` records the indicators observed in the synthetic suspicious email. `part-b-report.md` documents the assessment and limitations. Authentication results are simulated; no external enrichment or URL visits were performed.
+The account holder's recognition of the authorization is retrospective user confirmation, not independent forensic verification.
+
+Legacy synthetic exercises are retained separately under `supplementary/SUPP-002/`.

@@ -1,1 +1,3 @@
-evidence/Security alert.eml
+# Do not commit raw email files; allow explicitly sanitized derivatives.
+*.eml
+!*-sanitized.eml
