@@ -1,0 +1,42 @@
+{
+  "filename": "sample-1000.eml",
+  "sha256": "69feb34529b2ea44d90d1b3592935c32e22e968f36829e5f322281641c69450a",
+  "size_bytes": 18564,
+  "headers": {
+    "subject": "Comunicado Urgente: Infração não contestada vinculada à sua CNH. Processo: 808210547",
+    "from": "Detran - Aviso Urgente <detran@sistemadeinfracao373552>",
+    "date": "Mon, 21 Sep 2026 06:43:52 +0000",
+    "reply_to": "",
+    "return_path": "detran@sistemadeinfracao373552"
+  },
+  "authentication": {
+    "authentication_results": [
+      "spf=none (sender IP is 45.32.75.31) smtp.mailfrom=sistemadeinfracao373552; dkim=none (message not signed) header.d=none;dmarc=none action=none header.from=sistemadeinfracao373552;"
+    ],
+    "received_spf": [
+      "None (protection.outlook.com: sistemadeinfracao373552 does not designate permitted sender hosts)"
+    ],
+    "dkim_signature_present": false
+  },
+  "received_headers": [
+    "from LV0PR10MB997968.namprd10.prod.outlook.com (::1) by MW4PR10MB5749.namprd10.prod.outlook.com with HTTPS; Mon, 21 Sep 2026 06:43:55 +0000",
+    "from PAZP264CA0101.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1fb::12) by LV0PR10MB997968.namprd10.prod.outlook.com (2603:10b6:408:38f::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.13; Mon, 21 Sep 2026 06:43:53 +0000",
+    "from MI3PEPF0000849C.eurprd03.prod.outlook.com (2603:10a6:102:1fb:cafe::72) by PAZP264CA0101.outlook.office365.com (2603:10a6:102:1fb::12) with Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.16 via Frontend Transport; Mon, 21 Sep 2026 06:43:52 +0000",
+    "from [127.0.1.1] (45.32.75.31) by MI3PEPF0000849C.mail.protection.outlook.com (10.167.240.187) with Microsoft SMTP Server id 15.21.451.8 via Frontend Transport; Mon, 21 Sep 2026 06:43:52 +0000"
+  ],
+  "mime_types": [
+    "multipart/alternative",
+    "text/plain",
+    "text/html"
+  ],
+  "attachments": [],
+  "url_count": 1,
+  "url_domains_defanged": [
+    "dete1-489991573399[.]southamerica-east1[.]run[.]app"
+  ],
+  "limitations": [
+    "URLs were not visited.",
+    "Attachments were not opened or executed.",
+    "Domain reputation was not checked."
+  ]
+}

@@ -1,0 +1,5 @@
+indicator_type,indicator,context
+sender_address,detran@sistemadeinfracao373552,Unverified sender used in government impersonation
+sender_domain,sistemadeinfracao373552,Sender domain
+source_ip,45[.]32[.]75[.]31,Recorded sending IP
+destination_hostname,dete1-489991573399[.]southamerica-east1[.]run[.]app,Link hostname
