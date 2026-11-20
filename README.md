@@ -22,7 +22,7 @@ The project simulates selected responsibilities of a Level 1 Security Operations
 | CASE-001 | SSH Authentication and Honeypot Investigation | Complete |
 | CASE-002 | Suspicious Windows Process Execution | Complete |
 | CASE-003 | Legitimate Administrative Activity | Complete |
-| CASE-004 | Phishing Email Investigation | Planned |
+| CASE-004 | Phishing Email Investigation | Complete |
 | CASE-005 | Suspicious DNS / Network Communication | Planned |
 | CASE-006 | SIEM Alert Investigation | Planned |
 | CASE-007 | Linux Privilege and Account Activity | Planned |
@@ -33,13 +33,13 @@ Case verdicts will be based on collected evidence rather than predetermined assu
 ## Project Components
 
 ### 1. Security Investigations
-A planned set of eight documented investigations covering Linux, Windows, phishing, network traffic, and SIEM alert analysis.
+Eight planned investigations covering Linux, Windows, phishing, network traffic, and SIEM alert analysis. CASE-001 through CASE-004 are completed.
 
 ### 2. MiniSOC
 A lightweight Python-based Linux log collection and analysis module using structured storage and basic detection logic.
 
 ### 3. IOC Enrichment
-A supporting utility for researching indicators of compromise during relevant investigations.
+Supporting indicator research documented within relevant investigations. Automated enrichment is planned.
 
 ### 4. SOC Playbooks
 Practical investigation checklists for common security alerts and incidents.

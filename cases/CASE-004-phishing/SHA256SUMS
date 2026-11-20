@@ -5,12 +5,14 @@ b96f151893060fadeadaab236b58b31b451b42b53df2f3f5b723213d678a8cdf  ./analysis/ind
 bf56f2fb675c49aeb95232f1f391d7ebe050116995a5e4b45c4f164579393869  ./analysis/part-b-analysis.json
 7a001f04e2c60f4d9337a92e747203a575e099436054e37513d6103be2654857  ./analysis/README.md
 51d4135829c8edff25689038327b0f4f94ac7e117862b593e9623e0742938328  ./analysis/sanitize_email.py
+63be8325baa61efce1bd5420b7546662ac5f371f22c1532dd2e66dd1d568633e  ./analysis/tests/test_analyze_email.py
+b9f069bbaa6d8660cc3ec80a802cb566ad19c751fdff4d178f8dee48809744a5  ./enrichment-results.csv
 fffb1e5b7834d8aff0cd92348354dc7d4906657259afa8dca9a87e52fb1b8868  ./evidence/control-google-security-alert-sanitized.eml
 0c6eb2a5cdaff125aaa5fba9e5fdb1c5ba80c4c6c52a188f17151f397c6c3d48  ./evidence/part-b/README.md
 c31141186ced2caecd7cd5efa426fc6c401841b09a2307f57326582113c6e3d7  ./evidence/README-part-a.md
 7cf40a1c53888fe0a22ec4df1b80279ba1232e0fa6543fedc45d607fe325073f  ./.gitignore
 b51a38c8d6c6c9d86f18fede564c7e18542f326aa610fce8cb1012aebcb3c0a7  ./part-a-report.md
 7dc30b51b1747280d9cb95ef4df77551e49c8bef4bb1ac27b2c6b927cccbe3c2  ./part-b-indicators.csv
-126a35ed566511e9b106410c1a4fa36ffc02d344650517e959fb647c50f87514  ./part-b-report.md
+4fc77613f61402e94035634fe10e1cebc9260ae2d921b9e0971892b7afd9f4a7  ./part-b-report.md
 b3cda6db10ccff8225254818c5a44eed208cc51e4e653b5996c28f2e94753009  ./playbooks/phishing-triage.md
 78779a1411aaeac01e09ffd1dfcb157194e9acc7a181c272b09786e4fbf531fa  ./README.md
