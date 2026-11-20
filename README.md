@@ -33,7 +33,7 @@ Case verdicts will be based on collected evidence rather than predetermined assu
 ## Project Components
 
 ### 1. Security Investigations
-Eight planned investigations covering Linux, Windows, phishing, network traffic, and SIEM alert analysis. CASE-001 through CASE-004 are completed.
+The portfolio covers eight investigations across Linux, Windows, phishing, network traffic, and SIEM alert analysis. CASE-001 through CASE-004 are complete; the remaining cases are planned.
 
 ### 2. MiniSOC
 A lightweight Python-based Linux log collection and analysis module using structured storage and basic detection logic.

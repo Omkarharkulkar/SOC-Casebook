@@ -54,7 +54,7 @@ The recipient is urged to regularize the alleged violation before a stated deadl
 
 The sender domain is a bare name without a conventional public DNS suffix (TLD). It does not establish a legitimate relationship with the claimed government authority.
 
-The lack of a public-style domain helps explain why SPF, DKIM and DMARC were reported as none. These results do not independently prove maliciousness, but they provide no authentication assurance for the claimed sender.
+The sender uses a domain without a conventional public DNS suffix. SPF, DKIM and DMARC were reported as none in this message. These results do not independently prove maliciousness, but they provide no authentication assurance for the claimed sender.
 
 ## 4. Email Authentication
 

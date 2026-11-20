@@ -1,5 +1,5 @@
 lookup_date,indicator,lookup_type,result,assessment,source
 2026-11-20,45[.]32[.]75[.]31,IP registry ASN PTR,Not confirmed,Unknown,Passive public search
 2026-11-20,dete1-489991573399[.]southamerica-east1[.]run[.]app,Exact hostname reputation,No exact-match report confirmed,Unknown,Passive public search
-2026-11-20,c1c1-489991573399[.]southamerica-east1[.]run[.]app,Related hostname reputation,Existing phishing reports and recorded detections,Context only; not the exact hostname,https://phishdestroy.io/domain/c1c1-489991573399.southamerica-east1.run.app/
-2026-11-20,c2c2-489991573399[.]southamerica-east1[.]run[.]app,Related hostname reputation,Existing security warnings reported,Context only; not the exact hostname,https://gridinsoft.com/online-virus-scanner/url/c2c2_489991573399-southamerica_east1-run-app
+2026-11-20,c1c1-489991573399[.]southamerica-east1[.]run[.]app,Related hostname reputation,Existing phishing reports and recorded detections,Context only; not the exact hostname,hxxps://phishdestroy[.]io/domain/c1c1-489991573399[.]southamerica-east1[.]run[.]app/
+2026-11-20,c2c2-489991573399[.]southamerica-east1[.]run[.]app,Related hostname reputation,Existing security warnings reported,Context only; not the exact hostname,hxxps://gridinsoft[.]com/online-virus-scanner/url/c2c2_489991573399-southamerica_east1-run-app

@@ -8,6 +8,8 @@ https://github.com/rf-peixoto/phishing_pot
 Dataset commit:
 78be141545ed9e56eefb857808ac78e83eb81b81
 
+Collection/analysis date: 20 November 2026
+
 Original sample:
 email/sample-1000.eml
 
@@ -34,4 +36,4 @@ The complete original email is not published in this repository.
 
 Source: Phishing Pot — rf-peixoto/phishing_pot.
 
-The dataset is distributed under CC BY-NC 4.0 according to its dataset documentation. Attribution is retained, and the original sample is not redistributed here.
+The dataset documentation identifies CC BY-NC 4.0. License: https://creativecommons.org/licenses/by-nc/4.0/. Attribution is retained, and the original sample is not redistributed here.
