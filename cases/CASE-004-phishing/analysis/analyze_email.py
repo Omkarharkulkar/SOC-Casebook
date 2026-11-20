@@ -66,10 +66,22 @@ def analyze(path):
     urls = set(extract_urls(all_text))
 
     domains = set()
+    url_analysis = []
+
     for url in urls:
-        hostname = urlparse(url.rstrip(".,;!?)")).hostname
+        parsed = urlparse(url.rstrip(".,;!?"))
+        hostname = parsed.hostname
+        userinfo = parsed.netloc.rsplit("@", 1)[0] if "@" in parsed.netloc else ""
+
         if hostname:
             domains.add(hostname.lower())
+
+        url_analysis.append({
+            "hostname_defanged": defang(hostname.lower()) if hostname else None,
+            "userinfo_present": bool(userinfo),
+            "userinfo_contains_hotmail": "hotmail" in userinfo.lower(),
+            "userinfo_redacted": "[redacted]" if userinfo else None,
+        })
 
     authentication = msg.get_all("Authentication-Results", [])
     received_spf = msg.get_all("Received-SPF", [])
@@ -96,6 +108,7 @@ def analyze(path):
         "attachments": attachments,
         "url_count": len(urls),
         "url_domains_defanged": sorted(defang(d) for d in domains),
+        "url_analysis": url_analysis,
         "limitations": [
             "URLs were not visited.",
             "Attachments were not opened or executed.",

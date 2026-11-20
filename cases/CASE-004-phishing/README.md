@@ -1,6 +1,6 @@
 # CASE-004 — Phishing Email Investigation
 
-**Status:** In Progress
+**Status:** Complete
 **Focus:** Email authenticity, security notification analysis, and phishing triage
 **Severity:** Informational for Part A
 
@@ -25,9 +25,9 @@ The user's confirmation is not independent forensic verification.
 
 See `part-a-report.md` and `analysis/part-a-log-assessment.md`.
 
-### Part B — Suspicious Email Investigation
+### Part B — Phishing Email Investigation
 
-Pending. This part will investigate a suspicious email and compare its indicators and characteristics with the legitimate baseline established in Part A.
+Completed offline investigation of a public phishing sample impersonating a Brazilian traffic authority. The sample contained a fraudulent traffic-violation lure, urgency, and a deceptive URL. The destination was not visited and attachments were not executed. No recipient interaction or compromise was established.
 
 ## Evidence Handling
 
@@ -59,8 +59,10 @@ Analysis was performed offline. The destination was not visited and attachments 
 
 - `part-b-report.md` — Investigation findings
 - `part-b-indicators.csv` — Defanged indicators
+- `enrichment-results.csv` — Passive enrichment results
 - `analysis/analyze_email.py` — Offline email analysis script
 - `analysis/part-b-analysis.json` — Structured analysis output
+- `analysis/tests/test_analyze_email.py` — Analyzer tests
 - `evidence/part-b/README.md` — Source and evidence documentation
 
 ### Dataset Attribution

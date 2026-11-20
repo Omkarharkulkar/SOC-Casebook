@@ -36,6 +36,8 @@ The original sample is retained outside this repository. Analysis was performed 
 | E-004-B-03 | Defanged indicator CSV |
 | E-004-B-04 | Offline analyzer script |
 | E-004-B-05 | Dataset source and pinned commit |
+| E-004-B-06 | Passive enrichment results (`enrichment-results.csv`) |
+| E-004-B-07 | Analyzer tests (`analysis/tests/test_analyze_email.py`) |
 
 ## 2. Email Summary
 
@@ -118,7 +120,9 @@ Actual hostname (defanged):
 
 The hostname uses the `run.app` cloud-hosted service namespace. The hostname itself is not an established official traffic-authority domain.
 
-The URL uses deceptive user-information formatting to make the address appear associated with a familiar service. This is a strong phishing indicator.
+The offline analyzer recorded `userinfo_present: true`, `userinfo_contains_hotmail: true`, and `userinfo_redacted: [redacted]` in the structured output. The original user-information text is not reproduced in the published analysis.
+
+User-information formatting can make a URL appear associated with a familiar service while the actual hostname is different; this is a phishing indicator.
 
 The destination was not visited. Its page content, redirects, and functionality remain unverified.
 
@@ -133,7 +137,7 @@ Lookup date: 20 November 2026.
 | Related Cloud Run hostnames | Existing reports describe phishing activity on similar hostnames sharing the numeric identifier and region |
 | Attribution | No operator attribution established |
 
-Related infrastructure is context only. Findings for different hostnames are not transferred to the exact indicator.
+The shared numeric component is consistent with the project-number portion of Google's default Cloud Run hostname format. This is an infrastructure pivot only; it does not establish common ownership, operator identity, or malicious activity on the exact hostname. Reports for other hostnames are context only and are not transferred to this indicator.
 
 No new scans were submitted and the URL was not visited.
 

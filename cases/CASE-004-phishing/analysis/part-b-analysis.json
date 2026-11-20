@@ -34,6 +34,14 @@
   "url_domains_defanged": [
     "dete1-489991573399[.]southamerica-east1[.]run[.]app"
   ],
+  "url_analysis": [
+    {
+      "hostname_defanged": "dete1-489991573399[.]southamerica-east1[.]run[.]app",
+      "userinfo_present": true,
+      "userinfo_contains_hotmail": true,
+      "userinfo_redacted": "[redacted]"
+    }
+  ],
   "limitations": [
     "URLs were not visited.",
     "Attachments were not opened or executed.",

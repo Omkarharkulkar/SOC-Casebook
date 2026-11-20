@@ -41,13 +41,20 @@ class AnalyzerTests(unittest.TestCase):
         self.assertTrue(any("45.32.75.31" in h for h in result["received_headers"]))
         self.assertTrue(any("127.0.1.1" in h for h in result["received_headers"]))
 
-    def test_url_domain_defanged(self):
+    def test_url_domain_and_userinfo(self):
         result = self.analyze_fixture()
         self.assertEqual(result["url_count"], 1)
         self.assertEqual(
             result["url_domains_defanged"],
             ["fake-host[.]run[.]app"]
         )
+
+        url = result["url_analysis"][0]
+        self.assertEqual(url["hostname_defanged"], "fake-host[.]run[.]app")
+        self.assertTrue(url["userinfo_present"])
+        self.assertTrue(url["userinfo_contains_hotmail"])
+        self.assertEqual(url["userinfo_redacted"], "[redacted]")
+        self.assertNotIn("hotmail.com-example", str(result))
 
     def test_mime_and_attachments(self):
         result = self.analyze_fixture()

@@ -32,6 +32,16 @@ The dataset test recipient phishing@pot is retained as it is part of the sample 
 
 The complete original email is not published in this repository.
 
+## Reproducibility
+
+The original sample is excluded from this repository. Retrieve it from the pinned dataset source and verify its SHA-256 hash before analysis. Run the offline analyzer from the `analysis` directory. Tests can be run with:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+Do not visit embedded links or execute attachments.
+
 ## License and Attribution
 
 Source: Phishing Pot — rf-peixoto/phishing_pot.
