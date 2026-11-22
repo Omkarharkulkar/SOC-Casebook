@@ -4,17 +4,36 @@ set -u
 OUT="$(dirname "$0")/baseline-activity.txt"
 
 {
-    echo "CASE-005 Part A - Controlled DNS Baseline"
-    echo "Start: $(date -Is)"
-    echo "Hostname: $(hostname)"
-    echo "Interface: enp0s3"
+    echo "Controlled network baseline"
+    echo "Timestamp: $(date --iso-8601=seconds)"
     echo
 
     for domain in example.com ubuntu.com debian.org github.com; do
-        echo "[$(date -Is)] DNS lookup: $domain"
-        getent ahostsv4 "$domain" || echo "Resolution failed"
+        echo "DNS lookup: $domain"
+        getent ahosts "$domain" | awk '!seen[$1]++ {print $1}'
         echo
     done
 
-    echo "End: $(date -Is)"
-} | tee "$OUT"
+    echo "HTTPS request: https://example.com/"
+    python3 - <<'PY'
+import urllib.request
+from datetime import datetime
+
+url = "https://example.com/"
+print("Timestamp:", datetime.now().astimezone().isoformat())
+
+try:
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "SOC-Casebook-Baseline"}
+    )
+    with urllib.request.urlopen(request, timeout=10) as response:
+        print("HTTP status:", response.status)
+        print("Content type:", response.headers.get("Content-Type"))
+        response.read(256)
+except Exception as exc:
+    print("HTTPS request failed:", type(exc).__name__, str(exc))
+PY
+
+} > "$OUT" 2>&1
+
+cat "$OUT"

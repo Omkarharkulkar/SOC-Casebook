@@ -1,87 +1,29 @@
-# CASE-005 Part A — Collection and Analysis Methodology
+# Part A — Controlled Network Baseline
 
-## Environment
-- System: Ubuntu VM (omkarvm)
-- Interface: enp0s3 (VirtualBox NAT)
-- VM address: Redacted in published documentation
-- Capture tool: tcpdump 4.99.4
-- Snapshot length: 128 bytes
+## Purpose
+Record a short, controlled baseline of DNS and HTTPS activity from the Ubuntu lab VM for comparison with later network-traffic investigations.
 
-## 1. Controlled DNS Activity
+## Environment and tools
+- Ubuntu lab VM
+- Capture interface: enp0s3 (NAT)
+- tcpdump 4.99.4
+- getent and Python standard library urllib
+- tshark was not used.
 
-A Bash script was created to record timestamps and perform IPv4
-name resolution for four domains using getent:
+## Procedure
+1. Flush the DNS cache using `sudo resolvectl flush-caches`.
+2. Start a 30-second capture using:
+   `sudo timeout 30s tcpdump -i enp0s3 -s 0 -w evidence/part-a/baseline.pcap 'port 53 or tcp port 443'`
+3. Run `evidence/part-a/baseline-activity.sh`, which resolves four domains and makes one HTTPS request to `https://example.com/`.
+4. Inspect packets with `tcpdump -nn -tttt -r evidence/part-a/baseline.pcap`. Use `port 53` and `tcp port 443` filters for focused review.
 
-- example.com
-- ubuntu.com
-- debian.org
-- github.com
+## Results
+The activity log shows successful DNS lookups for example.com, ubuntu.com, debian.org, and github.com, with A and AAAA results. The HTTPS request returned HTTP 200 and `text/html; charset=utf-8`.
 
-The script was hashed before execution.
+DNS response timings calculated from captured query and response timestamps are recorded in `dns-observations.csv`. The Debian AAAA response was notably slower (about 1.447 seconds) than the other observed responses.
 
-## 2. DNS Packet Collection
+## Capture scope and limitations
+The capture includes unrelated background HTTPS traffic, including connections not attributable to the scripted request. Those connections are excluded from the controlled baseline conclusions. This short capture is not a comprehensive representation of normal host traffic. Encrypted HTTPS payloads were not inspected, and no conclusion is made about the cleanliness of the host.
 
-A packet capture was performed on enp0s3 using a UDP port 53
-filter with a 15-second maximum duration.
-
-Command:
-
-sudo timeout -s INT 15 tcpdump -i enp0s3 -nn -s 128 \
-  -w evidence/part-a/baseline.pcap 'port 53'
-
-The activity script was executed while the capture was running.
-
-## 3. DNS Analysis
-
-The PCAP was inspected using tcpdump's packet-reading and verbose
-output options.
-
-Command:
-
-sudo tcpdump -nn -tttt -vvv \
-  -r evidence/part-a/baseline.pcap
-
-DNS queries and responses were identified by query names, record
-types, response records, source/destination endpoints and timestamps.
-
-Response time was calculated by subtracting the query timestamp
-from the corresponding response timestamp.
-
-The capture contained two complete query/response pairs:
-ubuntu.com and github.com.
-
-## 4. Supplementary TCP Capture
-
-A separate 20-second capture filtered for TCP port 443 was performed.
-
-Command:
-
-sudo timeout -s INT 20 tcpdump -i enp0s3 -nn -s 128 \
-  -w evidence/part-a/tcp-baseline.pcap 'tcp port 443'
-
-The capture was inspected using:
-
-sudo tcpdump -nn -tttt \
-  -r evidence/part-a/tcp-baseline.pcap
-
-This traffic was not associated with a controlled application
-activity. It was treated as supplementary observation and excluded
-from public evidence.
-
-## 5. Integrity
-
-SHA-256 hashes were recorded for the DNS PCAP, activity script,
-and activity output.
-
-The raw PCAPs are retained locally. Derived documentation avoids
-publishing private VM and resolver addresses.
-
-## 6. Limitations
-
-- Only selected traffic was captured using display-independent
-  packet filters.
-- The DNS capture does not contain all four requested resolutions.
-- TCP/443 traffic was not tied to a controlled application.
-- Encrypted payload contents were not inspected.
-- This baseline is limited to the observed traffic and does not
-  establish that all system activity was benign.
+## Evidence handling
+The raw PCAP is local-only and excluded from Git. The case-level checksum manifest includes its hash when present. Public documentation contains derived observations only.

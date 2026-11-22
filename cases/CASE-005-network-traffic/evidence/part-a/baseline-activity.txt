@@ -1,44 +1,34 @@
-CASE-005 Part A - Controlled DNS Baseline
-Start: 2026-11-22T11:11:19+05:30
-Hostname: omkarvm
-Interface: enp0s3
+Controlled network baseline
+Timestamp: 2026-11-22T11:24:06+05:30
 
-[2026-11-22T11:11:19+05:30] DNS lookup: example.com
-104.20.23.154   STREAM example.com
-104.20.23.154   DGRAM  
-104.20.23.154   RAW    
-172.66.147.243  STREAM 
-172.66.147.243  DGRAM  
-172.66.147.243  RAW    
+DNS lookup: example.com
+104.20.23.154
+172.66.147.243
+2606:4700:8d75:72db:f2ca:a6a:ef6b:ff98
 
-[2026-11-22T11:11:19+05:30] DNS lookup: ubuntu.com
-185.125.190.20  STREAM ubuntu.com
-185.125.190.20  DGRAM  
-185.125.190.20  RAW    
-185.125.190.29  STREAM 
-185.125.190.29  DGRAM  
-185.125.190.29  RAW    
-185.125.190.21  STREAM 
-185.125.190.21  DGRAM  
-185.125.190.21  RAW    
+DNS lookup: ubuntu.com
+185.125.190.29
+185.125.190.21
+185.125.190.20
+2620:2d:4000:1::28
+2620:2d:4000:1::26
+2620:2d:4000:1::27
 
-[2026-11-22T11:11:19+05:30] DNS lookup: debian.org
-151.101.130.132 STREAM debian.org
-151.101.130.132 DGRAM  
-151.101.130.132 RAW    
-151.101.2.132   STREAM 
-151.101.2.132   DGRAM  
-151.101.2.132   RAW    
-151.101.194.132 STREAM 
-151.101.194.132 DGRAM  
-151.101.194.132 RAW    
-151.101.66.132  STREAM 
-151.101.66.132  DGRAM  
-151.101.66.132  RAW    
+DNS lookup: debian.org
+151.101.66.132
+151.101.130.132
+151.101.194.132
+151.101.2.132
+2a04:4e42:600::644
+2a04:4e42::644
+2a04:4e42:200::644
+2a04:4e42:400::644
 
-[2026-11-22T11:11:19+05:30] DNS lookup: github.com
-4.187.247.160   STREAM github.com
-4.187.247.160   DGRAM  
-4.187.247.160   RAW    
+DNS lookup: github.com
+4.186.157.192
+64:ff9b::87eb:9590
 
-End: 2026-11-22T11:11:19+05:30
+HTTPS request: https://example.com/
+Timestamp: 2026-11-22T11:24:08.455553+05:30
+HTTP status: 200
+Content type: text/html; charset=utf-8

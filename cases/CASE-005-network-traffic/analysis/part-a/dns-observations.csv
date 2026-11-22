@@ -1,3 +1,9 @@
-timestamp,query,type,answers,response_ms,transport,observation
-2026-11-22T11:11:19.065513+05:30,ubuntu.com,A,3 IPv4 addresses,243,UDP/53,Successful DNS response
-2026-11-22T11:11:19.326149+05:30,github.com,A,1 IPv4 address,44.445,UDP/53,Successful DNS response
+domain,query_type,query_time,response_time,response_ms,result_count,notes
+example.com,A,2026-11-22 11:24:06.550091,2026-11-22 11:24:06.677786,127.695,2,Successful response
+example.com,AAAA,2026-11-22 11:24:06.550562,2026-11-22 11:24:06.677785,127.223,1,Successful response
+ubuntu.com,A,2026-11-22 11:24:06.685769,2026-11-22 11:24:06.745871,60.102,3,Successful response
+ubuntu.com,AAAA,2026-11-22 11:24:06.686533,2026-11-22 11:24:06.740781,54.248,3,Successful response
+debian.org,A,2026-11-22 11:24:06.756399,2026-11-22 11:24:06.882656,126.257,4,Successful response
+debian.org,AAAA,2026-11-22 11:24:06.756815,2026-11-22 11:24:08.203891,1447.076,4,Slower response observed; not diagnostic by itself
+github.com,A,2026-11-22 11:24:08.208415,2026-11-22 11:24:08.373849,165.434,1,Successful response
+github.com,AAAA,2026-11-22 11:24:08.208628,2026-11-22 11:24:08.373851,165.223,1,Successful response
