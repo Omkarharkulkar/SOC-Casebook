@@ -1,0 +1,6 @@
+70bc41b1fb6620103c0cf69d54a672ebc032e571b150d18c49c989127d8bf821  ./analysis/part-a/dns-observations.csv
+42fb4ec0d0ac21fcb1489c4302326cbcf93320b760433ef29a0b3953d8d69ea0  ./analysis/part-a/findings.md
+50fcfe61f50b571471dfb46611cc65db87f590cc3e1e2b37f29b50a6f230160f  ./analysis/part-a/methodology.md
+2fdb0628acb51a8823a492807451ed23d8e6002f1b5645e45ba5cf39db3d4b02  ./evidence/part-a/baseline-activity.sh
+09a4ecf57c0df5826a16f186e0b23f0f8bbbe651e8a743c02e08c36784f1fe8c  ./evidence/part-a/baseline-activity.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./.gitkeep
