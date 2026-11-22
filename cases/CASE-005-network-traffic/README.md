@@ -1,6 +1,6 @@
 # CASE-005 — Network Traffic Investigation: Alert Triage
 
-**Status:** Part A completed; documentation review pending. Part B not started.
+**Status:** Part A complete (finalized); Part B not started.
 
 This case establishes a controlled network baseline in an Ubuntu lab VM and will later examine a public packet-capture scenario for alert triage.
 

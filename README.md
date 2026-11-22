@@ -23,7 +23,7 @@ The project simulates selected responsibilities of a Level 1 Security Operations
 | CASE-002 | Suspicious Windows Process Execution | Complete |
 | CASE-003 | Legitimate Administrative Activity | Complete |
 | CASE-004 | Phishing Email Investigation | Complete |
-| CASE-005 | Suspicious DNS / Network Communication | Part A completed; Part B pending |
+| CASE-005 | Network Traffic Investigation: Alert Triage | Part A complete; Part B pending |
 | CASE-006 | SIEM Alert Investigation | Planned |
 | CASE-007 | Linux Privilege and Account Activity | Planned |
 | CASE-008 | Legitimate Linux Administrative Activity | Planned |

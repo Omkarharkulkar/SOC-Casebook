@@ -1,9 +1,9 @@
-domain,query_type,query_time,response_time,response_ms,result_count,notes
-example.com,A,2026-11-22 11:24:06.550091,2026-11-22 11:24:06.677786,127.695,2,Successful response
-example.com,AAAA,2026-11-22 11:24:06.550562,2026-11-22 11:24:06.677785,127.223,1,Successful response
-ubuntu.com,A,2026-11-22 11:24:06.685769,2026-11-22 11:24:06.745871,60.102,3,Successful response
-ubuntu.com,AAAA,2026-11-22 11:24:06.686533,2026-11-22 11:24:06.740781,54.248,3,Successful response
-debian.org,A,2026-11-22 11:24:06.756399,2026-11-22 11:24:06.882656,126.257,4,Successful response
-debian.org,AAAA,2026-11-22 11:24:06.756815,2026-11-22 11:24:08.203891,1447.076,4,Slower response observed; not diagnostic by itself
-github.com,A,2026-11-22 11:24:08.208415,2026-11-22 11:24:08.373849,165.434,1,Successful response
-github.com,AAAA,2026-11-22 11:24:08.208628,2026-11-22 11:24:08.373851,165.223,1,Successful response
+domain,query_type,query_time_IST,response_time_IST,response_ms,result_count,notes
+example.com,A,2026-11-22 11:24:06.550091+05:30,2026-11-22 11:24:06.677786+05:30,127.695,2,Successful response
+example.com,AAAA,2026-11-22 11:24:06.550562+05:30,2026-11-22 11:24:06.677785+05:30,127.223,1,Successful response
+ubuntu.com,A,2026-11-22 11:24:06.685769+05:30,2026-11-22 11:24:06.745871+05:30,60.102,3,Successful response
+ubuntu.com,AAAA,2026-11-22 11:24:06.686533+05:30,2026-11-22 11:24:06.740781+05:30,54.248,3,Successful response
+debian.org,A,2026-11-22 11:24:06.756399+05:30,2026-11-22 11:24:06.882656+05:30,126.257,4,Successful response
+debian.org,AAAA,2026-11-22 11:24:06.756815+05:30,2026-11-22 11:24:08.203891+05:30,1447.076,4,Slower response observed; not diagnostic by itself
+github.com,A,2026-11-22 11:24:08.208415+05:30,2026-11-22 11:24:08.373849+05:30,165.434,1,Successful response
+github.com,AAAA,2026-11-22 11:24:08.208628+05:30,2026-11-22 11:24:08.373851+05:30,165.223,1,Successful response
