@@ -15,15 +15,23 @@
 | Assessment | Suspicious remote service execution and lateral movement observed — escalate to L2 for validation |
 | Analyst | Omkar Harkulkar |
 
-### Executive Summary
+## Case Summary
 
-This investigation reviewed a synthetic network capture containing DNS, HTTP, TLS, SMB2, and DCE/RPC activity.
+This investigation analyzed a network capture containing DNS, HTTP, TLS, SMB2 and DCE/RPC traffic. Routine connectivity and update-related activity was observed alongside suspicious internal SMB file operations and remote Service Control Manager activity.
 
-The main findings were repeated SMB access and file-write activity originating from HOST-1 (`10.42.10.21`), followed by remote Service Control Manager operations. The SMB activity included 11 successful CREATE requests for `q4-summary.bin` and 11 corresponding successful WRITE operations. The RPC activity included remote service creation and start requests, with different outcomes observed in the available responses.
+The investigation identified 11 SMB CREATE requests and 11 corresponding WRITE requests involving `q4-summary.bin`. All WRITE requests were 96 bytes and received successful SMB responses.
 
-The activity is consistent with remote administration or lateral movement behavior. However, the capture does not establish whether the activity was authorized, whether the file was malicious, or whether the remote service operations resulted in successful endpoint execution.
+Further analysis identified two correlated SCM waves initiated by HOST-1 (`10.42.10.21`) involving the same six destinations. Each wave contained the sequence `ROpenSCManagerW`, `RCreateServiceW` and `RStartServiceW`, correlated by TCP stream and DCE/RPC call ID.
 
-The recommended disposition is **High priority and escalation to L2** for endpoint and authorization validation.
+During the first wave, `WinHostSvc` was created across six destinations using a command-interpreter binary path. All service-creation responses returned `WERR_OK`; all service-start responses returned `WERR_SERVICE_REQUEST_TIMEOUT`.
+
+During the second wave, `WinUpdateSvc` was created across the same six destinations using a binary located in the Windows Temp directory. All service-creation and service-start responses returned `WERR_OK`.
+
+The repeated SMB operations, multi-host service-control sequences and timing support an inference of coordinated or automated remote activity.
+
+**Final assessment:** Suspicious remote service execution and lateral movement observed — escalate to L2 for validation.
+
+The investigation is network-only. It does not establish authorization, operator identity, successful endpoint execution or confirmed compromise.
 
 ---
 
@@ -83,11 +91,15 @@ This discrepancy remains unresolved. The local file was retained and analyzed us
 
 ### 3.4 Evidence References
 
-- **E-005:** Part B network capture and derived network analysis.
-- **E-006:** SMB2 and Service Control Manager operation analysis.
-- Part A baseline observations are maintained separately under `evidence/part-a/`.
+- **E-001:** Original Part B network capture, retained outside Git.
+- **E-002:** Dataset source and evidence-handling documentation.
+- **E-003:** DNS observations.
+- **E-004:** SCM operation analysis.
+- **E-005:** SMB CREATE/WRITE correlation.
+- **E-006:** Analysis commands and reproducibility notes.
+- **E-007:** Per-destination SCM service correlation evidence.
 
-The original Part B PCAP is not included in the public repository.
+Part A baseline observations are maintained separately under `evidence/part-a/`. The original Part B PCAP is not included in the public repository..
 
 ### 3.5 Host References
 
@@ -332,33 +344,25 @@ The reviewed operation numbers included:
 
 The presence of service creation and start operations is relevant to remote service execution analysis.
 
-### 7.3 Confirmed HOST-1 to HOST-2 Sequence
+### 7.3 Correlation Method and Example
 
-The clearest correlated service-management sequence was observed between:
+SCM requests and responses were correlated using TCP stream and DCE/RPC call ID. The operation sequence was then compared across destinations.
 
-- Source: HOST-1 (`10.42.10.21`)
-- Destination: HOST-2 (`10.42.10.22`)
+HOST-2 (`10.42.10.22`) is one example of the correlated activity, not the only destination.
 
-The following operations were identified:
+During the first wave, HOST-2's TCP stream 193 contained:
 
-| Frame | Time (IST) | Time (UTC) | Operation | Result |
-|---:|---|---|---|---|
-| 3079 | 19:57:48.188 | 14:27:48.188 | `RCreateServiceW` | Successful response at frame 3085 |
-| 3086 | — | — | `RStartServiceW` | Response at frame 3088: `WERR_SERVICE_REQUEST_TIMEOUT` |
-| 3827 | 20:02:07 approximately | 14:32:07 approximately | `RCreateServiceW` | Successful response at frame 3836 |
-| 3837 | — | — | `RStartServiceW` | Successful response at frame 3839 |
+| Operation | Request frame | Response frame | Call ID |
+|---|---:|---:|---:|
+| ROpenSCManagerW | 3073 | 3074 | 2 |
+| RCreateServiceW | 3079 | 3085 | 3 |
+| RStartServiceW | 3086 | 3088 | 4 |
 
-The successful service-creation responses returned `NT_STATUS_SUCCESS` and `WERR_OK`.
+The same operation sequence was identified on five additional destinations during the first wave and across all six destinations during the second wave.
 
-For the first service-start operation, the response included:
+Overall, 12 complete SCM sequences were correlated: six destinations across two waves.
 
-`WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)`
-
-For the second service-start operation, the response included:
-
-`WERR_OK`
-
-The timeout must not be treated as proof that the associated command failed to execute.
+**Evidence:** E-004 and E-007.
 
 ### 7.4 Service Definitions
 
@@ -422,6 +426,10 @@ The first wave's service-start timeout does not establish that the command did n
 
 The evidence therefore supports suspicious remote service creation and start activity across six destinations. It does not establish authorization, operator identity, persistence, or confirmed endpoint compromise.
 
+Per-destination service names, binary paths, CREATE responses, START requests and START responses are recorded in `analysis/part-b/scm-service-correlation.csv`. The artifact contains the frame references and TCP stream for all 12 sequences, allowing the observations to be checked against the original PCAP.
+
+**Evidence:** E-004 and E-007.
+
 ### 7.7 Account Attribution
 
 The reviewed NTLM username extraction did not return usable account attribution.
@@ -442,20 +450,26 @@ A file-to-service execution chain has not been confirmed.
 
 ## 8. Event Timeline
 
-The following timeline combines the main observed events. Times are shown in both IST and UTC.
+All timestamps are in IST (UTC+05:30).
 
-| Date | Time (IST) | Time (UTC) | Event |
-|---|---|---|---|
-| 2026-09-02 | 19:42:41.224 | 14:12:41.224 | First burst of five SMB CREATE requests for `q4-summary.bin` from HOST-1 |
-| 2026-09-02 | 19:42 onward | 14:12 onward | Corresponding SMB WRITE operations observed |
-| 2026-09-02 | 19:57:48.188 | 14:27:48.188 | HOST-1 sends `RCreateServiceW` request to HOST-2 |
-| 2026-09-02 | 19:57 onward | 14:27 onward | Service-start request receives `WERR_SERVICE_REQUEST_TIMEOUT` |
-| 2026-09-02 | 20:00:14.584 | 14:30:14.584 | Second burst of six SMB CREATE requests for `q4-summary.bin` |
-| 2026-09-02 | 20:00 onward | 14:30 onward | Corresponding SMB WRITE operations observed |
-| 2026-09-02 | 20:02:07 approximately | 14:32:07 approximately | Second correlated service-creation request to HOST-2 |
-| 2026-09-02 | 20:02 onward | 14:32 onward | Second service-start request receives `WERR_OK` |
+| Time (IST) | Activity | Scope / observation |
+|---|---|---|
+| 19:36:31 | `srvsvc` named-pipe activity | Five destinations; exact operation unknown |
+| 19:40:37 | `svcctl` manager-open operations | Five destinations |
+| 19:42:41.224455 | `q4-summary.bin` SMB CREATE/WRITE burst | Five destinations |
+| 19:47:24 | `srvsvc` named-pipe activity | Six destinations; exact operation unknown |
+| 19:49:10 | Additional `srvsvc` activity | Six destinations; exact operation unknown |
+| 19:51:30 | `samr` named-pipe activity | Six destinations; exact operation unknown |
+| 19:55:33 | `svcctl` manager-open operations | Six destinations |
+| 19:57:48.184343–19:57:48.223477 | First SCM wave: manager open, service creation and start | Six destinations; `WinHostSvc`; creation successful, start returned timeout |
+| 20:00:14.583870 | Second `q4-summary.bin` SMB CREATE/WRITE burst | Six destinations |
+| 20:02:07.642655–20:02:07.682293 | Second SCM wave: manager open, service creation and start | Six destinations; `WinUpdateSvc`; creation and start returned success |
 
-The timeline is based on the capture timestamps. Events not independently correlated at the packet level are not presented as confirmed cause-and-effect relationships.
+The timeline shows repeated SMB and remote service-control activity across the same destination group. The two complete SCM waves are approximately four minutes apart.
+
+The `srvsvc` and `samr` observations may be consistent with enumeration activity; their exact operations were not established. The timeline supports coordinated or automated activity as an inference but does not establish malicious intent or confirmed endpoint impact.
+
+**Evidence:** E-004, E-005, and E-007.
 
 ---
 
@@ -470,6 +484,10 @@ The following mappings are candidate techniques based on observed network behavi
 | T1543.003 | Windows Service | Service definitions and remote service-management activity | Medium |
 | T1033 | System Owner/User Discovery | The `WinHostSvc` command invokes `whoami` | Medium |
 | T1036.004 | Masquerade Task or Service | Windows-like service names may warrant review, but name similarity alone does not prove masquerading | Low |
+
+**Reference version:** MITRE ATT&CK Enterprise v20.1. Technique names and identifiers were checked against this version on 23 November 2026.
+
+The mappings are candidate interpretations of the observed network behavior. They do not establish successful endpoint execution. Confidence reflects how directly the available network evidence supports each mapping.
 
 These are investigation mappings, not confirmed attacker techniques. The available network capture does not provide enough endpoint evidence to confirm persistence, successful process execution, or the identity of the operator.
 
@@ -597,7 +615,9 @@ This investigation has several limitations:
 
 8. **No confirmed file-to-service relationship:** The capture does not establish that `q4-summary.bin` was used by the observed services.
 
-9. **Incomplete per-destination RPC correlation:** Not every service-management request and response could be confidently associated with a specific service name and destination outcome.
+9. SCM requests and responses were correlated across all six destinations in both waves using TCP stream and DCE/RPC call ID. Service names, binary paths and response results were extracted from decoded packet details and are documented in the supplementary SCM correlation evidence.
+
+Although the network responses establish the observed SCM-level results, they do not independently prove successful endpoint process execution or the intended effects.
 
 10. **No dataset ground truth:** No authoritative answer key was available to confirm the intended interpretation of the synthetic scenario.
 
@@ -609,19 +629,21 @@ This investigation has several limitations:
 
 ## 14. Final Conclusion
 
-The network capture contains suspicious SMB administrative-share activity and remote Service Control Manager operations originating from HOST-1 (`10.42.10.21`).
+The network capture contains suspicious SMB file operations and repeated remote Service Control Manager activity originating from HOST-1 (`10.42.10.21`).
 
-The strongest evidence includes 11 successful SMB CREATE operations and 11 associated successful WRITE operations for `q4-summary.bin`, followed by correlated remote service creation and start activity involving HOST-2 (`10.42.10.22`).
+The investigation identified 11 SMB CREATE requests and 11 corresponding WRITE requests involving `q4-summary.bin`. Each WRITE request was 96 bytes, and all 11 responses returned SMB success.
 
-The service definitions include a command-interpreter invocation of `whoami` and an executable path under the Windows temporary directory. These findings warrant further investigation, but the capture does not confirm successful endpoint execution, malicious file content, persistence, or unauthorized access.
+Two complete SCM waves were identified across the same six destinations. Each destination showed the sequence of manager open, service creation and service start, correlated by TCP stream and DCE/RPC call ID.
 
-The recommended assessment is:
+The first wave created `WinHostSvc` using a command-interpreter binary path. All six service-creation responses returned `WERR_OK`, while all six service-start responses returned request-timeout errors.
 
-**Suspicious remote service execution and lateral movement observed — escalate to L2 for validation.**
+The second wave created `WinUpdateSvc` using a binary located in the Windows Temp directory. All six service-creation and service-start responses returned `WERR_OK`.
 
-**Recommended priority: High.**
+The repeated multi-host activity, operation sequence, SMB file operations and closely grouped timing support an inference of coordinated or automated remote activity.
 
-This is a network-evidence-based assessment. Confirmation requires endpoint telemetry, account attribution, and validation against authorized administrative or red-team activity.
+**Final verdict: Suspicious remote service execution and lateral movement observed — escalate to L2 for validation.**
+
+The available network evidence does not establish authorization, operator identity, successful endpoint execution, persistence or confirmed compromise. Endpoint telemetry and authorization records are required to determine the actual impact and legitimacy of the activity.
 
 ---
 
