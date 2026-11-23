@@ -1,61 +1,64 @@
 # Part B Evidence — NM-SAMPLE-002
 
 ## Source
-NetMetria — NM-SAMPLE-002 Multi-Behavior Scenario
 
-Source page:
-https://netmetria.com/samples
+- Dataset: NM-SAMPLE-002 — Multi-Behavior Scenario
+- Publisher: NetMetria / Metria Data Systems, LLC
+- Source page: https://netmetria.com/samples
+- Direct download: https://netmetria.com/assets/samples/netmetria-multi-behavior-scenario.pcap
+- Acquisition date: 2026-11-23
+- Acquisition timestamp (local file timestamp): 2026-11-23 11:08:13 IST (IST)
 
-Direct file URL:
-https://netmetria.com/assets/samples/netmetria-multi-behavior-scenario.pcap
+## Acquisition details
 
-Access date:
-2026-11-23
+- Local filename: `netmetria-multi-behavior-scenario.pcap`
+- Local file size: 637,505 bytes (622.56 KiB)
+- Packet count: 4,134
+- Capture duration: 1,678.992 seconds (27m 58.992s)
+- SHA-256: `ec77f256e309ec7e9eda8dcd3c422b5524119c50d23a7485772838269a0c4d89`
+- Verification against publisher checksum file: **PASS**
 
-Published SHA-256:
-e5830a9672261b799cf1a6a259ae6078e976c6e5de06e898f0049a8b7b46db96
+The local SHA-256 matches the hash currently listed in the publisher's
+checksum file:
 
-Published size: 622.6 KiB
-Published packet count: 4,134
-Published duration: 27m 59s
+`ec77f256e309ec7e9eda8dcd3c422b5524119c50d23a7485772838269a0c4d89`
 
-## Acquisition verification
-The capture has not yet been downloaded.
+The dataset webpage also displays a different SHA-256:
 
-After acquisition, record:
-- Local filename
-- Actual file size
-- Locally calculated SHA-256
-- Comparison with the published checksum
-- Acquisition date
-- Verification result
+`e5830a9672261b799cf1a6a259ae6078e976c6e5de06e898f0049a8b7b46db96`
 
-The original PCAP is retained locally and excluded from Git.
-Do not commit the capture or extracted payload content.
+The discrepancy is documented and has not been independently resolved.
+Verification was performed against the publisher's checksum file.
+
+## Evidence handling
+
+- Original PCAP retained locally outside the repository.
+- Raw PCAP is excluded from Git.
+- Offline analysis in the Ubuntu VM.
+- No extracted payloads published.
+- No extracted files executed.
+- No traffic URLs visited.
+- SMB analysis limited to metadata.
+- Derived observations are documented separately.
 
 ## Terms and attribution
-The publisher states the datasets are for technical evaluation,
+
+The publisher describes the dataset as intended for technical evaluation,
 defensive-security research, detection engineering, training, and testing.
-The page does not grant rights to repackage or commercially redistribute
-the datasets as a separate dataset product.
 
-Derived analysis will be published with attribution. The original PCAP
-will not be redistributed.
+The dataset is attributed to its publisher. The original PCAP is not
+redistributed in this repository.
 
-Terms source:
-https://netmetria.com/samples
+Terms reviewed: 2026-11-23.
 
-Terms reviewed:
-2026-11-23
+This is a summary of the publisher's stated terms, not legal advice or
+written permission.
 
-This is a paraphrase of the publisher's statement, not legal advice or
-written permission from the publisher.
+## Dataset limitations
 
-## Analysis handling
-- Offline PCAP analysis in the Ubuntu VM.
-- No execution of extracted files.
-- No visits to URLs found in traffic.
-- No payload export.
-- SMB metadata only.
-- Document observations before drawing conclusions.
-- No public ground-truth answer key is available.
+- Synthetic dataset.
+- Publisher describes it as a post-compromise scenario.
+- Initial access is excluded.
+- No public ground-truth answer key was identified.
+- Findings are analyst observations and hypotheses, not confirmed
+  incident conclusions.
