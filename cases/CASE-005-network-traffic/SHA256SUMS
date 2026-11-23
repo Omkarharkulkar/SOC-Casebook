@@ -3,6 +3,7 @@
 2dfaf4fde91ed26e7275a20280350ced03c58a229501f202a8c010475416076b  ./analysis/part-a/methodology.md
 1758bc8983a9b88c3ce2e22ff0c90e433215cf023e0d4a6cdb2331ebdecf397f  ./analysis/part-b/methodology.md
 98ac45cc86a62cdc48902f5067851bdc8798d8ff738068ceafe70712d5ccfbfc  ./analysis/part-b/scm-operations.csv
+c46c130c7b8832c846ec49da7cb6b514b41861d1275ebf7f1b9b39f225beb7d6  ./analysis/part-b/scm-service-correlation.csv
 41652ad159accfe2d342c72d21685993261803bcb29a2a28449f08704bb6893b  ./analysis/part-b/smb-create-write.csv
 c522c1710cee05f8f1e93d989c62f13e105e0784a32946000fa4aaf2980b6156  ./analysis/part-b/source-register.md
 0fe0281676f8d5c5e3e4a037d15849d8af0fe675af60ed18326a9c26b9b1f14f  ./commands.md
@@ -11,7 +12,7 @@ b5380bc834a804b0f3509a5c36332641002fcb87e972380f1c99a33272dc7891  ./evidence/par
 e6fee624cf3b2d2e5fa068d6210b710ce36cb6b3bd82a39f297fc036ad17cce5  ./evidence/part-a/baseline.pcap
 9fda0788d2134d43d9704191f785e9885e74c3be2d46073b1f83e7b9502fcee1  ./evidence/part-a/README.md
 e16d6339f2ab4fc164824510f1f6db533665a72550aa375851d22ce7c3cd7088  ./evidence/part-b/README.md
-054a503736e30b8289332837f1756af8734afe04c9b452cae6ec74a8a743261b  ./incident-report.md
+c6575dd2c0a691e4609c29765605225d3560672ce08977c4d2de80bc41f3c8f4  ./incident-report.md
 0d46e413a56b3142b9ca8a7a3d0ad4b8e9e06045a1f143fd01e31af99fc661e0  ./README.md
 b52660a0b74822e0c91b0a49034abcc7e846c2b0884c38796fe8b003bb8d6add  ./update-manifest.sh
 ec77f256e309ec7e9eda8dcd3c422b5524119c50d23a7485772838269a0c4d89  evidence/part-b/netmetria-multi-behavior-scenario.pcap
