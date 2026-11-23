@@ -1,0 +1,13 @@
+wave,destination,tcp_stream,create_request_frame,create_response_frame,service_name,binary_path,create_result,start_request_frame,start_response_frame,start_result
+wave1,10.42.10.22,193,3079,3085,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3086,3088,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave1,10.42.20.40,192,3121,3130,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3131,3140,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave1,10.42.20.30,189,3124,3132,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3137,3143,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave1,10.42.20.10,190,3126,3133,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3135,3142,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave1,10.42.20.15,191,3128,3136,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3139,3147,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave1,10.42.20.20,188,3129,3134,WinHostSvc,"C:\Windows\System32\cmd.exe /Q /c whoami > C:\Windows\Temp\svc.out 2>&1",WERR_OK,3138,3144,WERR_SERVICE_REQUEST_TIMEOUT (0x0000041d)
+wave2,10.42.10.22,235,3827,3836,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3837,3839,WERR_OK
+wave2,10.42.20.20,230,3871,3880,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3881,3890,WERR_OK
+wave2,10.42.20.15,233,3876,3885,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3887,3895,WERR_OK
+wave2,10.42.20.30,231,3875,3882,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3889,3894,WERR_OK
+wave2,10.42.20.10,232,3879,3884,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3888,3893,WERR_OK
+wave2,10.42.20.40,234,3878,3883,WinUpdateSvc,C:\Windows\Temp\WinUpdateSvc.exe,WERR_OK,3886,3892,WERR_OK
