@@ -1,9 +1,9 @@
 # CASE-005 — Network Traffic Investigation: Alert Triage
 
-**Status:** Part A complete; Part B acquisition and analysis in progress.
+**Status:** Part A and Part B complete.
 
 - **Part A:** Controlled DNS and HTTPS baseline — finalized.
-- **Part B:** Blind investigation of a public synthetic network capture.
+- **Part B:** Blind investigation of a public synthetic network capture — completed.
 
 Part B uses a simulated analyst alert prompt. The dataset is
 NetMetria-generated post-compromise scenario traffic. Conclusions will

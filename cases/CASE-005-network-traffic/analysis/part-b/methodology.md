@@ -10,9 +10,9 @@ This is a simulated analyst prompt, not an alert produced by the
 dataset publisher or a real IDS/SIEM.
 
 ## Pre-analysis context
-The publisher states the capture is NetMetria-generated and
-post-compromise. This investigation characterizes it as synthetic,
-vendor-generated data. Initial-access traffic is not included.
+The publisher describes the capture as NetMetria-generated,
+post-compromise scenario traffic. This investigation characterizes it as
+synthetic, vendor-generated data. Initial-access traffic is not included.
 
 The capture is analyzed without supplementary scenario hints or an
 answer key. No public ground truth is available.
@@ -35,10 +35,10 @@ characteristics may be compared cautiously; direct timing comparisons
 and environment-specific behavior are not treated as equivalent.
 
 ## Time and tools
-- Report timestamps in UTC.
-- Use tshark's UTC display option `-t ud`.
+- Report timestamps in IST.
+- TShark timestamp option `-t ud` was used during timestamp extraction.
 - Record capture first/last packet timestamps and duration.
-- Record tshark and capinfos versions.
+- Record TShark and Capinfos versions.
 - Document commands and relevant output in the analysis notes.
 
 ## Blind-analysis rules
@@ -53,7 +53,10 @@ and environment-specific behavior are not treated as equivalent.
 
 ## Handling
 - Original PCAP remains outside the Git repository.
-- Verify the published and locally calculated SHA-256 values.
-- Do not execute extracted files, visit URLs, or export payloads.
+- Verify the local PCAP against the publisher's current checksum file.
+- Document the checksum discrepancy with the hash previously shown on
+  the dataset webpage.
+- Do not execute extracted files, visit URLs found in the capture,
+  or export payloads.
 - SMB review is metadata-only.
 - Publish only derived analysis, defanged indicators, and documentation.
