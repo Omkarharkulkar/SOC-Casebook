@@ -1,10 +1,13 @@
 # CASE-005 — Network Traffic Investigation: Alert Triage
 
-**Status:** Part A complete (finalized); Part B not started.
+**Status:** Part A complete; Part B acquisition and analysis in progress.
 
-This case establishes a controlled network baseline in an Ubuntu lab VM and will later examine a public packet-capture scenario for alert triage.
+- **Part A:** Controlled DNS and HTTPS baseline — finalized.
+- **Part B:** Blind investigation of a public synthetic network capture.
 
-- **Part A:** Controlled DNS and HTTPS baseline.
-- **Part B:** Public PCAP investigation (not started).
+Part B uses a simulated analyst alert prompt. The dataset is
+NetMetria-generated post-compromise scenario traffic. Conclusions will
+be evidence-supported hypotheses; public ground truth is unavailable.
 
-Raw PCAP evidence is kept locally and is not committed to this repository. Findings are limited to the available evidence and documented methodology.
+Original PCAP files are stored outside the repository. Only derived
+observations, documentation, and defanged indicators will be published.
