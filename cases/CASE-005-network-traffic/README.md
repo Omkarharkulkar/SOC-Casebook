@@ -15,8 +15,8 @@ observations, documentation, and defanged indicators will be published.
 ## Part B — Investigation Status
 
 - Dataset: NM-SAMPLE-002 — Multi-Behavior Scenario
-- Assessment: Suspicious coordinated internal activity observed — further investigation required.
-- Priority: Medium (provisional analyst assessment)
+- Assessment: Suspicious remote service execution and lateral movement observed — escalate to L2.
+- Priority: High priority for L2 validation
 - Confidence: Moderate in observed activity pattern; low in malicious intent.
 - Confirmed compromise: No.
 - Report: `incident-report.md`
